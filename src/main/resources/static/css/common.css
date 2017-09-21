@@ -1,0 +1,44 @@
+.has-error{
+    border-color: #d43f3a;
+}
+
+.responsive-text-1 {
+    font-size: 1.5rem;
+}
+
+.responsive-text-2 {
+    font-size: 1.17rem;
+}
+
+.responsive-text-3 {
+    font-size: 0.67rem;
+}
+
+@media (min-width: 768px) {
+    .responsive-text-1 {
+        font-size: 2rem;
+    }
+
+    .responsive-text-2 {
+        font-size: 1.5rem;
+    }
+
+    .responsive-text-3 {
+        font-size: 0.83rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .responsive-text-1 {
+        font-size: 2.5rem;
+    }
+
+    .responsive-text-2 {
+        font-size: 2rem;
+    }
+
+    .responsive-text-3 {
+        font-size: 1rem;
+    }
+}
+
