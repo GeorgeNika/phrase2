@@ -3,9 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'admin',
   template: `
-    <h1 class="title">Angular Router</h1>
+    <h1 class="title">phrase admin panel</h1>
     <nav>
       <a routerLink="/verbs" routerLinkActive="active">Verbs</a>
+      <span> -*- </span>
+      <a href="/password/logout">LogOut</a>
     </nav>
     <router-outlet></router-outlet>
     <router-outlet name="popup"></router-outlet>

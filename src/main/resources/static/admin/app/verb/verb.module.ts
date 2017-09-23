@@ -12,6 +12,7 @@ import { SelectTimeComponent } from "../useful/select-time.component";
 import { SelectPersonComponent } from "../useful/select-person.component";
 import { SelectQuantityComponent } from "../useful/select-quantity.component";
 import { SelectGenderComponent } from "../useful/select-gender.component";
+import { SelectPronounComponent } from "../useful/select-pronoun.component";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { SelectGenderComponent } from "../useful/select-gender.component";
       SelectTimeComponent,
       SelectPersonComponent,
       SelectQuantityComponent,
+      SelectPronounComponent,
       SelectGenderComponent
   ],
   providers: [ VerbService ]
