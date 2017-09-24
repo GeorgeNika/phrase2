@@ -50,7 +50,7 @@ export class VerbListComponent implements OnInit {
   visibleVerbInfoList: VerbInfo[];
   searchString: string;
 
-  constructor(private service: VerbService) {}
+  constructor(private service: VerbService, private router: Router) {}
 
   ngOnInit() {
     this.service.getVerbInfoList().subscribe(val => this.visibleVerbInfoList = this.verbInfoList = val);
@@ -59,6 +59,7 @@ export class VerbListComponent implements OnInit {
   addVerb(){
     let verbInfo = new VerbInfo();
     this.verbInfoList.push(verbInfo);
+    this.router.navigate(['/verb', verbInfo.id]);
   }
 
   onClickActionVerb(event, verbInfo: VerbInfo)
