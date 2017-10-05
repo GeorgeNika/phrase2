@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service.phrase;
+package il.george_nika.phrase2.service.phrase_builder.verb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.ModelConstants;
@@ -11,19 +11,19 @@ import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.TIME_PRESENT;
 
-public class PresentPhraseBuilder extends AbstractPhraseBuilder {
+public class PresentPhraseBuilder extends AbstractVerbPhraseBuilder {
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
-        Pronoun firstPronoun = phraseBuilderService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
-        Pronoun secondPronoun = phraseBuilderService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
+        Pronoun firstPronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
+        Pronoun secondPronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
 
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(firstPronoun.getLanguageUnit());
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, firstPronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnit(verb, firstPronoun, TIME_PRESENT));
         tempCollection.add(comma);
         tempCollection.add(secondPronoun.getLanguageUnit());
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, secondPronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnit(verb, secondPronoun, TIME_PRESENT));
 
         return buildPhrase(tempCollection);
     }

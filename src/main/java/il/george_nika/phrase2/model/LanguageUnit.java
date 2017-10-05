@@ -42,4 +42,10 @@ public class LanguageUnit implements Serializable {
         this.hebrew = source.getHebrew();
         this.transcription = source.getTranscription();
     }
+
+    public void concateLanguageUnit(LanguageUnit source){
+        this.russian = this.russian + source.getRussian();
+        this.hebrew = this.hebrew + source.getHebrew();
+        this.transcription = this.transcription + source.getTranscription();
+    }
 }

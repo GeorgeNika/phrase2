@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service.phrase;
+package il.george_nika.phrase2.service.phrase_builder.verb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.*;
 
-public class AnyTimeQuestionPhraseBuilder extends AbstractPhraseBuilder {
+public class AnyTimeQuestionPhraseBuilder extends AbstractVerbPhraseBuilder {
 
     private int time;
 
@@ -21,16 +21,16 @@ public class AnyTimeQuestionPhraseBuilder extends AbstractPhraseBuilder {
     @Override
 
     public ViewPhrase getPhrase(Verb verb) {
-        Pronoun thirdPersonPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
-        Pronoun pronoun = phraseBuilderService.getPronounByVerb(verb, time);
+        Pronoun thirdPersonPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
+        Pronoun pronoun = pronounService.getPronounByVerb(verb, time);
 
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whoQuestion);
 
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, thirdPersonPronoun, time));
+        tempCollection.add(verbService.getLanguageUnit(verb, thirdPersonPronoun, time));
         tempCollection.add(questionSign);
         tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, pronoun, time));
+        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, time));
         tempCollection.add(dot);
         return buildPhrase(tempCollection);
     }

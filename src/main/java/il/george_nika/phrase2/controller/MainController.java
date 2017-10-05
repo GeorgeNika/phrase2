@@ -1,8 +1,8 @@
 package il.george_nika.phrase2.controller;
 
-import il.george_nika.phrase2.service.NounService;
-import il.george_nika.phrase2.service.PhraseService;
-import il.george_nika.phrase2.service.VerbService;
+import il.george_nika.phrase2.service.data.NounService;
+import il.george_nika.phrase2.service.phrase_builder.VerbPhraseService;
+import il.george_nika.phrase2.service.data.VerbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,10 +15,10 @@ import static il.george_nika.phrase2.controller.ControllerConstants.*;
 @Controller
 public class MainController {
 
-    private PhraseService phraseService;
+    private VerbPhraseService phraseService;
 
     @Autowired
-    public MainController(PhraseService phraseService, NounService nounService, VerbService verbService) {
+    public MainController(VerbPhraseService phraseService, NounService nounService, VerbService verbService) {
         this.phraseService = phraseService;
     }
 

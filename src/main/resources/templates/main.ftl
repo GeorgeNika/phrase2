@@ -11,8 +11,13 @@
     <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <div class="col-5 col-lg-5"></div>
         <select id="phrase-type" class="custom-select col-5 col-lg-4 responsive-text-3">
+            <option disabled>Выберите тип</option>
+            <option selected value="verb">глаголы -></option>
+            <option value="number">цифры -></option>
+        </select>
+        <div class="col-0 col-lg-1"></div>
+        <select id="direction" class="custom-select col-5 col-lg-4 responsive-text-3">
             <option disabled>Выберите направление</option>
             <option selected value="russian">русский -></option>
             <option value="hebrew">иврит -></option>

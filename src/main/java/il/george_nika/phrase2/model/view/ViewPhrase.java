@@ -9,8 +9,6 @@ import lombok.Data;
 @Data
 public class ViewPhrase {
 
-    private String phraseType = "";
-
     private String russian = "";
 
     private String hebrew = "";

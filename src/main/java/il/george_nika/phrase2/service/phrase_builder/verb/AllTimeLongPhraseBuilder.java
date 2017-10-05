@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service.phrase;
+package il.george_nika.phrase2.service.phrase_builder.verb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
@@ -10,17 +10,17 @@ import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.*;
 
-public class AllTimeLongPhraseBuilder extends AbstractPhraseBuilder {
+public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
     @Override
     public ViewPhrase getPhrase(Verb verb) {
 
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
 
-        Pronoun infinitivePronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
-        Verb actionVerb = phraseBuilderService.getRandomActionVerb();
+        Pronoun infinitivePronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
+        Verb actionVerb = verbService.getRandomActionVerb();
 
         tempCollection.add(infinitivePronoun.getLanguageUnit());
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(actionVerb, infinitivePronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnit(actionVerb, infinitivePronoun, TIME_PRESENT));
         tempCollection.add(verb.getInfinitive());
         tempCollection.add(comma);
 
@@ -31,11 +31,11 @@ public class AllTimeLongPhraseBuilder extends AbstractPhraseBuilder {
     }
 
     private List<LanguageUnit> getCurrentPart(Verb verb){
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
 
-        Pronoun currentFirstPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
-        Pronoun currentSecondPronoun = phraseBuilderService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND);
-        Pronoun currentThirdPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_FIRST);
+        Pronoun currentFirstPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
+        Pronoun currentSecondPronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND);
+        Pronoun currentThirdPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_FIRST);
 
         tempCollection.add(today);
         tempCollection.addAll(getVerbWithPronoun(verb, currentFirstPronoun, TIME_PRESENT));
@@ -47,13 +47,13 @@ public class AllTimeLongPhraseBuilder extends AbstractPhraseBuilder {
     }
 
     private List<LanguageUnit> getFuturePart(Verb verb){
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
 
-        Pronoun futureFirstPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
-        Pronoun futureSecondPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
-        Pronoun futureThirdPronoun = phraseBuilderService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND);
-        Pronoun futureFourthPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
-        Pronoun futureFifthPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_FIRST);
+        Pronoun futureFirstPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
+        Pronoun futureSecondPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
+        Pronoun futureThirdPronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND);
+        Pronoun futureFourthPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
+        Pronoun futureFifthPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_FIRST);
 
         tempCollection.add(tomorrow);
         tempCollection.addAll(getVerbWithPronoun(verb, futureFirstPronoun, TIME_FUTURE));
@@ -67,12 +67,12 @@ public class AllTimeLongPhraseBuilder extends AbstractPhraseBuilder {
     }
 
     private List<LanguageUnit> getPastPart(Verb verb){
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
 
-        Pronoun pastFirstPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
-        Pronoun pastSecondPronoun = phraseBuilderService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_THIRD);
-        Pronoun pastThirdPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_THIRD);
-        Pronoun pastFourthPronoun = phraseBuilderService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
+        Pronoun pastFirstPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
+        Pronoun pastSecondPronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_THIRD);
+        Pronoun pastThirdPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_THIRD);
+        Pronoun pastFourthPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
 
         tempCollection.add(yesterday);
         tempCollection.addAll(getVerbWithPronoun(verb, pastFirstPronoun, TIME_PAST));
@@ -85,11 +85,11 @@ public class AllTimeLongPhraseBuilder extends AbstractPhraseBuilder {
     }
 
     private List<LanguageUnit> getVerbWithPronoun(Verb verb, Pronoun pronoun, int time){
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
 
-        if (phraseBuilderService.isUnitExist(verb, pronoun, time)){
+        if (verbService.isUnitExist(verb, pronoun, time)){
             tempCollection.add(pronoun.getLanguageUnit());
-            tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, pronoun, time));
+            tempCollection.add(verbService.getLanguageUnit(verb, pronoun, time));
         }
         return tempCollection;
     }

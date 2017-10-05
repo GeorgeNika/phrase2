@@ -1,7 +1,8 @@
-package il.george_nika.phrase2.service;
+package il.george_nika.phrase2.service.data;
 
 import il.george_nika.phrase2.model.dao.NounRepository;
 import il.george_nika.phrase2.model.noun.Noun;
+import il.george_nika.phrase2.service.RandomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

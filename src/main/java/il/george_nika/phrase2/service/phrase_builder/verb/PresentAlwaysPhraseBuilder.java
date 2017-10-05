@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service.phrase;
+package il.george_nika.phrase2.service.phrase_builder.verb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.ModelConstants;
@@ -9,20 +9,19 @@ import il.george_nika.phrase2.model.view.ViewPhrase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PresentAlwaysPhraseBuilder extends AbstractPhraseBuilder {
+public class PresentAlwaysPhraseBuilder extends AbstractVerbPhraseBuilder {
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
 
-        Pronoun pronoun = phraseBuilderService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
+        Pronoun pronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
 
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(pronoun.getLanguageUnit());
         tempCollection.add(always);
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, pronoun, ModelConstants.TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, ModelConstants.TIME_PRESENT));
         tempCollection.add(dot);
 
         return buildPhrase(tempCollection);
-
     }
 }

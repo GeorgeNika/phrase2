@@ -15,6 +15,7 @@ function setData(data) {
     var $question = $("#question");
     var $answer1 = $("#answer1");
     var $answer2 = $("#answer2");
+    var $direction = $("#direction");
 
     var question = '';
     var answer1 = '';
@@ -26,7 +27,7 @@ function setData(data) {
     var hebrewCaption = 'hebrew';
     var transcriptCaption = 'voice';
 
-    if (data.phraseType=='transcription'){
+    if ($direction.val()=='transcription'){
         question = data.transcription;
         textLeft($question);
         answer1 = data.hebrew;
@@ -35,7 +36,7 @@ function setData(data) {
         answer2 = data.russian;
         textLeft($answer2);
         buttonCaption2 = russianCaption;
-    } else if (data.phraseType=='hebrew'){
+    } else if ($direction.val()=='hebrew'){
         question = data.hebrew;
         textRight($question);
         answer1 = data.russian;

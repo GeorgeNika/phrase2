@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service.phrase;
+package il.george_nika.phrase2.service.phrase_builder.verb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.ModelConstants;
@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FuturePhraseBuilder extends AbstractPhraseBuilder {
+public class FuturePhraseBuilder extends AbstractVerbPhraseBuilder {
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
-        Pronoun pronoun = phraseBuilderService.getPronounByVerb(verb, ModelConstants.TIME_FUTURE);
+        Pronoun pronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_FUTURE);
 
-        List<LanguageUnit> tempCollection = new ArrayList<LanguageUnit>();
+        List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whenQuestion);
         tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(phraseBuilderService.getLanguageUnitFromVerb(verb, pronoun, ModelConstants.TIME_FUTURE));
+        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, ModelConstants.TIME_FUTURE));
         tempCollection.add(questionSign);
 
         return buildPhrase(tempCollection);

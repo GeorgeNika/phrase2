@@ -3,9 +3,10 @@ package il.george_nika.phrase2.controller;
 import il.george_nika.phrase2.model.view.VerbForView;
 import il.george_nika.phrase2.model.view.VerbInfo;
 import il.george_nika.phrase2.model.view.ViewPhrase;
-import il.george_nika.phrase2.service.NounService;
 import il.george_nika.phrase2.service.PhraseService;
-import il.george_nika.phrase2.service.VerbService;
+import il.george_nika.phrase2.service.data.NounService;
+import il.george_nika.phrase2.service.phrase_builder.VerbPhraseService;
+import il.george_nika.phrase2.service.data.VerbService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,7 @@ public class AjaxController {
         ViewPhrase result = null;
         while (result == null) {
             try{
-                result = phraseService.getSimplePhrase();
-                result.setPhraseType(phraseType);
+                result = phraseService.getPhrase(phraseType);
             } catch (RuntimeException ex){
                 result = null;
             }

@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.service;
+package il.george_nika.phrase2.service.data;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.dao.ActionVerbRepository;
@@ -11,6 +11,7 @@ import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.verb.VerbData;
 import il.george_nika.phrase2.model.view.VerbForView;
 import il.george_nika.phrase2.model.view.VerbInfo;
+import il.george_nika.phrase2.service.RandomService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
