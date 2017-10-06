@@ -8,10 +8,6 @@
 <body>
 
 <div class="container-fluid">
-    menu - buttons
-</div>
-
-<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="form-group col-10 responsive-text-2">
             <label for="password-input" >Password for admin section</label>

@@ -12,7 +12,7 @@ import {VerbInfo, VerbService}  from './verb.service';
         <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-3" placeholder="search"/>
     </div>
     <div class="container-fluid">
-        <table class="table container-fluid table-striped table-hover">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr class="row bg-info">
                     <td class="col-1">id</td>
@@ -24,24 +24,27 @@ import {VerbInfo, VerbService}  from './verb.service';
                 </tr> 
             </thead>
             <tbody>
-                <tr *ngFor="let verbInfo of visibleVerbInfoList" class="row"
+                <tr *ngFor="let verbInfo of visibleVerbInfoList" class="row align-items-center"
                     [routerLink]="['/verb', verbInfo.id]">
-                    <th class="col-1" scope="row">{{ verbInfo.id }}</th>
-                    <td class="col-3">{{ verbInfo.russian }}</td>
-                    <td class="col-1">{{ verbInfo.childQuantity }}</td>
-                    <td class="col-3">            
-                            <button [routerLink]="['/verb', verbInfo.id]" class="btn btn-warning"> Edit </button>
-                            <button class="btn" 
+                    <th class="col-1 border-0" scope="row">{{ verbInfo.id }}</th>
+                    <td class="col-3 border-0">{{ verbInfo.russian }}</td>
+                    <td class="col-1 border-0">{{ verbInfo.childQuantity }}</td>
+                    <td class="col-3 border-0">            
+                            <button [routerLink]="['/verb', verbInfo.id]" class="btn btn-sm btn-warning"> Edit </button>
+                            <button class="btn btn-sm" 
                                     (click)="onClickActionVerb($event, verbInfo)"
                                     [ngClass]="verbInfo.actionVerb ? 'btn-danger' : 'btn-success'">
                                 {{ verbInfo.actionVerb ? 'Remove ' : 'Add ' }} action verb
                             </button>
                     </td>
-                    <td class="col-3 text-right">{{ verbInfo.hebrew }}</td>
-                    <th class="col-1 text-right" scope="row">{{ verbInfo.id }}</th>
+                    <td class="col-3 border-0 text-right">{{ verbInfo.hebrew }}</td>
+                    <th class="col-1 border-0 text-right" scope="row">{{ verbInfo.id }}</th>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="container-fluid">
+        <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
     </div>
   `
 })

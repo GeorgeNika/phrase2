@@ -15,7 +15,7 @@ import {Pronoun}                            from '../useful/select-pronoun.compo
                 <h3>Verb id {{verb.id}}</h3>
             </div>
             <br/>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between align-items-center">
                 <div class="col-2">infinitive - </div>
                 <input [(ngModel)]="verb.infinitive.russian" class="col-3" placeholder="russian"/>
                 <input [(ngModel)]="verb.infinitive.transcription" class="col-3" placeholder="transcription"/>
@@ -24,7 +24,7 @@ import {Pronoun}                            from '../useful/select-pronoun.compo
             <br/>
             <br/>
             <div *ngFor="let verbData of verb.verbDataCollection">
-                <div class="row justify-content-between">
+                <div class="row justify-content-between align-items-center">
                     <div class="col-2">
                         <selectTimeComponent 
                             [time]="verbData.time" 

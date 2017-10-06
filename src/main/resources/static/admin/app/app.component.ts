@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'admin',
   template: `
-    <h1 class="title">phrase admin panel</h1>
     <nav>
       <a routerLink="/verbs" routerLinkActive="active">Verbs</a>
       <span> -*- </span>

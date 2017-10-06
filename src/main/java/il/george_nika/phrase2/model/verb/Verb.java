@@ -21,7 +21,7 @@ public class Verb {
     @JoinColumn(name="infinitive_fk")
     private LanguageUnit infinitive;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "verb", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "verb", cascade = CascadeType.ALL)
     private List<VerbData> verbDataCollection;
 
 }

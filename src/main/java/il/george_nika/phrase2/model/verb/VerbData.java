@@ -35,7 +35,7 @@ public class VerbData {
     @JoinColumn(name="language_unit_fk")
     private LanguageUnit languageUnit;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="verb_fk")
     private Verb verb;
 
