@@ -1,18 +1,22 @@
 package il.george_nika.phrase2.controller;
 
+import com.google.gson.Gson;
+import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.VerbForView;
 import il.george_nika.phrase2.model.view.VerbInfo;
+import il.george_nika.phrase2.model.view.ViewPageWithContent;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.service.PhraseService;
 import il.george_nika.phrase2.service.data.NounService;
-import il.george_nika.phrase2.service.phrase_builder.VerbPhraseService;
 import il.george_nika.phrase2.service.data.VerbService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 import static il.george_nika.phrase2.controller.ControllerConstants.CONNECTION_TYPE_ADMIN;
@@ -62,14 +66,35 @@ public class AjaxController {
 
     @RequestMapping(value = "/ajax/verbs")
     @ResponseBody
-    public List<VerbInfo> getVerbsInfo (HttpSession session){
+    public ViewPageWithContent getVerbsViewPageWithContent (
+            @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
 
-        return verbService.getAllVerbInfo();
+        if (page<1) {
+            page = 1;
+        }
+        Page<Verb> verbPage = verbService.getVerbsOnPage(page-1, itemsOnPage, filter);
+
+        List<VerbInfo> verbInfoList = new ArrayList<>();
+        List<Integer> allActiveVerbsId = verbService.getAllActionVerbIds();
+        for (Verb loopVerb : verbPage.getContent()){
+            VerbInfo tempVerbInfo = new VerbInfo(loopVerb);
+            if (allActiveVerbsId.contains(loopVerb.getId())) {
+                tempVerbInfo.setActionVerb(true);
+            }
+            verbInfoList.add(tempVerbInfo);
+        }
+
+        ViewPageWithContent result = new ViewPageWithContent();
+        result.setCurrentPage(page);
+        result.setItemsOnPage(verbPage.getSize());
+        result.setTotalPages(verbPage.getTotalPages());
+        result.setJsonContent( new Gson().toJson(verbInfoList));
+        return result;
     }
 
     @RequestMapping(value = "/ajax/verb/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public VerbForView getVerbForView (@PathVariable Integer id, HttpSession session){
+    public VerbForView getVerbForView (@PathVariable Integer id){
 
         return new VerbForView(verbService.getVerbById(id));
     }

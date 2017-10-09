@@ -7,12 +7,13 @@ import { VerbDetailComponent }  from './verb-detail.component';
 
 import { VerbService } from './verb.service';
 
-import { VerbRoutingModule } from './verb-routing.module';
-import { SelectTimeComponent } from "../useful/select-time.component";
-import { SelectPersonComponent } from "../useful/select-person.component";
-import { SelectQuantityComponent } from "../useful/select-quantity.component";
-import { SelectGenderComponent } from "../useful/select-gender.component";
-import { SelectPronounComponent } from "../useful/select-pronoun.component";
+import { VerbRoutingModule }        from './verb-routing.module';
+import { SelectTimeComponent }      from "../useful/select-time.component";
+import { SelectPersonComponent }    from "../useful/select-person.component";
+import { SelectQuantityComponent }  from "../useful/select-quantity.component";
+import { SelectGenderComponent }    from "../useful/select-gender.component";
+import { SelectPronounComponent }   from "../useful/select-pronoun.component";
+import { PaginationComponent }      from "../useful/pagination.component";
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { SelectPronounComponent } from "../useful/select-pronoun.component";
       SelectPersonComponent,
       SelectQuantityComponent,
       SelectPronounComponent,
-      SelectGenderComponent
+      SelectGenderComponent,
+      PaginationComponent
   ],
   providers: [ VerbService ]
 })

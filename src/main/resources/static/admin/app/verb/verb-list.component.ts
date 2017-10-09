@@ -24,7 +24,7 @@ import {VerbInfo, VerbService}  from './verb.service';
                 </tr> 
             </thead>
             <tbody>
-                <tr *ngFor="let verbInfo of visibleVerbInfoList" class="row align-items-center"
+                <tr *ngFor="let verbInfo of verbInfoList" class="row align-items-center"
                     [routerLink]="['/verb', verbInfo.id]">
                     <th class="col-1 border-0" scope="row">{{ verbInfo.id }}</th>
                     <td class="col-3 border-0">{{ verbInfo.russian }}</td>
@@ -34,7 +34,7 @@ import {VerbInfo, VerbService}  from './verb.service';
                             <button class="btn btn-sm" 
                                     (click)="onClickActionVerb($event, verbInfo)"
                                     [ngClass]="verbInfo.actionVerb ? 'btn-danger' : 'btn-success'">
-                                {{ verbInfo.actionVerb ? 'Remove ' : 'Add ' }} action verb
+                                {{ verbInfo.actionVerb ? '-' : '+' }} action
                             </button>
                     </td>
                     <td class="col-3 border-0 text-right">{{ verbInfo.hebrew }}</td>
@@ -43,20 +43,41 @@ import {VerbInfo, VerbService}  from './verb.service';
             </tbody>
         </table>
     </div>
-    <div class="container-fluid">
-        <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
-    </div>
+    <pagination
+        (goPage)="goToPage($event)"
+        (goNext)="onNext()"
+        (goPrev)="onPrev()"
+        [pagesToShow]="6"
+        [currentPage]="currentPage"
+        [itemsOnPage]="itemsOnPage"
+        [totalPages]="totalPages">
+    </pagination>
   `
 })
 export class VerbListComponent implements OnInit {
   verbInfoList : VerbInfo[];
-  visibleVerbInfoList: VerbInfo[];
-  searchString: string;
+
+  searchString: string = "";
+  currentPage = 1;
+  itemsOnPage = 15;
+  totalPages = 0;
 
   constructor(private service: VerbService, private router: Router) {}
 
   ngOnInit() {
-    this.service.getVerbInfoList().subscribe(val => this.visibleVerbInfoList = this.verbInfoList = val);
+    this.getVerbsInfoList(1);
+  }
+
+  getVerbsInfoList(page: number){
+    this.service.getVerbInfoList(page, this.itemsOnPage, this.searchString)
+        .subscribe(val => this.setDataInfo(val));
+  }
+
+  setDataInfo(val: object){
+    this.currentPage = val.currentPage;
+    this.itemsOnPage = val.itemsOnPage;
+    this.totalPages = val.totalPages;
+    this.verbInfoList = JSON.parse(val.jsonContent);
   }
 
   addVerb(){
@@ -68,26 +89,24 @@ export class VerbListComponent implements OnInit {
   onClickActionVerb(event, verbInfo: VerbInfo)
   {
     event.stopPropagation();
-    console.log(verbInfo);
     this.service.changeActionVerb(verbInfo.id)
       .subscribe((status: boolean) => verbInfo.actionVerb = status);
   }
 
   onChangeSearch(){
-    if (this.searchString == '') {
-      this.visibleVerbInfoList = this.verbInfoList;
-    }else {
-      this.visibleVerbInfoList = this.verbInfoList.filter(this.filterForVerbInfo,this);
-    }
+    this.getVerbsInfoList(1);
   }
 
-  filterForVerbInfo(verbInfo){
-    if (verbInfo.hebrew.indexOf(this.searchString) >= 0){
-      return true;
-    }
-    if (verbInfo.russian.indexOf(this.searchString) >= 0){
-      return true;
-    }
-    return false;
+  goToPage(n: number): void {
+    this.getVerbsInfoList(n);
   }
+
+  onNext(): void {
+    this.getVerbsInfoList(this.currentPage + 1);
+  }
+
+  onPrev(): void {
+    this.getVerbsInfoList(this.currentPage - 1);
+  }
+
 }

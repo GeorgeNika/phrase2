@@ -1,11 +1,8 @@
 package il.george_nika.phrase2.controller;
 
-import il.george_nika.phrase2.service.data.NounService;
 import il.george_nika.phrase2.service.phrase_builder.VerbPhraseService;
-import il.george_nika.phrase2.service.data.VerbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +15,7 @@ public class MainController {
     private VerbPhraseService phraseService;
 
     @Autowired
-    public MainController(VerbPhraseService phraseService, NounService nounService, VerbService verbService) {
+    public MainController(VerbPhraseService phraseService) {
         this.phraseService = phraseService;
     }
 
@@ -46,16 +43,21 @@ public class MainController {
     }
 
     @RequestMapping(value = "/admin")
-    public String admin(HttpSession session, ModelMap model){
+    public String admin(){
         return "redirect:/admin/prog";
     }
 
     @RequestMapping(value = "/admin/prog")
-    public String adminProg(HttpSession session, ModelMap model){
+    public String adminProg(HttpSession session){
         if (isAdminLogin(session, false)){
             return "admin";
         }
         return "redirect:/password";
+    }
+
+    @RequestMapping(value = "/admin/prog/**")
+    public String admin2(){
+        return "redirect:/admin/prog";
     }
 
     public static boolean isAdminLogin(HttpSession session, boolean strong){

@@ -12,6 +12,10 @@ import il.george_nika.phrase2.model.verb.VerbData;
 import il.george_nika.phrase2.model.view.VerbForView;
 import il.george_nika.phrase2.model.view.VerbInfo;
 import il.george_nika.phrase2.service.RandomService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -70,6 +74,10 @@ public class VerbService {
         return allActionVerbs;
     }
 
+    public List<Integer> getAllActionVerbIds(){
+        return actionVerbRepository.getAllActionVerbIds();
+    }
+
     public boolean isTimeExist(Verb verb, Integer time){
         for (VerbData loopVerbData : verb.getVerbDataCollection()){
             if (loopVerbData.getTime() == time) {
@@ -96,23 +104,13 @@ public class VerbService {
         return isUnitExist(verb, pronoun.getGender(), pronoun.getQuantity(), pronoun.getPerson(), time);
     }
 
-    public List<VerbInfo> getAllVerbInfo(){
-        List<VerbInfo> result = new ArrayList<VerbInfo>();
-        List<Integer> allActiveVerbsId = actionVerbRepository.getAllActionVerbIds();
-        for (Verb loopVerb : verbRepository.findAll()){
-           VerbInfo tempVerbInfo = new VerbInfo(loopVerb);
-           if (allActiveVerbsId.contains(loopVerb.getId())) {
-               tempVerbInfo.setActionVerb(true);
-           }
-           result.add(tempVerbInfo);
+    public Page<Verb> getVerbsOnPage(int page, int itemsOnPage, String filter){
+        Pageable pageable = new PageRequest(page, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
+        if (filter.isEmpty()){
+            return verbRepository.getVerbsWithoutFilter(pageable);
+        } else {
+            return  verbRepository.getVerbsWithFilter(pageable, "%"+filter+"%");
         }
-        Collections.sort(result, new Comparator<VerbInfo>() {
-            @Override
-            public int compare(VerbInfo o1, VerbInfo o2) {
-                return o1.getId() - o2.getId();
-            }
-        });
-        return result;
     }
 
     public Verb getRandomVerb() {

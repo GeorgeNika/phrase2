@@ -1,5 +1,5 @@
 import { Injectable }                                   from '@angular/core';
-import { HttpClient, RequestOptions , HttpHeaders }     from "@angular/common/http";
+import { HttpClient, HttpParams , HttpHeaders }     from "@angular/common/http";
 import { Observable }                                   from 'rxjs/Observable';
 import { of }                                           from 'rxjs/observable/of';
 
@@ -61,8 +61,14 @@ export class VerbService {
 
   constructor(private http: HttpClient) {}
 
-  getVerbInfoList() : Observable<VerbInfo[]> {
-    return this.http.get(this.verbsInfoUrl);
+  getVerbInfoList(page: number, itemsOnPage: number, filter: string) : Observable<VerbInfo[]> {
+
+    const searchParams = new HttpParams()
+        .set('page', page)
+        .set('itemsOnPage', itemsOnPage)
+        .set('filter', filter);
+
+    return this.http.get(this.verbsInfoUrl, {params: searchParams});
   }
 
   getVerbById(verbId: number): Observable<Verb> {
