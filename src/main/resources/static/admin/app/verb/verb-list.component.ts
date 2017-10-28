@@ -1,15 +1,25 @@
-import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Observable }                       from 'rxjs/Observable';
+import { Component, OnInit, OnDestroy }     from '@angular/core';
+import { HttpErrorResponse }                from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {VerbInfo, VerbService}  from './verb.service';
+import {AlertService} from '../useful/alert/alert.service';
 
 @Component({
   template: `
     <div class="container-fluid">
         <h2>Verbs</h2>
-        <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
-        <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-3" placeholder="search"/>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
+            <div class="col-8">
+                <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
+                <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>
+                <button (click)="clearFilter()" class="col-2 btn btn-info"> Clear </button>
+            </div>
+        </div>
     </div>
     <div class="container-fluid">
         <table class="table table-striped table-hover">
@@ -62,10 +72,23 @@ export class VerbListComponent implements OnInit {
   itemsOnPage = 15;
   totalPages = 0;
 
-  constructor(private service: VerbService, private router: Router) {}
+  constructor(private service: VerbService, private alertService: AlertService, private router: Router) {}
 
   ngOnInit() {
-    this.getVerbsInfoList(1);
+      let previousFilter = this.service.getVerbFilterList();
+      if (previousFilter ) {
+          this.searchString = previousFilter.searchString;
+          this.getVerbsInfoList(  previousFilter.currentPage );
+      } else {
+          this.getVerbsInfoList(1);
+      }
+  }
+
+  ngOnDestroy() {
+      let previousFilter: object = new Object;
+      previousFilter.searchString =this.searchString;
+      previousFilter.currentPage = this.currentPage;
+      this.service.saveVerbListFilter(previousFilter);
   }
 
   getVerbsInfoList(page: number){
@@ -81,16 +104,24 @@ export class VerbListComponent implements OnInit {
   }
 
   addVerb(){
-    let verbInfo = new VerbInfo();
-    this.verbInfoList.push(verbInfo);
-    this.router.navigate(['/verb', verbInfo.id]);
+      let verbInfo = new VerbInfo();
+      this.verbInfoList.push(verbInfo);
+      this.router.navigate(['/verb', verbInfo.id]);
+  }
+
+  clearFilter(){
+      this.searchString="";
+      this.onChangeSearch();
   }
 
   onClickActionVerb(event, verbInfo: VerbInfo)
   {
-    event.stopPropagation();
-    this.service.changeActionVerb(verbInfo.id)
-      .subscribe((status: boolean) => verbInfo.actionVerb = status);
+      event.stopPropagation();
+      this.service.changeActionVerb(verbInfo.id)
+          .subscribe(
+              (status: boolean) => verbInfo.actionVerb = status,
+              (error) => { this.alertService.error("Error during change 'action verb' status")}
+          );
   }
 
   onChangeSearch(){

@@ -107,9 +107,19 @@ public class VerbService {
     public Page<Verb> getVerbsOnPage(int page, int itemsOnPage, String filter){
         Pageable pageable = new PageRequest(page, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
         if (filter.isEmpty()){
-            return verbRepository.getVerbsWithoutFilter(pageable);
+            Page<Verb> tempPage = verbRepository.getVerbsWithoutFilter(pageable);
+            if ((tempPage.getContent().size()==0) && (page != 0)){
+                pageable = new PageRequest(0, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
+                tempPage = verbRepository.getVerbsWithoutFilter(pageable);
+            }
+            return tempPage;
         } else {
-            return  verbRepository.getVerbsWithFilter(pageable, "%"+filter+"%");
+            Page<Verb> tempPage = verbRepository.getVerbsWithFilter(pageable, "%"+filter+"%");
+            if ((tempPage.getContent().size()==0) && (page != 0)){
+                pageable = new PageRequest(0, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
+                tempPage = verbRepository.getVerbsWithFilter(pageable, "%"+filter+"%");
+            }
+            return tempPage;
         }
     }
 
@@ -135,7 +145,7 @@ public class VerbService {
         throw new RuntimeException("don't find " + pronoun + " for " + time + " verb N-"+verb.getId());
     }
 
-    public void saveVerbByVerbForView(VerbForView verbForView){
+    public Integer saveVerbByVerbForView(VerbForView verbForView){
         Verb verb ;
         if (verbForView.getId()==null || verbForView.getId()==0) {
             verb = new Verb();
@@ -149,6 +159,8 @@ public class VerbService {
         updateVerbDataCollection(verb, verbForView);
 
         verbRepository.save(verb);
+
+        return verb.getId();
     }
 
     private void updateInfinitive(Verb verb, VerbForView verbForView){

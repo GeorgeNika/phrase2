@@ -104,10 +104,9 @@ public class AjaxController {
     public Integer  updateVerb (@RequestBody VerbForView verbForView, HttpSession session){
 
         if (!MainController.isAdminLogin(session, true)){
-            return 0;
+            throw new RuntimeException("Access denied");
         }
-        verbService.saveVerbByVerbForView(verbForView);
-        return 1;
+        return verbService.saveVerbByVerbForView(verbForView);
     }
 
     @RequestMapping(value = "/ajax/changeActionVerb", method = {RequestMethod.POST, RequestMethod.PUT} )
@@ -115,7 +114,7 @@ public class AjaxController {
     public Boolean  changeActionVerb (@RequestBody Integer id, HttpSession session){
 
         if (!MainController.isAdminLogin(session, true)){
-            throw  new RuntimeException("Access denied");
+            throw new RuntimeException("Access denied");
         }
         return verbService.changeActionVerb(id);
     }

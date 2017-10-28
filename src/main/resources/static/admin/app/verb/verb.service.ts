@@ -1,5 +1,5 @@
 import { Injectable }                                   from '@angular/core';
-import { HttpClient, HttpParams , HttpHeaders }     from "@angular/common/http";
+import { HttpClient, HttpParams , HttpHeaders }         from "@angular/common/http";
 import { Observable }                                   from 'rxjs/Observable';
 import { of }                                           from 'rxjs/observable/of';
 
@@ -59,6 +59,8 @@ export class VerbService {
   private verbUrl :string = '/ajax/verb';
   private changeActionVerbUrl :string = '/ajax/changeActionVerb';
 
+  private verbListFilter: object;
+
   constructor(private http: HttpClient) {}
 
   getVerbInfoList(page: number, itemsOnPage: number, filter: string) : Observable<VerbInfo[]> {
@@ -72,7 +74,6 @@ export class VerbService {
   }
 
   getVerbById(verbId: number): Observable<Verb> {
-    console.log(verbId);
     if (verbId == 0){
       return Observable.create(observer => {
         observer.next(new Verb());
@@ -90,5 +91,13 @@ export class VerbService {
   changeActionVerb(id: number): Observable<boolean>{
     return this.http.post(this.changeActionVerbUrl ,id
         ,{headers: new HttpHeaders().set('Content-Type', 'application/json')});
+  }
+
+  saveVerbListFilter(verbListFilter: object){
+    this.verbListFilter = verbListFilter;
+  }
+
+  getVerbFilterList(){
+    return this.verbListFilter;
   }
 }

@@ -10,24 +10,28 @@ import { AppComponent }            from './app.component';
 import { AppRoutingModule }        from './app-routing.module';
 
 import { VerbModule }              from './verb/verb.module';
+import { AlertComponent }          from './useful/alert/alert.component';
+import { AlertService }            from './useful/alert/alert.service';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    VerbModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
-  ],
-  declarations: [
-    AppComponent,
-  ],
-  bootstrap: [ AppComponent ]
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        VerbModule,
+        AppRoutingModule,
+        BrowserAnimationsModule
+    ],
+    declarations: [
+        AppComponent,
+        AlertComponent
+    ],
+    providers: [
+        AlertService
+    ],
+    bootstrap: [ AppComponent ]
 })
 export class AppModule {
-  // Diagnostic only: inspect router configuration
-  constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  }
+    constructor(router: Router) {
+    }
 }

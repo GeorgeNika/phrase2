@@ -6,6 +6,7 @@ import { slideInDownAnimation }             from '../animations';
 
 import { Verb, VerbData, VerbService }      from './verb.service';
 import {Pronoun}                            from '../useful/select-pronoun.component'
+import {AlertService}                       from "../useful/alert/alert.service";
 
 @Component({
   template: `
@@ -61,7 +62,8 @@ export class VerbDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: VerbService
+    private service: VerbService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -82,7 +84,10 @@ export class VerbDetailComponent implements OnInit {
   }
 
   saveVerbAndClose(){
-    this.service.saveVerb(this.verb).subscribe((data) => console.log(data) );
+    this.service.saveVerb(this.verb).subscribe(
+        (data) => console.log(data),
+        (error) => {this.alertService.error("Error during saving verb", true)}
+        );
     this.gotoVerbs();
   }
 

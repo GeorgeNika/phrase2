@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
       <span> -*- </span>
       <a href="/password/logout">LogOut</a>
     </nav>
+    <alert></alert>
     <router-outlet></router-outlet>
     <router-outlet name="popup"></router-outlet>
   `

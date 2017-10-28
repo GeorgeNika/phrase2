@@ -1,4 +1,3 @@
-// pagination.component.ts
 // based on http://www.bentedder.com/create-a-pagination-component-in-angular-4/
 
 import { Component, Input, EventEmitter, Output } from '@angular/core';
@@ -9,6 +8,9 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
         <nav aria-label="Page navigation">
             <ul class="pagination" *ngIf="totalPages > 0">
                 <li class="page-item" [class.disabled]="currentPage === 1">
+                    <button (click)="onFirst()" class="page-link" > First </button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === 1">
                     <button (click)="onPrev()" class="page-link"  > Previous </button>
                 </li>
                 <li class="page-item" *ngFor="let pageNum of getPages()" [class.active]="pageNum == currentPage">
@@ -16,6 +18,9 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
                 </li>
                 <li class="page-item" [class.disabled]="currentPage === totalPages">
                     <button (click)="onNext()" class="page-link" > Next </button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <button (click)="onLast()" class="page-link" > Last </button>
                 </li>
             </ul>
         </nav>
@@ -43,6 +48,14 @@ export class PaginationComponent {
 
     onNext(): void {
         this.goNext.emit();
+    }
+
+    onLast(): void{
+        this.onPage(this.totalPages);
+    }
+
+    onFirst(): void{
+        this.onPage(1);
     }
 
     getPages(): number[]{
