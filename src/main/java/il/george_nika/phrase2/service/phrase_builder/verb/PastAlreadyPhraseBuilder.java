@@ -14,8 +14,8 @@ public class PastAlreadyPhraseBuilder extends AbstractVerbPhraseBuilder {
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
-        Pronoun firstPronoun = pronounService.getPronounByVerb(verb, TIME_PAST);
-        Pronoun secondPronoun = pronounService.getPronounByVerb(verb, TIME_PAST);
+        Pronoun firstPronoun = pronounService.getRandomPronounByVerb(verb, TIME_PAST);
+        Pronoun secondPronoun = pronounService.getRandomPronounByVerb(verb, TIME_PAST);
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(firstPronoun.getLanguageUnit());

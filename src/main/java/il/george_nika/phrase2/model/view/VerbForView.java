@@ -23,7 +23,7 @@ public class VerbForView {
     public VerbForView(Verb verb){
         this.id = verb.getId();
         this.infinitive = verb.getInfinitive();
-        this.verbDataCollection = new ArrayList<VerbData>();
+        this.verbDataCollection = new ArrayList<>();
         for (VerbData loopVerbData: verb.getVerbDataCollection()){
             VerbData tempVerbData = new VerbData();
             tempVerbData.setId(loopVerbData.getId());
@@ -34,6 +34,7 @@ public class VerbForView {
             tempVerbData.setLanguageUnit(loopVerbData.getLanguageUnit());
             this.verbDataCollection.add(tempVerbData);
         }
+        //todo stream
         Collections.sort(verbDataCollection, new Comparator<VerbData>() {
             @Override
             public int compare(VerbData o1, VerbData o2) {

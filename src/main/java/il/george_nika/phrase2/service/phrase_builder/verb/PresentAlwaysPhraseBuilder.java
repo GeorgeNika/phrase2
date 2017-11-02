@@ -14,7 +14,7 @@ public class PresentAlwaysPhraseBuilder extends AbstractVerbPhraseBuilder {
     @Override
     public ViewPhrase getPhrase(Verb verb) {
 
-        Pronoun pronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_PRESENT);
+        Pronoun pronoun = pronounService.getRandomPronounByVerb(verb, ModelConstants.TIME_PRESENT);
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(pronoun.getLanguageUnit());

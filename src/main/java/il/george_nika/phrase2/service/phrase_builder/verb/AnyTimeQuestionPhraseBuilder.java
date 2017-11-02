@@ -22,7 +22,7 @@ public class AnyTimeQuestionPhraseBuilder extends AbstractVerbPhraseBuilder {
 
     public ViewPhrase getPhrase(Verb verb) {
         Pronoun thirdPersonPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
-        Pronoun pronoun = pronounService.getPronounByVerb(verb, time);
+        Pronoun pronoun = pronounService.getRandomPronounByVerb(verb, time);
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whoQuestion);

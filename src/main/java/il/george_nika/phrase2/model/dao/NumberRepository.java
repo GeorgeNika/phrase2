@@ -68,13 +68,13 @@ public class NumberRepository {
             return getSecondTen(number);
         }
 
-        int decade = (int) number / 10;
+        int decade = number / 10;
         LanguageUnit result = getDecade(decade);
         if (decade * 10  != number){
-            result.concateLanguageUnit(SPACE);
-            result.concateLanguageUnit(ADD);
-            result.concateLanguageUnit(SPACE);
-            result.concateLanguageUnit(getSingleNumber(number - decade*10));
+            result.concatLanguageUnit(SPACE);
+            result.concatLanguageUnit(ADD);
+            result.concatLanguageUnit(SPACE);
+            result.concatLanguageUnit(getSingleNumber(number - decade*10));
         }
         return result;
     }

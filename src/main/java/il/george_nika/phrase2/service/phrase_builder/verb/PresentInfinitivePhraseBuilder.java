@@ -15,8 +15,8 @@ public class PresentInfinitivePhraseBuilder extends AbstractVerbPhraseBuilder {
     @Override
     public ViewPhrase getPhrase(Verb verb) {
         Verb actionVerb = verbService.getRandomActionVerb();
-        Pronoun firstPronoun = pronounService.getPronounByVerb(actionVerb, TIME_PRESENT);
-        Pronoun secondPronoun = pronounService.getPronounByVerb(verb, TIME_PRESENT);
+        Pronoun firstPronoun = pronounService.getRandomPronounByVerb(actionVerb, TIME_PRESENT);
+        Pronoun secondPronoun = pronounService.getRandomPronounByVerb(verb, TIME_PRESENT);
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(firstPronoun.getLanguageUnit());

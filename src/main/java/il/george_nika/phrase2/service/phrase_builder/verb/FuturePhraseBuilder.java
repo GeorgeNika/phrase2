@@ -14,7 +14,7 @@ public class FuturePhraseBuilder extends AbstractVerbPhraseBuilder {
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
-        Pronoun pronoun = pronounService.getPronounByVerb(verb, ModelConstants.TIME_FUTURE);
+        Pronoun pronoun = pronounService.getRandomPronounByVerb(verb, ModelConstants.TIME_FUTURE);
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whenQuestion);

@@ -3,13 +3,13 @@ package il.george_nika.phrase2.service.data;
 import il.george_nika.phrase2.model.dao.PronounRepository;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
-import il.george_nika.phrase2.model.verb.VerbData;
 import il.george_nika.phrase2.service.RandomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PronounService {
@@ -23,14 +23,20 @@ public class PronounService {
         this.pronounRepository = pronounRepository;
     }
 
-    public Pronoun getPronounByVerb(Verb verb, Integer time){
-        List<Pronoun> tempPronouns = new ArrayList<>();
-        for (VerbData loopVerbData : verb.getVerbDataCollection()){
-            if (!loopVerbData.getTime().equals(time)) {
-                continue;
-            }
-            tempPronouns.add(getPronoun(loopVerbData.getGender(), loopVerbData.getQuantity(), loopVerbData.getPerson()));
-        }
+    public Pronoun getRandomPronounByVerb(Verb verb, Integer time){
+
+        List<Pronoun> tempPronouns = verb.getVerbDataCollection().stream()
+                .filter( verbData -> verbData.getTime() == time )
+                .map( verbData -> getPronoun(verbData.getGender(), verbData.getQuantity(), verbData.getPerson()) )
+                .collect( Collectors.toList() );
+
+//        List<Pronoun> tempPronouns = new ArrayList<>();
+//        for (VerbData loopVerbData : verb.getVerbDataCollection()){
+//            if (!loopVerbData.getTime().equals(time)) {
+//                continue;
+//            }
+//            tempPronouns.add(getPronoun(loopVerbData.getGender(), loopVerbData.getQuantity(), loopVerbData.getPerson()));
+//        }
         if (tempPronouns.size()<1){
             throw new RuntimeException("Can't get pronoun for verb id="+verb.getId()+" time:"+time);
         }
@@ -38,18 +44,26 @@ public class PronounService {
     }
 
     public Pronoun getPronoun(int gender, int quantity, int person){
-        for(Pronoun loopPronoun : pronounRepository.getAllPronouns()){
-            if (loopPronoun.getGender() != gender){
-                continue;
-            }
-            if (loopPronoun.getQuantity() != quantity){
-                continue;
-            }
-            if (loopPronoun.getPerson() != person){
-                continue;
-            }
-            return loopPronoun;
+        Optional<Pronoun> result = pronounRepository.getAllPronouns().stream()
+                .filter( pronoun -> pronoun.getGender() == gender )
+                .filter( pronoun -> pronoun.getQuantity() == quantity )
+                .filter( pronoun -> pronoun.getPerson() == person )
+                .findFirst();
+        if ( result.isPresent() ){
+            return result.get();
         }
+//        for(Pronoun loopPronoun : pronounRepository.getAllPronouns()){
+//            if (loopPronoun.getGender() != gender){
+//                continue;
+//            }
+//            if (loopPronoun.getQuantity() != quantity){
+//                continue;
+//            }
+//            if (loopPronoun.getPerson() != person){
+//                continue;
+//            }
+//            return loopPronoun;
+//        }
         throw new RuntimeException("Can't get pronoun for gender:" + gender
                 + " quantity:" + quantity + " person:" + person);
     }
