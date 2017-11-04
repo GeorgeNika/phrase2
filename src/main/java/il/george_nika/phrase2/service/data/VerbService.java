@@ -10,7 +10,6 @@ import il.george_nika.phrase2.model.verb.ActionVerb;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.verb.VerbData;
 import il.george_nika.phrase2.model.view.VerbForView;
-import il.george_nika.phrase2.model.view.VerbInfo;
 import il.george_nika.phrase2.service.RandomService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -79,25 +78,17 @@ public class VerbService {
     }
 
     public boolean isTimeExist(Verb verb, Integer time){
-        for (VerbData loopVerbData : verb.getVerbDataCollection()){
-            if (loopVerbData.getTime() == time) {
-                return true;
-            }
-        }
-        return false;
+
+        return verb.getVerbDataCollection().stream().anyMatch(verbData -> verbData.getTime() == time);
     }
 
     public boolean isUnitExist(Verb verb, int gender, int quantity, int person, int time){
-        for (VerbData loopVerbData : verb.getVerbDataCollection()){
-            if (loopVerbData.getTime() == time) {
-                if ((loopVerbData.getGender() == gender)
-                    && (loopVerbData.getQuantity() == quantity)
-                    && (loopVerbData.getPerson() == person)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        return verb.getVerbDataCollection().stream()
+                .anyMatch(verbData -> verbData.getTime() == time
+                        && verbData.getGender() == gender
+                        && verbData.getQuantity() == quantity
+                        && verbData.getPerson() == person);
     }
 
     public boolean isUnitExist(Verb verb, Pronoun pronoun, int time){
@@ -134,12 +125,15 @@ public class VerbService {
 
     public LanguageUnit getLanguageUnit(Verb verb, Pronoun pronoun, int time){
 
-        for (VerbData loopVerbData : verb.getVerbDataCollection()){
-            if (loopVerbData.getTime() != time) continue;
-            if (loopVerbData.getPerson() != pronoun.getPerson()) continue;
-            if (loopVerbData.getGender() != pronoun.getGender()) continue;
-            if (loopVerbData.getQuantity() != pronoun.getQuantity()) continue;
-            return loopVerbData.getLanguageUnit();
+        Optional<VerbData> result = verb.getVerbDataCollection().stream()
+                .filter(verbData -> verbData.getTime() == time
+                        && verbData.getGender() == pronoun.getGender()
+                        && verbData.getQuantity() == pronoun.getQuantity()
+                        && verbData.getPerson() == pronoun.getPerson())
+                .findFirst();
+
+        if (result.isPresent()){
+            return result.get().getLanguageUnit();
         }
 
         throw new RuntimeException("don't find " + pronoun + " for " + time + " verb N-"+verb.getId());
@@ -150,7 +144,7 @@ public class VerbService {
         if (verbForView.getId()==null || verbForView.getId()==0) {
             verb = new Verb();
             verb.setInfinitive(new LanguageUnit());
-            verb.setVerbDataCollection(new ArrayList<VerbData>());
+            verb.setVerbDataCollection(new ArrayList<>());
         } else {
             verb = getVerbById(verbForView.getId());
         }
@@ -168,7 +162,7 @@ public class VerbService {
     }
 
     private void updateVerbDataCollection(Verb verb, VerbForView verbForView){
-        Map<Integer, VerbData> mapForUpdate = new HashMap<Integer, VerbData>();
+        Map<Integer, VerbData> mapForUpdate = new HashMap<>();
         for (VerbData loopVerbData : verb.getVerbDataCollection()){
             mapForUpdate.put(loopVerbData.getId(), loopVerbData);
         }

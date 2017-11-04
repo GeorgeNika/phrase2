@@ -30,13 +30,6 @@ public class PronounService {
                 .map( verbData -> getPronoun(verbData.getGender(), verbData.getQuantity(), verbData.getPerson()) )
                 .collect( Collectors.toList() );
 
-//        List<Pronoun> tempPronouns = new ArrayList<>();
-//        for (VerbData loopVerbData : verb.getVerbDataCollection()){
-//            if (!loopVerbData.getTime().equals(time)) {
-//                continue;
-//            }
-//            tempPronouns.add(getPronoun(loopVerbData.getGender(), loopVerbData.getQuantity(), loopVerbData.getPerson()));
-//        }
         if (tempPronouns.size()<1){
             throw new RuntimeException("Can't get pronoun for verb id="+verb.getId()+" time:"+time);
         }
@@ -52,18 +45,6 @@ public class PronounService {
         if ( result.isPresent() ){
             return result.get();
         }
-//        for(Pronoun loopPronoun : pronounRepository.getAllPronouns()){
-//            if (loopPronoun.getGender() != gender){
-//                continue;
-//            }
-//            if (loopPronoun.getQuantity() != quantity){
-//                continue;
-//            }
-//            if (loopPronoun.getPerson() != person){
-//                continue;
-//            }
-//            return loopPronoun;
-//        }
         throw new RuntimeException("Can't get pronoun for gender:" + gender
                 + " quantity:" + quantity + " person:" + person);
     }

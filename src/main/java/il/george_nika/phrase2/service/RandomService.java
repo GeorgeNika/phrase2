@@ -10,6 +10,9 @@ public class RandomService {
     private Random random  = new Random();
 
     public int getRandom(int bound) {
+        if (bound ==0){
+            return 0;
+        }
         return random.nextInt(bound);
     }
 
@@ -17,7 +20,7 @@ public class RandomService {
         if (getRandom(2) == 0){
             return getRandom(bound);
         } else {
-            return bound - getRandom(bound * percentPriority / 100);
+            return bound - 1 - getRandom(bound * percentPriority / 100);
         }
     }
 }

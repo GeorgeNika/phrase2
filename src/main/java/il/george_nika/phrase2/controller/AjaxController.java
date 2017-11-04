@@ -103,7 +103,7 @@ public class AjaxController {
     @ResponseBody
     public Integer  updateVerb (@RequestBody VerbForView verbForView, HttpSession session){
 
-        if (!MainController.isAdminLogin(session, true)){
+        if (!ControllerUtil.isAdminLogin(session, true)){
             throw new RuntimeException("Access denied");
         }
         return verbService.saveVerbByVerbForView(verbForView);
@@ -113,7 +113,7 @@ public class AjaxController {
     @ResponseBody
     public Boolean  changeActionVerb (@RequestBody Integer id, HttpSession session){
 
-        if (!MainController.isAdminLogin(session, true)){
+        if (!ControllerUtil.isAdminLogin(session, true)){
             throw new RuntimeException("Access denied");
         }
         return verbService.changeActionVerb(id);
