@@ -8,28 +8,23 @@ import { VerbDetailComponent }  from './verb-detail.component';
 import { VerbService } from './verb.service';
 
 import { VerbRoutingModule }        from './verb-routing.module';
-import { SelectTimeComponent }      from "../useful/select-time.component";
-import { SelectPersonComponent }    from "../useful/select-person.component";
-import { SelectQuantityComponent }  from "../useful/select-quantity.component";
-import { SelectGenderComponent }    from "../useful/select-gender.component";
-import { SelectPronounComponent }   from "../useful/select-pronoun.component";
-import { PaginationComponent }      from "../useful/pagination.component";
+
+import {SelectTimeModule} from "../useful/select-time/select-time.module";
+import {SelectPronounModule} from "../useful/select-pronoun/select-pronoun.module";
+import {PaginationModule} from "../useful/pagination/pagination.module";
 
 @NgModule({
   imports: [
       CommonModule,
       FormsModule,
-      VerbRoutingModule
+      VerbRoutingModule,
+      SelectTimeModule,
+      SelectPronounModule,
+      PaginationModule
   ],
   declarations: [
       VerbListComponent,
-      VerbDetailComponent,
-      SelectTimeComponent,
-      SelectPersonComponent,
-      SelectQuantityComponent,
-      SelectPronounComponent,
-      SelectGenderComponent,
-      PaginationComponent
+      VerbDetailComponent
   ],
   providers: [ VerbService ]
 })

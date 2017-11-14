@@ -9,7 +9,7 @@ import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.ActionVerb;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.verb.VerbData;
-import il.george_nika.phrase2.model.view.VerbForView;
+import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.service.RandomService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,55 +22,23 @@ import java.util.*;
 @Service
 public class VerbService {
 
-    private List<Integer> allVerbsIds;
-    private List<ActionVerb> allActionVerbs;
-
-    private static int LAST_VERB_ID_PERCENT_PRIORITY = 20;
-    private static int VERBS_REFRESH_LIMIT = 50;
-    private static int ACTION_VERBS_REFRESH_LIMIT = 20;
-
-    private int verbsRefreshTrigger;
-    private int actionVerbsRefreshTrigger;
-
     private VerbRepository verbRepository;
     private VerbDataRepository verbDataRepository;
     private LanguageUnitRepository languageUnitRepository;
     private ActionVerbRepository actionVerbRepository;
-    private RandomService randomService;
 
     public VerbService (VerbRepository verbRepository,
                         VerbDataRepository verbDataRepository,
                         LanguageUnitRepository languageUnitRepository,
-                        ActionVerbRepository actionVerbRepository,
-                        RandomService randomService){
+                        ActionVerbRepository actionVerbRepository){
         this.verbRepository = verbRepository;
         this.verbDataRepository = verbDataRepository;
         this.languageUnitRepository = languageUnitRepository;
         this.actionVerbRepository = actionVerbRepository;
-        this.randomService = randomService;
-    }
-
-    private List<Integer> getAllVerbsIds(){
-        verbsRefreshTrigger ++;
-        if ((allVerbsIds == null) || (verbsRefreshTrigger >= VERBS_REFRESH_LIMIT)){
-            allVerbsIds = verbRepository.getAllIds();
-            Collections.sort(allVerbsIds);
-            verbsRefreshTrigger = 0;
-        }
-        return allVerbsIds;
     }
 
     public Verb getVerbById(Integer id){
         return verbRepository.getVerbById(id);
-    }
-
-    private List<ActionVerb> getAllActionVerbs(){
-        actionVerbsRefreshTrigger ++;
-        if ((allActionVerbs == null) || (actionVerbsRefreshTrigger >= ACTION_VERBS_REFRESH_LIMIT)){
-            allActionVerbs = actionVerbRepository.findAll();
-            actionVerbsRefreshTrigger = 0;
-        }
-        return allActionVerbs;
     }
 
     public List<Integer> getAllActionVerbIds(){
@@ -115,12 +83,11 @@ public class VerbService {
     }
 
     public Verb getRandomVerb() {
-        int id = randomService.getRandomWithPriorityOnLast(getAllVerbsIds().size(),LAST_VERB_ID_PERCENT_PRIORITY);
-        return getVerbById(getAllVerbsIds().get(id));
+        return verbRepository.getRandomVerb();
     }
 
     public Verb getRandomActionVerb() {
-        return getAllActionVerbs().get(randomService.getRandom((getAllActionVerbs().size()))).getVerb();
+        return actionVerbRepository.getRandomActionVerb().getVerb();
     }
 
     public LanguageUnit getLanguageUnit(Verb verb, Pronoun pronoun, int time){
@@ -139,34 +106,34 @@ public class VerbService {
         throw new RuntimeException("don't find " + pronoun + " for " + time + " verb N-"+verb.getId());
     }
 
-    public Integer saveVerbByVerbForView(VerbForView verbForView){
+    public Integer saveVerbByVerbForView(VerbForDetailView verbForDetailView){
         Verb verb ;
-        if (verbForView.getId()==null || verbForView.getId()==0) {
+        if (verbForDetailView.getId()==null || verbForDetailView.getId()==0) {
             verb = new Verb();
             verb.setInfinitive(new LanguageUnit());
             verb.setVerbDataCollection(new ArrayList<>());
         } else {
-            verb = getVerbById(verbForView.getId());
+            verb = getVerbById(verbForDetailView.getId());
         }
 
-        updateInfinitive(verb, verbForView);
-        updateVerbDataCollection(verb, verbForView);
+        updateInfinitive(verb, verbForDetailView);
+        updateVerbDataCollection(verb, verbForDetailView);
 
         verbRepository.save(verb);
 
         return verb.getId();
     }
 
-    private void updateInfinitive(Verb verb, VerbForView verbForView){
-        verb.getInfinitive().updateLanguageUnit(verbForView.getInfinitive());
+    private void updateInfinitive(Verb verb, VerbForDetailView verbForDetailView){
+        verb.getInfinitive().updateLanguageUnit(verbForDetailView.getInfinitive());
     }
 
-    private void updateVerbDataCollection(Verb verb, VerbForView verbForView){
+    private void updateVerbDataCollection(Verb verb, VerbForDetailView verbForDetailView){
         Map<Integer, VerbData> mapForUpdate = new HashMap<>();
         for (VerbData loopVerbData : verb.getVerbDataCollection()){
             mapForUpdate.put(loopVerbData.getId(), loopVerbData);
         }
-        for (VerbData loopVerbData : verbForView.getVerbDataCollection()){
+        for (VerbData loopVerbData : verbForDetailView.getVerbDataCollection()){
             VerbData tempVerbDate;
             if (loopVerbData.getId()== null || loopVerbData.getId() == 0){
                 tempVerbDate = new VerbData();

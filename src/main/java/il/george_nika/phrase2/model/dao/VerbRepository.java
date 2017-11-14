@@ -28,4 +28,7 @@ public interface VerbRepository extends CrudRepository<Verb, Integer> {
     @Query("SELECT v FROM Verb v")
     Page<Verb> getVerbsWithoutFilter(Pageable pageable);
 
+    @Query(value="SELECT * FROM Verb ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
+    Verb getRandomVerb();
+
 }

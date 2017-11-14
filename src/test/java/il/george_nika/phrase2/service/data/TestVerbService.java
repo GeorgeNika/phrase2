@@ -6,7 +6,7 @@ import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.ActionVerb;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.verb.VerbData;
-import il.george_nika.phrase2.model.view.VerbForView;
+import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.service.RandomService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class TestVerbService {
     @Before
     public void setVerbService(){
         verbService = new VerbService(verbRepository, verbDataRepository,
-                languageUnitRepository, actionVerbRepository, new RandomService());
+                languageUnitRepository, actionVerbRepository);
     }
 
     @Test
@@ -250,29 +250,29 @@ public class TestVerbService {
         Verb pastVerb = verbService.getVerbById(verbsFromDataBase.get(0).getId());
         Verb futureVerb = verbService.getVerbById(verbsFromDataBase.get(2).getId());
 
-        VerbForView newVerbForView = new VerbForView();
+        VerbForDetailView newVerbForDetailView = new VerbForDetailView();
         List<VerbData> newVerbDataCollection = new ArrayList<>();
         newVerbDataCollection.add(getVerbData(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_THIRD, TIME_PRESENT));
         newVerbDataCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND, TIME_PRESENT));
-        newVerbForView.setVerbDataCollection(newVerbDataCollection);
-        newVerbForView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
+        newVerbForDetailView.setVerbDataCollection(newVerbDataCollection);
+        newVerbForDetailView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
         Assert.assertEquals(verbService.getVerbsOnPage(0,2,"").getTotalElements(),3);
-        verbService.saveVerbByVerbForView(newVerbForView);
+        verbService.saveVerbByVerbForView(newVerbForDetailView);
         Assert.assertEquals(verbService.getVerbsOnPage(0,2,"").getTotalElements(),4);
 
-        VerbForView changeInfinitiveInVerbForView = new VerbForView(pastVerb);
-        changeInfinitiveInVerbForView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
-        String testString = changeInfinitiveInVerbForView.getInfinitive().getTranscription();
+        VerbForDetailView changeInfinitiveInVerbForDetailView = new VerbForDetailView(pastVerb);
+        changeInfinitiveInVerbForDetailView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
+        String testString = changeInfinitiveInVerbForDetailView.getInfinitive().getTranscription();
         Assert.assertNotEquals(verbService.getVerbById(pastVerb.getId()).getInfinitive().getTranscription(), testString);
-        verbService.saveVerbByVerbForView(changeInfinitiveInVerbForView);
+        verbService.saveVerbByVerbForView(changeInfinitiveInVerbForDetailView);
         Assert.assertEquals(verbService.getVerbById(pastVerb.getId()).getInfinitive().getTranscription(), testString);
 
-        VerbForView addVerbDataInVerbForView = new VerbForView(futureVerb);
+        VerbForDetailView addVerbDataInVerbForDetailView = new VerbForDetailView(futureVerb);
         Assert.assertEquals(verbService.getVerbById(futureVerb.getId()).getVerbDataCollection().size(), 3);
-        List<VerbData> tempCollection = addVerbDataInVerbForView.getVerbDataCollection();
+        List<VerbData> tempCollection = addVerbDataInVerbForDetailView.getVerbDataCollection();
         tempCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_PLURAL, PERSON_SECOND, TIME_PRESENT));
-        addVerbDataInVerbForView.setVerbDataCollection(tempCollection);
-        verbService.saveVerbByVerbForView(addVerbDataInVerbForView);
+        addVerbDataInVerbForDetailView.setVerbDataCollection(tempCollection);
+        verbService.saveVerbByVerbForView(addVerbDataInVerbForDetailView);
         Assert.assertEquals(verbService.getVerbById(futureVerb.getId()).getVerbDataCollection().size(), 4);
     }
 

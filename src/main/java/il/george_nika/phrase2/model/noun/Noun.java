@@ -4,6 +4,7 @@ import il.george_nika.phrase2.model.LanguageUnit;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
@@ -17,13 +18,10 @@ public class Noun {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "gender")
-    private Integer gender;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="language_unit_fk")
-    private LanguageUnit languageUnit;
+    @JoinColumn(name="main_form__fk")
+    private LanguageUnit mainForm;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "noun", cascade = CascadeType.ALL)
+    private List<NounData> nounDataCollection;
 }

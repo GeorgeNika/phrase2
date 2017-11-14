@@ -3,17 +3,17 @@ import { Component, OnInit, OnDestroy }     from '@angular/core';
 import { HttpErrorResponse }                from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { VerbInfo, VerbService }  from './verb.service';
-import { AlertService } from '../useful/alert/alert.service';
+import {NounInfo, NounService}  from './noun.service';
+import {AlertService} from '../useful/alert/alert.service';
 
 @Component({
   template: `
     <div class="container-fluid">
-        <h2>Verbs</h2>
+        <h2>Nouns</h2>
     </div>
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
+            <button (click)="addNoun()" class="col-2 btn btn-success"> ADD NOUN</button>
             <div class="col-8">
                 <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
                 <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>
@@ -24,7 +24,7 @@ import { AlertService } from '../useful/alert/alert.service';
     <div class="container-fluid">
         <table class="table table-striped table-hover">
             <thead>
-                <tr class="row bg-info">
+                <tr class="row bg-success">
                     <td class="col-1">id</td>
                     <td class="col-3">russian</td>
                     <td class="col-1">forms</td>
@@ -34,21 +34,16 @@ import { AlertService } from '../useful/alert/alert.service';
                 </tr> 
             </thead>
             <tbody>
-                <tr *ngFor="let verbInfo of verbInfoList" class="row align-items-center"
-                    [routerLink]="['/verb', verbInfo.id]">
-                    <th class="col-1 border-0">{{ verbInfo.id }}</th>
-                    <td class="col-3 border-0">{{ verbInfo.russian }}</td>
-                    <td class="col-1 border-0">{{ verbInfo.childQuantity }}</td>
+                <tr *ngFor="let nounInfo of nounInfoList" class="row align-items-center"
+                    [routerLink]="['/noun', nounInfo.id]">
+                    <th class="col-1 border-0" scope="row">{{ nounInfo.id }}</th>
+                    <td class="col-3 border-0">{{ nounInfo.russian }}</td>
+                    <td class="col-1 border-0">{{ nounInfo.childQuantity }}</td>
                     <td class="col-3 border-0">            
-                            <button [routerLink]="['/verb', verbInfo.id]" class="btn btn-sm btn-warning"> Edit </button>
-                            <button class="btn btn-sm" 
-                                    (click)="onClickActionVerb($event, verbInfo)"
-                                    [ngClass]="verbInfo.actionVerb ? 'btn-danger' : 'btn-success'">
-                                {{ verbInfo.actionVerb ? '-' : '+' }} action
-                            </button>
+                            <button [routerLink]="['/noun', nounInfo.id]" class="btn btn-sm btn-warning"> Edit </button>
                     </td>
-                    <td class="col-3 border-0 text-right">{{ verbInfo.hebrew }}</td>
-                    <th class="col-1 border-0 text-right">{{ verbInfo.id }}</th>
+                    <td class="col-3 border-0 text-right">{{ nounInfo.hebrew }}</td>
+                    <th class="col-1 border-0 text-right" scope="row">{{ nounInfo.id }}</th>
                 </tr>
             </tbody>
         </table>
@@ -64,23 +59,23 @@ import { AlertService } from '../useful/alert/alert.service';
     </pagination>
   `
 })
-export class VerbListComponent implements OnInit {
-  verbInfoList : VerbInfo[];
+export class NounListComponent implements OnInit {
+  nounInfoList : NounInfo[] = new Array();
 
   searchString: string = "";
   currentPage = 1;
   itemsOnPage = 15;
   totalPages = 0;
 
-  constructor(private service: VerbService, private alertService: AlertService, private router: Router) {}
+  constructor(private service: NounService, private alertService: AlertService, private router: Router) {}
 
   ngOnInit() {
-      let previousFilter = this.service.getVerbFilterList();
+      let previousFilter = this.service.getNounFilterList();
       if (previousFilter ) {
           this.searchString = previousFilter.searchString;
-          this.getVerbsInfoList(  previousFilter.currentPage );
+          this.getNounsInfoList(  previousFilter.currentPage );
       } else {
-          this.getVerbsInfoList(1);
+          this.getNounsInfoList(1);
       }
   }
 
@@ -88,11 +83,11 @@ export class VerbListComponent implements OnInit {
       let previousFilter: object = new Object;
       previousFilter.searchString =this.searchString;
       previousFilter.currentPage = this.currentPage;
-      this.service.saveVerbListFilter(previousFilter);
+      this.service.saveNounListFilter(previousFilter);
   }
 
-  getVerbsInfoList(page: number){
-    this.service.getVerbInfoList(page, this.itemsOnPage, this.searchString)
+  getNounsInfoList(page: number){
+    this.service.getNounInfoList(page, this.itemsOnPage, this.searchString)
         .subscribe(val => this.setDataInfo(val));
   }
 
@@ -100,13 +95,13 @@ export class VerbListComponent implements OnInit {
     this.currentPage = val.currentPage;
     this.itemsOnPage = val.itemsOnPage;
     this.totalPages = val.totalPages;
-    this.verbInfoList = JSON.parse(val.jsonContent);
+    this.nounInfoList = JSON.parse(val.jsonContent);
   }
 
-  addVerb(){
-      let verbInfo = new VerbInfo();
-      this.verbInfoList.push(verbInfo);
-      this.router.navigate(['/verb', verbInfo.id]);
+  addNoun(){
+      let nounInfo = new NounInfo();
+      this.nounInfoList.push(nounInfo);
+      this.router.navigate(['/noun', nounInfo.id]);
   }
 
   clearFilter(){
@@ -114,30 +109,20 @@ export class VerbListComponent implements OnInit {
       this.onChangeSearch();
   }
 
-  onClickActionVerb(event, verbInfo: VerbInfo)
-  {
-      event.stopPropagation();
-      this.service.changeActionVerb(verbInfo.id)
-          .subscribe(
-              (status: boolean) => verbInfo.actionVerb = status,
-              (error) => { this.alertService.error("Error during change 'action verb' status")}
-          );
-  }
-
   onChangeSearch(){
-    this.getVerbsInfoList(1);
+    this.getNounsInfoList(1);
   }
 
   goToPage(n: number): void {
-    this.getVerbsInfoList(n);
+    this.getNounsInfoList(n);
   }
 
   onNext(): void {
-    this.getVerbsInfoList(this.currentPage + 1);
+    this.getNounsInfoList(this.currentPage + 1);
   }
 
   onPrev(): void {
-    this.getVerbsInfoList(this.currentPage - 1);
+    this.getNounsInfoList(this.currentPage - 1);
   }
 
 }

@@ -10,8 +10,16 @@ import { AppComponent }            from './app.component';
 import { AppRoutingModule }        from './app-routing.module';
 
 import { VerbModule }              from './verb/verb.module';
+import { NounModule }              from './noun/noun.module';
 import { AlertComponent }          from './useful/alert/alert.component';
 import { AlertService }            from './useful/alert/alert.service';
+
+import { SelectTimeModule }      from "./useful/select-time/select-time.module";
+import {SelectPronounModule} from "./useful/select-pronoun/select-pronoun.module";
+import {SelectGenderModule} from "./useful/select-gender/select-gender.module";
+import {SelectPersonModule} from "./useful/select-person/select-person.module";
+import {SelectQuantityModule} from "./useful/select-quantity/select-quantity.module";
+import {PaginationModule} from "./useful/pagination/pagination.module";
 
 @NgModule({
     imports: [
@@ -19,12 +27,20 @@ import { AlertService }            from './useful/alert/alert.service';
         HttpClientModule,
         FormsModule,
         VerbModule,
+        NounModule,
         AppRoutingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        SelectTimeModule,
+        SelectGenderModule,
+        SelectPersonModule,
+        SelectQuantityModule,
+        SelectPronounModule,
+        PaginationModule
     ],
     declarations: [
         AppComponent,
-        AlertComponent
+        AlertComponent,
+
     ],
     providers: [
         AlertService

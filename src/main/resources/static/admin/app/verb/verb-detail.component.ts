@@ -5,8 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { slideInDownAnimation }             from '../animations';
 
 import { Verb, VerbData, VerbService }      from './verb.service';
-import {Pronoun}                            from '../useful/select-pronoun.component'
-import {AlertService}                       from "../useful/alert/alert.service";
+import { Pronoun }                            from '../useful/select-pronoun/select-pronoun.component'
+import { AlertService }                       from "../useful/alert/alert.service";
 
 @Component({
   template: `
@@ -24,25 +24,45 @@ import {AlertService}                       from "../useful/alert/alert.service"
             </div>
             <br/>
             <br/>
-            <div *ngFor="let verbData of verb.verbDataCollection">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-2">
-                        <selectTimeComponent 
-                            [time]="verbData.time" 
-                            (timeChange)="timeChange($event, verbData)">  
-                        </selectTimeComponent>
-                    </div>
-                    <div class="col-1">
-                        <selectPronounComponent
-                            [pronoun] = "{person: verbData.person, gender: verbData.gender, quantity: verbData.quantity}"
-                            (pronounChange)="pronounChange($event, verbData)">
-                        </selectPronounComponent>
-                    </div>
-                    <input [(ngModel)]="verbData.languageUnit.russian" class="col-3" placeholder="russian"/>
-                    <input [(ngModel)]="verbData.languageUnit.transcription" class="col-3" placeholder="transcription"/>
-                    <input [(ngModel)]="verbData.languageUnit.hebrew" class="col-2 text-right" placeholder="hebrew"/>
-                </div> 
-            </div>  
+            <table class="table table-hover">
+                <thead>
+                    <tr class="row justify-content-between align-items-center bg-info">
+                        <td class="col-2">time</td>
+                        <td class="col-1">pronoun</td>
+                        <td class="col-3">russian</td>
+                        <td class="col-3">tr-script</td>
+                        <td class="col-3 text-right">hebrew</td>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr *ngFor="let verbData of verb.verbDataCollection" class="row justify-content-between align-items-center">
+                        <td class="col-2">
+                            <selectTimeComponent 
+                                [time]="verbData.time" 
+                                (timeChange)="timeChange($event, verbData)">  
+                            </selectTimeComponent>
+                        </td>
+                        <td class="col-1">
+                            <selectPronounComponent
+                                [pronoun] = "{person: verbData.person, gender: verbData.gender, quantity: verbData.quantity}"
+                                (pronounChange)="pronounChange($event, verbData)">
+                            </selectPronounComponent>
+                        </td>
+                        <td class="col-3">
+                            <input [(ngModel)]="verbData.languageUnit.russian"  style="padding: 0" 
+                                placeholder="russian"/>
+                        </td>
+                        <td class="col-3">
+                            <input [(ngModel)]="verbData.languageUnit.transcription" style="padding: 0" 
+                                placeholder="transcription"/>
+                        </td>
+                        <td class="col-3 text-right">
+                            <input [(ngModel)]="verbData.languageUnit.hebrew" style="padding: 0" 
+                                class="text-right" placeholder="hebrew"/>
+                        </td>
+                    </tr>  
+                </tbody>
+            </table>
             <br/>
             <div class="row justify-content-between">
                 <button (click)="addVerbData()" class="col-3 btn btn-form btn-primary">Add verb data</button>

@@ -3,6 +3,8 @@ import { HttpClient, HttpParams , HttpHeaders }         from "@angular/common/ht
 import { Observable }                                   from 'rxjs/Observable';
 import { of }                                           from 'rxjs/observable/of';
 
+import { LanguageUnit }                                 from '../language-unit/language-unit.class'
+
 export class  VerbInfo {
   id: number;
   hebrew: string;
@@ -30,13 +32,6 @@ export class Verb{
     this.infinitive = new LanguageUnit();
     this.verbDataCollection = [];
   }
-}
-
-class LanguageUnit{
-  id: number;
-  hebrew: string;
-  russian: string;
-  transcription: string;
 }
 
 export class VerbData{

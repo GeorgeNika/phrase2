@@ -21,4 +21,7 @@ public interface ActionVerbRepository extends CrudRepository<ActionVerb, Integer
 
     ActionVerb getByVerb(Verb verb);
 
+    @Query(value="SELECT * FROM active_verb ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
+    ActionVerb getRandomActionVerb();
+
 }

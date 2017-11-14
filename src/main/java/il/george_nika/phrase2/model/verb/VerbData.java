@@ -46,4 +46,15 @@ public class VerbData {
         this.person = source.getPerson();
         this.languageUnit.updateLanguageUnit(source.getLanguageUnit());
     }
+
+    public VerbData(){}
+
+    public VerbData(VerbData verbData, Boolean isNeedToSetVerb){
+        this.id = verbData.getId();
+        this.languageUnit = new LanguageUnit();
+        if (isNeedToSetVerb) {
+            this.verb = verbData.getVerb();
+        }
+        updateVerbDate(verbData);
+    }
 }

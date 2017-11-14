@@ -4,9 +4,13 @@ import { Component } from '@angular/core';
   selector: 'admin',
   template: `
     <nav>
-      <a routerLink="/verbs" routerLinkActive="active">Verbs</a>
-      <span> -*- </span>
-      <a href="/password/logout">LogOut</a>
+      <a routerLink="/verbs" routerLinkActive="active" class="btn btn-sm btn-info">verbs</a>
+      <span>  </span>
+      <a routerLink="/nouns" class="btn btn-sm btn-success" >nouns</a>
+      <span>  </span>
+      <a  class="btn btn-sm btn-secondary" >adjectives</a>
+      <span>  </span>
+      <a href="/password/logout" class="btn btn-sm btn-danger">logout</a>
     </nav>
     <alert></alert>
     <router-outlet></router-outlet>
