@@ -20,10 +20,10 @@ public class PresentPhraseBuilder extends AbstractVerbPhraseBuilder {
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(firstPronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnit(verb, firstPronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, firstPronoun, TIME_PRESENT));
         tempCollection.add(comma);
         tempCollection.add(secondPronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnit(verb, secondPronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, secondPronoun, TIME_PRESENT));
 
         return buildPhrase(tempCollection);
     }

@@ -1,6 +1,7 @@
 package il.george_nika.phrase2.service.data;
 
 import il.george_nika.phrase2.model.dao.PronounRepository;
+import il.george_nika.phrase2.model.noun.Noun;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.service.RandomService;

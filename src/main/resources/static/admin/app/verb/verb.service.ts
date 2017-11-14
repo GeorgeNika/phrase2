@@ -3,49 +3,9 @@ import { HttpClient, HttpParams , HttpHeaders }         from "@angular/common/ht
 import { Observable }                                   from 'rxjs/Observable';
 import { of }                                           from 'rxjs/observable/of';
 
-import { LanguageUnit }                                 from '../language-unit/language-unit.class'
-
-export class  VerbInfo {
-  id: number;
-  hebrew: string;
-  russian: string;
-  actionVerb: boolean;
-  childQuantity: number;
-
-
-  constructor (){
-    this.id = 0;
-    this.hebrew = '';
-    this.russian = '';
-    this.actionVerb = false;
-    this.childQuantity = 0;
-  }
-}
-
-export class Verb{
-  id: number;
-  infinitive : LanguageUnit;
-  verbDataCollection: VerbData[];
-
-  constructor (){
-    this.id = 0;
-    this.infinitive = new LanguageUnit();
-    this.verbDataCollection = [];
-  }
-}
-
-export class VerbData{
-  id: number;
-  gender: number;
-  quantity: number;
-  time: number;
-  person: number;
-  languageUnit: LanguageUnit;
-
-  constructor(){
-    this.languageUnit = new LanguageUnit();
-  }
-}
+import { Verb }                                         from '../model/verb/verb.class';
+import { VerbInfo }                                     from '../model/verb/verb_info.class'
+import { PageParameters }                               from "../model/page_parameters.class";
 
 @Injectable()
 export class VerbService {
@@ -54,7 +14,7 @@ export class VerbService {
   private verbUrl :string = '/ajax/verb';
   private changeActionVerbUrl :string = '/ajax/changeActionVerb';
 
-  private verbListFilter: object;
+  private verbPageParameters: PageParameters;
 
   constructor(private http: HttpClient) {}
 
@@ -88,11 +48,11 @@ export class VerbService {
         ,{headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }
 
-  saveVerbListFilter(verbListFilter: object){
-    this.verbListFilter = verbListFilter;
+  saveVerbPageParameters(verbPageParameters: PageParameters){
+    this.verbPageParameters = verbPageParameters;
   }
 
-  getVerbFilterList(){
-    return this.verbListFilter;
+  getVerbPageParameters(){
+    return this.verbPageParameters;
   }
 }

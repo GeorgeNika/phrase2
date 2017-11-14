@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 const personValueConst = [
-    {name: "я - мы", value: 1},
-    {name: "ты -вы", value: 2},
-    {name: "он - они", value: 3}
+    {name: "i - we", value: 1},
+    {name: "you", value: 2},
+    {name: "he she they", value: 3}
 ]
 @Component({
     selector: 'selectPersonComponent',

@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 const timeValueConst = [
-    {name: "прошедшее", value: 1},
-    {name: "настоящее", value: 2},
-    {name: "будущее", value: 3}
+    {name: "past", value: 1},
+    {name: "present", value: 2},
+    {name: "future", value: 3}
 ]
 @Component({
     selector: 'selectTimeComponent',

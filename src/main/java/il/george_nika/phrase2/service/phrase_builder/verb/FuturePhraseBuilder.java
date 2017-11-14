@@ -19,7 +19,7 @@ public class FuturePhraseBuilder extends AbstractVerbPhraseBuilder {
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whenQuestion);
         tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, ModelConstants.TIME_FUTURE));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_FUTURE));
         tempCollection.add(questionSign);
 
         return buildPhrase(tempCollection);

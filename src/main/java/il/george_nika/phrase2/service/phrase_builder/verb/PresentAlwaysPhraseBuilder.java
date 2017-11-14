@@ -19,7 +19,7 @@ public class PresentAlwaysPhraseBuilder extends AbstractVerbPhraseBuilder {
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(pronoun.getLanguageUnit());
         tempCollection.add(always);
-        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, ModelConstants.TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_PRESENT));
         tempCollection.add(dot);
 
         return buildPhrase(tempCollection);

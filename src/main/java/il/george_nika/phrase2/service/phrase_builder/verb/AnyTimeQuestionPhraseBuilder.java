@@ -27,10 +27,10 @@ public class AnyTimeQuestionPhraseBuilder extends AbstractVerbPhraseBuilder {
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whoQuestion);
 
-        tempCollection.add(verbService.getLanguageUnit(verb, thirdPersonPronoun, time));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, thirdPersonPronoun, time));
         tempCollection.add(questionSign);
         tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnit(verb, pronoun, time));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, time));
         tempCollection.add(dot);
         return buildPhrase(tempCollection);
     }

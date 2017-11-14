@@ -63,7 +63,7 @@ public class VerbService {
         return isUnitExist(verb, pronoun.getGender(), pronoun.getQuantity(), pronoun.getPerson(), time);
     }
 
-    public Page<Verb> getVerbsOnPage(int page, int itemsOnPage, String filter){
+    public Page<Verb> getVerbsPage(int page, int itemsOnPage, String filter){
         Pageable pageable = new PageRequest(page, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
         if (filter.isEmpty()){
             Page<Verb> tempPage = verbRepository.getVerbsWithoutFilter(pageable);
@@ -90,7 +90,7 @@ public class VerbService {
         return actionVerbRepository.getRandomActionVerb().getVerb();
     }
 
-    public LanguageUnit getLanguageUnit(Verb verb, Pronoun pronoun, int time){
+    public LanguageUnit getLanguageUnitByPronounByTime(Verb verb, Pronoun pronoun, int time){
 
         Optional<VerbData> result = verb.getVerbDataCollection().stream()
                 .filter(verbData -> verbData.getTime() == time
@@ -106,7 +106,7 @@ public class VerbService {
         throw new RuntimeException("don't find " + pronoun + " for " + time + " verb N-"+verb.getId());
     }
 
-    public Integer saveVerbByVerbForView(VerbForDetailView verbForDetailView){
+    public Integer saveVerbByVerbForDetailView(VerbForDetailView verbForDetailView){
         Verb verb ;
         if (verbForDetailView.getId()==null || verbForDetailView.getId()==0) {
             verb = new Verb();

@@ -13,15 +13,15 @@ export class Pronoun {
 }
 
 const pronounValueConst = [
-    {name: "Я(м)",  id: 1, value: new Pronoun(1,1,1)},
-    {name: "Я(ж)",  id: 2, value: new Pronoun(1,2,1)},
-    {name: "Мы",    id: 3, value: new Pronoun(1,1,2)},
-    {name: "Ты(м)", id: 4, value: new Pronoun(2,1,1)},
-    {name: "Ты(ж)", id: 5, value: new Pronoun(2,2,1)},
-    {name: "Вы",    id: 6, value: new Pronoun(2,1,2)},
-    {name: "Он",    id: 7, value: new Pronoun(3,1,1)},
-    {name: "Она",   id: 8, value: new Pronoun(3,2,1)},
-    {name: "Они",   id: 9, value: new Pronoun(3,1,2)}
+    {name: "I(m)",  id: 1, value: new Pronoun(1,1,1)},
+    {name: "I(w)",  id: 2, value: new Pronoun(1,2,1)},
+    {name: "We",    id: 3, value: new Pronoun(1,1,2)},
+    {name: "You(m)", id: 4, value: new Pronoun(2,1,1)},
+    {name: "You(w)", id: 5, value: new Pronoun(2,2,1)},
+    {name: "You(pl)",    id: 6, value: new Pronoun(2,1,2)},
+    {name: "He",    id: 7, value: new Pronoun(3,1,1)},
+    {name: "She",   id: 8, value: new Pronoun(3,2,1)},
+    {name: "They",   id: 9, value: new Pronoun(3,1,2)}
 ]
 
 @Component({

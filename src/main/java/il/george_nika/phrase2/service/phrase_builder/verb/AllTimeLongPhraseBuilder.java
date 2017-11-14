@@ -20,7 +20,7 @@ public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
         Verb actionVerb = verbService.getRandomActionVerb();
 
         tempCollection.add(infinitivePronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnit(actionVerb, infinitivePronoun, TIME_PRESENT));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, infinitivePronoun, TIME_PRESENT));
         tempCollection.add(verb.getInfinitive());
         tempCollection.add(comma);
 
@@ -48,7 +48,7 @@ public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
 
         if (verbService.isUnitExist(verb, pronoun, time)){
             tempCollection.add(pronoun.getLanguageUnit());
-            tempCollection.add(verbService.getLanguageUnit(verb, pronoun, time));
+            tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, time));
         }
         return tempCollection;
     }

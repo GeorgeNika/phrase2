@@ -3,46 +3,9 @@ import { HttpClient, HttpParams , HttpHeaders }         from "@angular/common/ht
 import { Observable }                                   from 'rxjs/Observable';
 import { of }                                           from 'rxjs/observable/of';
 
-import { LanguageUnit }                                 from '../language-unit/language-unit.class';
-
-
-export class  NounInfo {
-  id: number;
-  hebrew: string;
-  russian: string;
-  childQuantity: number;
-
-
-  constructor (){
-    this.id = 0;
-    this.hebrew = '';
-    this.russian = '';
-    this.childQuantity = 0;
-  }
-}
-
-export class Noun{
-  id: number;
-  nounDataCollection: NounData[];
-
-  constructor (){
-    this.id = 0;
-    this.nounDataCollection = [];
-  }
-}
-
-export class NounData{
-  id: number;
-  genderRU: number;
-  quantityRU: number;
-  genderIL: number;
-  quantityIL: number;
-  languageUnit: LanguageUnit;
-
-  constructor(){
-    this.languageUnit = new LanguageUnit();
-  }
-}
+import { Noun }                                         from '../model/noun/noun.class';
+import { NounInfo }                                     from '../model/noun/noun_info.class';
+import { PageParameters }                               from '../model/page_parameters.class';
 
 @Injectable()
 export class NounService {
@@ -50,7 +13,7 @@ export class NounService {
   private nounsInfoUrl :string = '/ajax/nouns';
   private nounUrl :string = '/ajax/noun';
 
-  private nounListFilter: object;
+  private nounPageParameters: PageParameters;
 
   constructor(private http: HttpClient) {}
 
@@ -80,11 +43,11 @@ export class NounService {
         ,{headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }
 
-  saveNounListFilter(nounListFilter: object){
-    this.nounListFilter = nounListFilter;
+  saveNounPageParameters(nounPageParameters: PageParameters){
+    this.nounPageParameters = nounPageParameters;
   }
 
-  getNounFilterList(){
-    return this.nounListFilter;
+  getNounPageParameters(){
+    return this.nounPageParameters;
   }
 }

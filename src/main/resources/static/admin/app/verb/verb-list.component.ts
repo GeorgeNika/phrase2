@@ -3,8 +3,10 @@ import { Component, OnInit, OnDestroy }     from '@angular/core';
 import { HttpErrorResponse }                from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { VerbInfo, VerbService }  from './verb.service';
-import { AlertService } from '../useful/alert/alert.service';
+import { VerbService }                      from './verb.service';
+import { VerbInfo }                         from '../model/verb/verb_info.class';
+import { AlertService }                     from '../useful/alert/alert.service';
+import {PageParameters} from "../model/page_parameters.class";
 
 @Component({
   template: `
@@ -13,7 +15,7 @@ import { AlertService } from '../useful/alert/alert.service';
     </div>
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <button (click)="addVerb()" class="col-2 btn btn-success"> ADD VERB</button>
+            <button (click)="addVerb()" class="col-2 btn btn-success">+ Add verb</button>
             <div class="col-8">
                 <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
                 <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>
@@ -65,7 +67,7 @@ import { AlertService } from '../useful/alert/alert.service';
   `
 })
 export class VerbListComponent implements OnInit {
-  verbInfoList : VerbInfo[];
+  verbInfoList : VerbInfo[] = [];
 
   searchString: string = "";
   currentPage = 1;
@@ -75,20 +77,20 @@ export class VerbListComponent implements OnInit {
   constructor(private service: VerbService, private alertService: AlertService, private router: Router) {}
 
   ngOnInit() {
-      let previousFilter = this.service.getVerbFilterList();
-      if (previousFilter ) {
-          this.searchString = previousFilter.searchString;
-          this.getVerbsInfoList(  previousFilter.currentPage );
+      let previousPageParameters = this.service.getVerbPageParameters();
+      if (previousPageParameters ) {
+          this.searchString = previousPageParameters.searchString;
+          this.getVerbsInfoList(  previousPageParameters.currentPage );
       } else {
-          this.getVerbsInfoList(1);
+          this.getVerbsInfoList( 1 );
       }
   }
 
   ngOnDestroy() {
-      let previousFilter: object = new Object;
-      previousFilter.searchString =this.searchString;
-      previousFilter.currentPage = this.currentPage;
-      this.service.saveVerbListFilter(previousFilter);
+      let pageParameters = new PageParameters;
+      pageParameters.searchString =this.searchString;
+      pageParameters.currentPage = this.currentPage;
+      this.service.saveVerbPageParameters(pageParameters);
   }
 
   getVerbsInfoList(page: number){
@@ -104,9 +106,7 @@ export class VerbListComponent implements OnInit {
   }
 
   addVerb(){
-      let verbInfo = new VerbInfo();
-      this.verbInfoList.push(verbInfo);
-      this.router.navigate(['/verb', verbInfo.id]);
+      this.router.navigate(['/verb', 0]);
   }
 
   clearFilter(){

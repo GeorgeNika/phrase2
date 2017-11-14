@@ -1,10 +1,12 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, HostBinding }   from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit, HostBinding }     from '@angular/core';
+import { Router, ActivatedRoute, ParamMap }   from '@angular/router';
 
-import { slideInDownAnimation }             from '../animations';
+import { slideInDownAnimation }               from '../animations';
 
-import { Verb, VerbData, VerbService }      from './verb.service';
+import { VerbService }                        from './verb.service';
+import { Verb }                               from '../model/verb/verb.class';
+import { VerbData }                           from '../model/verb/verb_data.class';
 import { Pronoun }                            from '../useful/select-pronoun/select-pronoun.component'
 import { AlertService }                       from "../useful/alert/alert.service";
 
@@ -30,7 +32,7 @@ import { AlertService }                       from "../useful/alert/alert.servic
                         <td class="col-2">time</td>
                         <td class="col-1">pronoun</td>
                         <td class="col-3">russian</td>
-                        <td class="col-3">tr-script</td>
+                        <td class="col-3">voice</td>
                         <td class="col-3 text-right">hebrew</td>
                     </tr> 
                 </thead>
@@ -111,23 +113,23 @@ export class VerbDetailComponent implements OnInit {
     this.gotoVerbs();
   }
 
-  timeChange(time: number, verbData: any ){
+  timeChange(time: number, verbData: VerbData ){
     verbData.time = time;
   }
 
-  personChange(person: number, verbData: any ){
+  personChange(person: number, verbData: VerbData ){
     verbData.person = person;
   }
 
-  quantityChange(quantity: number, verbData: any ){
+  quantityChange(quantity: number, verbData: VerbData ){
     verbData.quantity = quantity;
   }
 
-  genderChange(gender: number, verbData: any ){
+  genderChange(gender: number, verbData: VerbData ){
     verbData.gender = gender;
   }
 
-  pronounChange(pronoun: Pronoun, verbData:any){
+  pronounChange(pronoun: Pronoun, verbData: VerbData){
     if (pronoun) {
       verbData.person = pronoun.person;
       verbData.gender = pronoun.gender;

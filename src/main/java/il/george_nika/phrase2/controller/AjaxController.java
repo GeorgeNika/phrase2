@@ -1,14 +1,18 @@
 package il.george_nika.phrase2.controller;
 
 import com.google.gson.Gson;
+import il.george_nika.phrase2.model.adjective.Adjective;
 import il.george_nika.phrase2.model.noun.Noun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.*;
+import il.george_nika.phrase2.model.view.adjective.AdjectiveForDetailView;
+import il.george_nika.phrase2.model.view.adjective.AdjectiveForListView;
 import il.george_nika.phrase2.model.view.noun.NounForDetailView;
 import il.george_nika.phrase2.model.view.noun.NounForListView;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.model.view.verb.VerbForListView;
 import il.george_nika.phrase2.service.PhraseService;
+import il.george_nika.phrase2.service.data.AdjectiveService;
 import il.george_nika.phrase2.service.data.NounService;
 import il.george_nika.phrase2.service.data.VerbService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -31,12 +35,15 @@ public class AjaxController {
     private PhraseService phraseService;
     private NounService nounService;
     private VerbService verbService;
+    private AdjectiveService adjectiveService;
 
     @Autowired
-    public AjaxController(PhraseService phraseService, NounService nounService, VerbService verbService) {
+    public AjaxController(PhraseService phraseService, NounService nounService,
+                          VerbService verbService, AdjectiveService adjectiveService) {
         this.phraseService = phraseService;
         this.nounService = nounService;
         this.verbService = verbService;
+        this.adjectiveService = adjectiveService;
     }
 
     @RequestMapping(value = "/ajax/phrase")
@@ -75,7 +82,7 @@ public class AjaxController {
         if (page<1) {
             page = 1;
         }
-        Page<Verb> verbPage = verbService.getVerbsOnPage(page-1, itemsOnPage, filter);
+        Page<Verb> verbPage = verbService.getVerbsPage(page-1, itemsOnPage, filter);
 
         List<VerbForListView> verbInfoList = new ArrayList<>();
         List<Integer> allActiveVerbsId = verbService.getAllActionVerbIds();
@@ -109,7 +116,7 @@ public class AjaxController {
         if (!ControllerUtil.isAdminLogin(session, true)){
             throw new RuntimeException("Access denied");
         }
-        return verbService.saveVerbByVerbForView(verbForDetailView);
+        return verbService.saveVerbByVerbForDetailView(verbForDetailView);
     }
 
     @RequestMapping(value = "/ajax/changeActionVerb", method = {RequestMethod.POST, RequestMethod.PUT} )
@@ -130,10 +137,10 @@ public class AjaxController {
         if (page<1) {
             page = 1;
         }
-        Page<Noun> nounPage = nounService.getNounsOnPage(page-1, itemsOnPage, filter);
+        Page<Noun> nounPage = nounService.getNounsPage(page-1, itemsOnPage, filter);
 
         List<NounForListView> nounInfoList = nounPage.getContent().stream()
-                .map(noun -> new NounForListView(noun)).collect(Collectors.toList());
+                .map(NounForListView::new).collect(Collectors.toList());
 
         ViewPageWithContent result = new ViewPageWithContent();
         result.setCurrentPage(page);
@@ -157,6 +164,44 @@ public class AjaxController {
         if (!ControllerUtil.isAdminLogin(session, true)){
             throw new RuntimeException("Access denied");
         }
-        return nounService.saveNounByNounForView(nounForDetailView);
+        return nounService.saveNounByNounForDetailView(nounForDetailView);
+    }
+
+    @RequestMapping(value = "/ajax/adjectives")
+    @ResponseBody
+    public ViewPageWithContent getAdjectivesViewPageWithContent (
+            @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
+
+        if (page<1) {
+            page = 1;
+        }
+        Page<Adjective> adjectivePage = adjectiveService.getAdjectivesPage(page-1, itemsOnPage, filter);
+
+        List<AdjectiveForListView> adjectiveInfoList = adjectivePage.getContent().stream()
+                .map(AdjectiveForListView::new).collect(Collectors.toList());
+
+        ViewPageWithContent result = new ViewPageWithContent();
+        result.setCurrentPage(page);
+        result.setItemsOnPage(adjectivePage.getSize());
+        result.setTotalPages(adjectivePage.getTotalPages());
+        result.setJsonContent( new Gson().toJson(adjectiveInfoList));
+        return result;
+    }
+
+    @RequestMapping(value = "/ajax/adjective/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public AdjectiveForDetailView getAdjectiveForDetailView (@PathVariable Integer id){
+
+        return new AdjectiveForDetailView(adjectiveService.getAdjectiveById(id));
+    }
+
+    @RequestMapping(value = "/ajax/adjective", method = {RequestMethod.POST, RequestMethod.PUT} )
+    @ResponseBody
+    public Integer  updateAdjective (@RequestBody AdjectiveForDetailView adjectiveForDetailView, HttpSession session){
+
+        if (!ControllerUtil.isAdminLogin(session, true)){
+            throw new RuntimeException("Access denied");
+        }
+        return adjectiveService.saveAdjectiveByAdjectiveForDetailView(adjectiveForDetailView);
     }
 }

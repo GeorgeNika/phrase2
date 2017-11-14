@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 const quantityValueConst = [
-    {name: "один", value: 1},
-    {name: "много", value: 2}
+    {name: "one", value: 1},
+    {name: "many", value: 2}
 ]
 @Component({
     selector: 'selectQuantityComponent',

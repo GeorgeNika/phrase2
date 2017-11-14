@@ -135,7 +135,7 @@ public class TestVerbService {
         Verb pastVerb = verbService.getVerbById(verbsFromDataBase.get(0).getId());
         Verb futureVerb = verbService.getVerbById(verbsFromDataBase.get(2).getId());
 
-        Page<Verb> testPage = verbService.getVerbsOnPage(0,2, "");
+        Page<Verb> testPage = verbService.getVerbsPage(0,2, "");
         Assert.assertEquals(testPage.getTotalElements(), 3);
         Assert.assertEquals(testPage.getTotalPages(), 2);
         Assert.assertEquals(testPage.getContent().size(), 2);
@@ -143,7 +143,7 @@ public class TestVerbService {
         Assert.assertTrue(testPage.getContent().contains(pastVerb));
         Assert.assertFalse(testPage.getContent().contains(futureVerb));
 
-        testPage = verbService.getVerbsOnPage(1,2, "");
+        testPage = verbService.getVerbsPage(1,2, "");
         Assert.assertEquals(testPage.getTotalElements(), 3);
         Assert.assertEquals(testPage.getTotalPages(), 2);
         Assert.assertEquals(testPage.getContent().size(), 1);
@@ -151,7 +151,7 @@ public class TestVerbService {
         Assert.assertTrue(testPage.getContent().contains(futureVerb));
         Assert.assertFalse(testPage.getContent().contains(pastVerb));
 
-        testPage = verbService.getVerbsOnPage(2,2, "");
+        testPage = verbService.getVerbsPage(2,2, "");
         Assert.assertEquals(testPage.getTotalElements(), 3);
         Assert.assertEquals(testPage.getTotalPages(), 2);
         Assert.assertEquals(testPage.getContent().size(), 2);
@@ -159,15 +159,15 @@ public class TestVerbService {
         Assert.assertTrue(testPage.getContent().contains(pastVerb));
         Assert.assertFalse(testPage.getContent().contains(futureVerb));
 
-        testPage = verbService.getVerbsOnPage(1,2, pastVerb.getInfinitive().getHebrew().substring(2,6));
+        testPage = verbService.getVerbsPage(1,2, pastVerb.getInfinitive().getHebrew().substring(2,6));
         Assert.assertEquals(testPage.getTotalElements(), 1);
         Assert.assertTrue(testPage.getContent().contains(pastVerb));
 
-        testPage = verbService.getVerbsOnPage(1,2, pastVerb.getInfinitive().getRussian().substring(2,6));
+        testPage = verbService.getVerbsPage(1,2, pastVerb.getInfinitive().getRussian().substring(2,6));
         Assert.assertEquals(testPage.getTotalElements(), 1);
         Assert.assertTrue(testPage.getContent().contains(pastVerb));
 
-        testPage = verbService.getVerbsOnPage(1,2, pastVerb.getInfinitive().getTranscription().substring(2,6));
+        testPage = verbService.getVerbsPage(1,2, pastVerb.getInfinitive().getTranscription().substring(2,6));
         Assert.assertEquals(testPage.getTotalElements(), 0);
         Assert.assertFalse(testPage.getContent().contains(pastVerb));
     }
@@ -211,35 +211,35 @@ public class TestVerbService {
         Pronoun pronoun;
 
         pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
-        Assert.assertNotNull(verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE));
+        Assert.assertNotNull(verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE));
 
         pronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_PLURAL, PERSON_THIRD);
-        Assert.assertNotNull(verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE));
+        Assert.assertNotNull(verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE));
 
         pronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_FIRST);
-        Assert.assertNotNull(verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE));
+        Assert.assertNotNull(verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE));
 
         try {
             pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
-            verbService.getLanguageUnit(futureVerb, pronoun, TIME_PAST);
+            verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_PAST);
             Assert.fail();
         }catch (Exception ex){}
 
         try {
             pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
-            verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE);
+            verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE);
             Assert.fail();
         }catch (Exception ex){}
 
         try {
             pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_PLURAL, PERSON_SECOND);
-            verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE);
+            verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE);
             Assert.fail();
         }catch (Exception ex){}
 
         try{
             pronoun = pronounService.getPronoun(GENDER_FEMININE, QUANTITY_PLURAL, PERSON_SECOND);
-            verbService.getLanguageUnit(futureVerb, pronoun, TIME_FUTURE);
+            verbService.getLanguageUnitByPronounByTime(futureVerb, pronoun, TIME_FUTURE);
             Assert.fail();
         }catch (Exception ex){}
     }
@@ -256,15 +256,15 @@ public class TestVerbService {
         newVerbDataCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND, TIME_PRESENT));
         newVerbForDetailView.setVerbDataCollection(newVerbDataCollection);
         newVerbForDetailView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
-        Assert.assertEquals(verbService.getVerbsOnPage(0,2,"").getTotalElements(),3);
-        verbService.saveVerbByVerbForView(newVerbForDetailView);
-        Assert.assertEquals(verbService.getVerbsOnPage(0,2,"").getTotalElements(),4);
+        Assert.assertEquals(verbService.getVerbsPage(0,2,"").getTotalElements(),3);
+        verbService.saveVerbByVerbForDetailView(newVerbForDetailView);
+        Assert.assertEquals(verbService.getVerbsPage(0,2,"").getTotalElements(),4);
 
         VerbForDetailView changeInfinitiveInVerbForDetailView = new VerbForDetailView(pastVerb);
         changeInfinitiveInVerbForDetailView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
         String testString = changeInfinitiveInVerbForDetailView.getInfinitive().getTranscription();
         Assert.assertNotEquals(verbService.getVerbById(pastVerb.getId()).getInfinitive().getTranscription(), testString);
-        verbService.saveVerbByVerbForView(changeInfinitiveInVerbForDetailView);
+        verbService.saveVerbByVerbForDetailView(changeInfinitiveInVerbForDetailView);
         Assert.assertEquals(verbService.getVerbById(pastVerb.getId()).getInfinitive().getTranscription(), testString);
 
         VerbForDetailView addVerbDataInVerbForDetailView = new VerbForDetailView(futureVerb);
@@ -272,7 +272,7 @@ public class TestVerbService {
         List<VerbData> tempCollection = addVerbDataInVerbForDetailView.getVerbDataCollection();
         tempCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_PLURAL, PERSON_SECOND, TIME_PRESENT));
         addVerbDataInVerbForDetailView.setVerbDataCollection(tempCollection);
-        verbService.saveVerbByVerbForView(addVerbDataInVerbForDetailView);
+        verbService.saveVerbByVerbForDetailView(addVerbDataInVerbForDetailView);
         Assert.assertEquals(verbService.getVerbById(futureVerb.getId()).getVerbDataCollection().size(), 4);
     }
 

@@ -4,7 +4,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { slideInDownAnimation }             from '../animations';
 
-import { Noun, NounData, NounService }      from './noun.service';
+import { NounService }                      from './noun.service';
+import { Noun }                             from '../model/noun/noun.class';
+import { NounData }                         from '../model/noun/noun_data.class';
 import { AlertService }                     from "../useful/alert/alert.service";
 
 @Component({
@@ -22,7 +24,7 @@ import { AlertService }                     from "../useful/alert/alert.service"
                         <td class="col-1">gndr RU</td>
                         <td class="col-1">qty RU</td>
                         <td class="col-3">russian</td>
-                        <td class="col-3">tr-script</td>
+                        <td class="col-3">voice</td>
                         <td class="col-2 text-right">hebrew</td>
                         <td class="col-1 text-right">gndr IL</td>
                         <td class="col-1 text-right">qty IL</td>
@@ -61,11 +63,11 @@ import { AlertService }                     from "../useful/alert/alert.service"
                             </selectGenderComponent>
                         </td>
                         <td class="col-1">
-                                <selectQuantityComponent 
-                                    [quantity]="nounData.quantityIL" 
-                                    (quantityChange)="quantityILChange($event, nounData)">  
-                                </selectQuantityComponent>
-                            </td>
+                            <selectQuantityComponent 
+                                [quantity]="nounData.quantityIL" 
+                                (quantityChange)="quantityILChange($event, nounData)">  
+                            </selectQuantityComponent>
+                        </td>
                     </tr> 
                 </tbody>  
             </table>    
@@ -117,19 +119,23 @@ export class NounDetailComponent implements OnInit {
     this.gotoNouns();
   }
 
-  genderRUChange(gender: number, nounData: any ){
+  genderRUChange(gender: number, nounData: NounData ){
     nounData.genderRU = gender;
   }
 
-  quantityRUChange(quantity: number, nounData: any ){
+  quantityRUChange(quantity: number, nounData: NounData ){
     nounData.quantityRU = quantity;
   }
 
-  genderILChange(gender: number, nounData: any ){
+  genderILChange(gender: number, nounData: NounData ){
+    if (gender > 2){
+      this.alertService.error("incorrect hebrew gender", true);
+      return;
+    }
     nounData.genderIL = gender;
   }
 
-  quantityILChange(quantity: number, nounData: any ){
+  quantityILChange(quantity: number, nounData: NounData ){
     nounData.quantityIL = quantity;
   }
 

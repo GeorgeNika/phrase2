@@ -41,7 +41,7 @@ public class NounService {
         return nounRepository.getNounById(id);
     }
 
-    public Page<Noun> getNounsOnPage(int page, int itemsOnPage, String filter){
+    public Page<Noun> getNounsPage(int page, int itemsOnPage, String filter){
         Pageable pageable = new PageRequest(page, itemsOnPage, new Sort(Sort.Direction.ASC, "id"));
         if (filter.isEmpty()){
             Page<Noun> tempPage = nounRepository.getNounsWithoutFilter(pageable);
@@ -60,7 +60,7 @@ public class NounService {
         }
     }
 
-    public Integer saveNounByNounForView(NounForDetailView nounForDetailView){
+    public Integer saveNounByNounForDetailView(NounForDetailView nounForDetailView){
         Noun noun ;
         if (nounForDetailView.getId()==null || nounForDetailView.getId()==0) {
             noun = new Noun();
@@ -105,8 +105,8 @@ public class NounService {
             }
             tempNounDate.updateNounDate(loopNounData);
         }
-        for (NounData loopVerbData: mapForUpdate.values()){
-            deleteNounData(loopVerbData);
+        for (NounData loopNounData: mapForUpdate.values()){
+            deleteNounData(loopNounData);
         }
     }
 

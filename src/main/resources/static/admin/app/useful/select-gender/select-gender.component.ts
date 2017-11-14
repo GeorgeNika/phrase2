@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 const genderValueConst = [
-    {name: "муж", value: 1},
-    {name: "жен", value: 2}
+    {name: "men", value: 1},
+    {name: "women", value: 2},
+    {name: "middle", value: 3}
 ]
 @Component({
     selector: 'selectGenderComponent',

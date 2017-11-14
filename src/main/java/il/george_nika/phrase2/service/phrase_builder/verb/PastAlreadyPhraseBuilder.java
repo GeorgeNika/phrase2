@@ -20,11 +20,11 @@ public class PastAlreadyPhraseBuilder extends AbstractVerbPhraseBuilder {
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(firstPronoun.getLanguageUnit());
         tempCollection.add(already);
-        tempCollection.add(verbService.getLanguageUnit(verb, firstPronoun, TIME_PAST));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, firstPronoun, TIME_PAST));
         tempCollection.add(comma);
         tempCollection.add(secondPronoun.getLanguageUnit());
         tempCollection.add(notYet);
-        tempCollection.add(verbService.getLanguageUnit(verb, secondPronoun, TIME_PAST));
+        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, secondPronoun, TIME_PAST));
 
         return buildPhrase(tempCollection);
     }

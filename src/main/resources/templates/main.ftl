@@ -14,15 +14,16 @@
         <div class="col-12 col-lg-10">
                 <div class="row justify-content-between">
                     <select id="phrase-type" class="custom-select col-5 col-lg-4 responsive-text-3">
-                        <option disabled>Выберите тип</option>
-                        <option selected value="verb">глаголы -></option>
-                        <option value="number">цифры -></option>
+                        <option disabled>Choose type</option>
+                        <option selected value="verb">verb -></option>
+                        <option value="number">number -></option>
+                        <option value="noun">noun -></option>
                     </select>
                     <select id="direction" class="custom-select col-5 col-lg-4 responsive-text-3">
-                        <option disabled>Выберите направление</option>
-                        <option selected value="russian">русский -></option>
-                        <option value="hebrew">иврит -></option>
-                        <option value="transcription">транскрипция -></option>
+                        <option disabled>Choose direction</option>
+                        <option selected value="russian">russian -></option>
+                        <option value="hebrew">hebrew -></option>
+                        <option value="transcription">transcription -></option>
                     </select>
                     <button type="button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-secondary responsive-text-3" id="admin-button">
                         admin
