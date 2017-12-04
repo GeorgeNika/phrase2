@@ -80,7 +80,7 @@ function setWords(data, language) {
     for (wordIndex in data.wordsIdentification) {
         var wordData = data.wordsIdentification[wordIndex]
         var $newWordButton = $("<a>", {href: "/word/"+wordData.type+"/"+wordData.wordId,
-            "class": "col-2 btn btn-md btn-info responsive-text-3",
+            "class": "col-2 btn btn-md btn-outline-primary responsive-text-3",
             "html": wordData.languageUnit[language]});
         $words.append($newWordButton);
     }

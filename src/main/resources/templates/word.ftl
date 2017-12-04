@@ -45,9 +45,9 @@
                     <#list wordInfoList as wordInfoItem>
                         <tr class="row">
                             <td class="col-3"> --- </td>
-                            <td class="col-3"> ${wordInfoItem.getRussian()} </td>
-                            <td class="col-3"> ${wordInfoItem.getTranscription()} </td>
-                            <td class="col-3 text-right"> ${wordInfoItem.getHebrew()} </td>
+                            <td class="col-3"> <#if wordInfoItem.getRussian() ??>${wordInfoItem.getRussian()}</#if></td>
+                            <td class="col-3"> <#if wordInfoItem.getTranscription() ??>${wordInfoItem.getTranscription()} </#if></td>
+                            <td class="col-3 text-right"> <#if wordInfoItem.getHebrew() ??>${wordInfoItem.getHebrew()} </#if></td>
                         </tr>
                     </#list>
                 </tbody>
@@ -67,6 +67,8 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class YearPhraseBuilder extends AbstractNumberPhraseBuilder {
 
         tempCollection.add(YEAR);
 
-        if (randomService.getRandom(1) == 0) {
+        if (randomService.getRandom(2) == 0) {
             russianYear = russianYear + 2000;
             tempCollection.add(numberService.getThousand(2));
             tempNumber = randomService.getRandom(26);

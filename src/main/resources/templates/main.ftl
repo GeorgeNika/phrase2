@@ -36,7 +36,6 @@
 </div>
 
 <div class="container-fluid">
-    <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
         <h1 id="question" class="col-12 col-lg-10 responsive-text-1"></h1>
@@ -44,43 +43,35 @@
     <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" id="answer1-button" class="col-2 col-lg-1 btn btn-md btn-info responsive-text-3" >
+        <button type="button" id="answer1-button" class="col-2 col-lg-1 btn btn-md btn-outline-primary responsive-text-3" >
             answer
         </button>
         <div id="answer1" class="col-10 col-lg-9 responsive-text-2"></div>
     </div>
-    <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" id="answer2-button" class="col-2 col-lg-1 btn btn-md btn-block btn-info responsive-text-3">
+        <button type="button" id="answer2-button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-primary responsive-text-3">
             answer 2
         </button>
         <h2 id="answer2" class="col-10 col-lg-9 responsive-text-2"></h2>
     </div>
-    <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" id="words-button" class="col-2 col-lg-1 btn btn-md btn-block btn-info responsive-text-3">
+        <button type="button" id="words-button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-primary responsive-text-3">
             words
         </button>
         <div class="col-10 col-lg-9 invisible" id="words" >
-            <a href="/word/noun/5" class="col-2 btn btn-md btn-info responsive-text-3">
-                noun 5
-            </a>
-            <a href="/word/article/4" class=" col-2 btn btn-md btn-info responsive-text-3">
-                article 4
-            </a>
+            <#-- insert words here by jscript -->
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" class="col-12 col-lg-10 btn btn-md btn-block btn-info responsive-text-3" id="new-phrase-button">
+        <button type="button" class="col-12 col-lg-10 btn btn-md btn-block btn-primary responsive-text-3" id="new-phrase-button">
             new phrase
         </button>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
