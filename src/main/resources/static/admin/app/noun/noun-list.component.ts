@@ -18,8 +18,8 @@ import { AlertService }                     from '../useful/alert/alert.service'
             <button (click)="addNoun()" class="col-2 btn btn-success">+ Add noun</button>
             <div class="col-8">
                 <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
-                <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>
-                <button (click)="clearFilter()" class="col-2 btn btn-info"> Clear </button>
+                <button (click)="onChangeSearch()" class="col-2 btn btn-success"> Search </button>
+                <button (click)="clearFilter()" class="col-2 btn btn-success"> Clear </button>
             </div>
         </div>
     </div>

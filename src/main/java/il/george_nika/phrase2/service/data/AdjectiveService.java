@@ -17,9 +17,9 @@ import java.util.*;
 @Service
 public class AdjectiveService {
 
-    private AdjectiveRepository adjectiveRepository;
-    private AdjectiveDataRepository adjectiveDataRepository;
-    private LanguageUnitRepository languageUnitRepository;
+    private final AdjectiveRepository adjectiveRepository;
+    private final AdjectiveDataRepository adjectiveDataRepository;
+    private final LanguageUnitRepository languageUnitRepository;
 
     @Autowired
     public AdjectiveService(AdjectiveRepository adjectiveRepository,

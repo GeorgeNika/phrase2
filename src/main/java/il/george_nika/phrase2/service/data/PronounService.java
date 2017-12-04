@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Service
 public class PronounService {
 
-    private RandomService randomService;
-    private PronounRepository pronounRepository;
+    private final RandomService randomService;
+    private final PronounRepository pronounRepository;
 
     @Autowired
     public PronounService(RandomService randomService, PronounRepository pronounRepository){

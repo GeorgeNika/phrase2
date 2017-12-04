@@ -31,6 +31,12 @@ public class LanguageUnit implements Serializable {
     public LanguageUnit() {
     }
 
+    public LanguageUnit(LanguageUnit languageUnit) {
+        this.russian = languageUnit.getRussian();
+        this.hebrew = languageUnit.getHebrew();
+        this.transcription = languageUnit.getTranscription();
+    }
+
     public LanguageUnit(String russian, String hebrew, String transcription) {
         this.russian = russian;
         this.hebrew = hebrew;

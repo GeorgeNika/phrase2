@@ -20,9 +20,9 @@ import java.util.*;
 @Service
 public class NounService {
 
-    private NounRepository nounRepository;
-    private NounDataRepository nounDataRepository;
-    private LanguageUnitRepository languageUnitRepository;
+    private final NounRepository nounRepository;
+    private final NounDataRepository nounDataRepository;
+    private final LanguageUnitRepository languageUnitRepository;
 
     @Autowired
     public NounService (NounRepository nounRepository,

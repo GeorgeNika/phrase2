@@ -15,11 +15,11 @@ import { AlertService }                     from '../useful/alert/alert.service'
     </div>
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <button (click)="addAdjective()" class="col-2 btn btn-success">+ Add adjective</button>
+            <button (click)="addAdjective()" class="col-2 btn btn-secondary">+ Add adjective</button>
             <div class="col-8">
                 <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
-                <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>
-                <button (click)="clearFilter()" class="col-2 btn btn-info"> Clear </button>
+                <button (click)="onChangeSearch()" class="col-2 btn btn-secondary"> Search </button>
+                <button (click)="clearFilter()" class="col-2 btn btn-secondary"> Clear </button>
             </div>
         </div>
     </div>

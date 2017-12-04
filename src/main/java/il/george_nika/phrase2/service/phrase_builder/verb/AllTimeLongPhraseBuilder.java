@@ -4,6 +4,7 @@ import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
+import il.george_nika.phrase2.model.view.WordIdentification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,12 @@ public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
     public ViewPhrase getPhrase(Verb verb) {
 
         List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<WordIdentification> wordsIdentification = new ArrayList<>();
 
         Pronoun infinitivePronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
         Verb actionVerb = verbService.getRandomActionVerb();
+        wordsIdentification.add(new WordIdentification(VERB_TYPE, actionVerb.getId(), actionVerb.getInfinitive()));
+        wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
 
         tempCollection.add(infinitivePronoun.getLanguageUnit());
         tempCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, infinitivePronoun, TIME_PRESENT));
@@ -27,7 +31,7 @@ public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
         tempCollection.addAll(getTimePart(verb, TIME_PRESENT, today));
         tempCollection.addAll(getTimePart(verb, TIME_PAST, yesterday));
         tempCollection.addAll(getTimePart(verb, TIME_FUTURE, tomorrow));
-        return buildPhrase(tempCollection);
+        return buildPhrase(tempCollection, wordsIdentification);
     }
 
     private List<LanguageUnit> getTimePart(Verb verb, int time, LanguageUnit description){

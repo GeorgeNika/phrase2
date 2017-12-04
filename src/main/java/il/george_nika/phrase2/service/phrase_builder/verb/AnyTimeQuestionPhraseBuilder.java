@@ -4,6 +4,7 @@ import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
+import il.george_nika.phrase2.model.view.WordIdentification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class AnyTimeQuestionPhraseBuilder extends AbstractVerbPhraseBuilder {
         Pronoun thirdPersonPronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_THIRD);
         Pronoun pronoun = pronounService.getRandomPronounByVerb(verb, time);
 
+        List<WordIdentification> wordsIdentification = new ArrayList<>();
+        wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
+
         List<LanguageUnit> tempCollection = new ArrayList<>();
         tempCollection.add(whoQuestion);
 
@@ -32,6 +36,6 @@ public class AnyTimeQuestionPhraseBuilder extends AbstractVerbPhraseBuilder {
         tempCollection.add(pronoun.getLanguageUnit());
         tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, time));
         tempCollection.add(dot);
-        return buildPhrase(tempCollection);
+        return buildPhrase(tempCollection, wordsIdentification);
     }
 }

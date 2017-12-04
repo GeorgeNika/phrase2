@@ -29,13 +29,13 @@ import java.util.stream.Collectors;
 import static il.george_nika.phrase2.controller.ControllerConstants.CONNECTION_TYPE_ADMIN;
 import static il.george_nika.phrase2.controller.ControllerConstants.SESSION_CONNECTION_TYPE;
 
-@Controller
+@RestController
 public class AjaxController {
 
-    private PhraseService phraseService;
-    private NounService nounService;
-    private VerbService verbService;
-    private AdjectiveService adjectiveService;
+    private final PhraseService phraseService;
+    private final NounService nounService;
+    private final VerbService verbService;
+    private final AdjectiveService adjectiveService;
 
     @Autowired
     public AjaxController(PhraseService phraseService, NounService nounService,
@@ -47,7 +47,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/phrase")
-    @ResponseBody
     public ViewPhrase getAjaxPhrase(@RequestParam String phraseType){
         ViewPhrase result = null;
         while (result == null) {
@@ -61,7 +60,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/password")
-    @ResponseBody
     public Integer checkPassword (@RequestParam String password, HttpSession session){
 
         String  hashPassword = "$2a$10$eV.B2TBN2m3WMcTFmcswZOo1JsO/ZlQuGSZOf38IjuwAxU6b7d4P6";
@@ -75,7 +73,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/verbs")
-    @ResponseBody
     public ViewPageWithContent getVerbsViewPageWithContent (
             @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
 
@@ -103,14 +100,12 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/verb/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public VerbForDetailView getVerbForDetailView (@PathVariable Integer id){
 
         return new VerbForDetailView(verbService.getVerbById(id));
     }
 
     @RequestMapping(value = "/ajax/verb", method = {RequestMethod.POST, RequestMethod.PUT} )
-    @ResponseBody
     public Integer  updateVerb (@RequestBody VerbForDetailView verbForDetailView, HttpSession session){
 
         if (!ControllerUtil.isAdminLogin(session, true)){
@@ -120,7 +115,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/changeActionVerb", method = {RequestMethod.POST, RequestMethod.PUT} )
-    @ResponseBody
     public Boolean  changeActionVerb (@RequestBody Integer id, HttpSession session){
 
         if (!ControllerUtil.isAdminLogin(session, true)){
@@ -130,7 +124,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/nouns")
-    @ResponseBody
     public ViewPageWithContent getNounsViewPageWithContent (
             @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
 
@@ -151,14 +144,12 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/noun/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public NounForDetailView getNounForDetailView (@PathVariable Integer id){
 
         return new NounForDetailView(nounService.getNounById(id));
     }
 
     @RequestMapping(value = "/ajax/noun", method = {RequestMethod.POST, RequestMethod.PUT} )
-    @ResponseBody
     public Integer  updateNoun (@RequestBody NounForDetailView nounForDetailView, HttpSession session){
 
         if (!ControllerUtil.isAdminLogin(session, true)){
@@ -168,7 +159,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/adjectives")
-    @ResponseBody
     public ViewPageWithContent getAdjectivesViewPageWithContent (
             @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
 
@@ -189,14 +179,12 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/ajax/adjective/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public AdjectiveForDetailView getAdjectiveForDetailView (@PathVariable Integer id){
 
         return new AdjectiveForDetailView(adjectiveService.getAdjectiveById(id));
     }
 
     @RequestMapping(value = "/ajax/adjective", method = {RequestMethod.POST, RequestMethod.PUT} )
-    @ResponseBody
     public Integer  updateAdjective (@RequestBody AdjectiveForDetailView adjectiveForDetailView, HttpSession session){
 
         if (!ControllerUtil.isAdminLogin(session, true)){

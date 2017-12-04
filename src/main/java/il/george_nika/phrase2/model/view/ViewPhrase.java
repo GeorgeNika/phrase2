@@ -3,9 +3,8 @@ package il.george_nika.phrase2.model.view;
 import il.george_nika.phrase2.model.LanguageUnit;
 import lombok.Data;
 
-/**
- * Created by George on 11.06.2017.
- */
+import java.util.List;
+
 @Data
 public class ViewPhrase {
 
@@ -13,12 +12,14 @@ public class ViewPhrase {
 
     private String hebrew = "";
 
-    private String transcription = "";
+    private String voice = "";
+
+    private List<WordIdentification> wordsIdentification;
 
     public void addLanguageUnit(LanguageUnit languageUnit){
         this.russian = russian + " " + languageUnit.getRussian();
         this.hebrew = hebrew + " " + languageUnit.getHebrew();
-        this.transcription = transcription + " " + languageUnit.getTranscription();
+        this.voice = voice + " " + languageUnit.getTranscription();
     }
 
 }

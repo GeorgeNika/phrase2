@@ -33,7 +33,7 @@ public class YearPhraseBuilder extends AbstractNumberPhraseBuilder {
             tempCollection.add(numberService.getDozens(tempNumber));
         }
 
-        ViewPhrase result = buildPhrase(tempCollection);
+        ViewPhrase result = buildPhrase(tempCollection, new ArrayList<>());
         result.setRussian(YEAR.getRussian() + " " + russianYear);
         return result;
     }

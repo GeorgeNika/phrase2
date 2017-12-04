@@ -15,7 +15,7 @@ import {PageParameters} from "../model/page_parameters.class";
     </div>
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <button (click)="addVerb()" class="col-2 btn btn-success">+ Add verb</button>
+            <button (click)="addVerb()" class="col-2 btn btn-info">+ Add verb</button>
             <div class="col-8">
                 <input [(ngModel)]="searchString" (change)="onChangeSearch()" class="col-4" placeholder="search"/>
                 <button (click)="onChangeSearch()" class="col-2 btn btn-info"> Search </button>

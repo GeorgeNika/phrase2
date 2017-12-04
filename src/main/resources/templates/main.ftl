@@ -23,7 +23,7 @@
                         <option disabled>Choose direction</option>
                         <option selected value="russian">russian -></option>
                         <option value="hebrew">hebrew -></option>
-                        <option value="transcription">transcription -></option>
+                        <option value="voice">voice -></option>
                     </select>
                     <button type="button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-secondary responsive-text-3" id="admin-button">
                         admin
@@ -44,7 +44,7 @@
     <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" class="col-2 col-lg-1 btn btn-md btn-info responsive-text-3" id="answer1-button">
+        <button type="button" id="answer1-button" class="col-2 col-lg-1 btn btn-md btn-info responsive-text-3" >
             answer
         </button>
         <div id="answer1" class="col-10 col-lg-9 responsive-text-2"></div>
@@ -52,10 +52,25 @@
     <br/>
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <button type="button" class="col-2 col-lg-1 btn btn-md btn-block btn-info responsive-text-3" id="answer2-button">
+        <button type="button" id="answer2-button" class="col-2 col-lg-1 btn btn-md btn-block btn-info responsive-text-3">
             answer 2
         </button>
         <h2 id="answer2" class="col-10 col-lg-9 responsive-text-2"></h2>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-0 col-lg-1"></div>
+        <button type="button" id="words-button" class="col-2 col-lg-1 btn btn-md btn-block btn-info responsive-text-3">
+            words
+        </button>
+        <div class="col-10 col-lg-9 invisible" id="words" >
+            <a href="/word/noun/5" class="col-2 btn btn-md btn-info responsive-text-3">
+                noun 5
+            </a>
+            <a href="/word/article/4" class=" col-2 btn btn-md btn-info responsive-text-3">
+                article 4
+            </a>
+        </div>
     </div>
     <br/>
     <div class="row">

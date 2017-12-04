@@ -22,10 +22,10 @@ import java.util.*;
 @Service
 public class VerbService {
 
-    private VerbRepository verbRepository;
-    private VerbDataRepository verbDataRepository;
-    private LanguageUnitRepository languageUnitRepository;
-    private ActionVerbRepository actionVerbRepository;
+    private final VerbRepository verbRepository;
+    private final VerbDataRepository verbDataRepository;
+    private final LanguageUnitRepository languageUnitRepository;
+    private final ActionVerbRepository actionVerbRepository;
 
     public VerbService (VerbRepository verbRepository,
                         VerbDataRepository verbDataRepository,

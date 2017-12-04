@@ -6,18 +6,23 @@ package il.george_nika.phrase2.model;
 
 public class ModelConstants {
 
-    public static int GENDER_MASCULINE = 1;
-    public static int GENDER_FEMININE = 2;
+    public static final int GENDER_MASCULINE = 1;
+    public static final int GENDER_FEMININE = 2;
 
-    public static int QUANTITY_SINGULAR = 1;
-    public static int QUANTITY_PLURAL = 2;
+    public static final int QUANTITY_SINGULAR = 1;
+    public static final int QUANTITY_PLURAL = 2;
 
-    public static int PERSON_FIRST = 1;
-    public static int PERSON_SECOND = 2;
-    public static int PERSON_THIRD = 3;
+    public static final int PERSON_FIRST = 1;
+    public static final int PERSON_SECOND = 2;
+    public static final int PERSON_THIRD = 3;
 
-    public static int TIME_PRESENT = 2;
-    public static int TIME_PAST = 1;
-    public static int TIME_FUTURE = 3;
+    public static final int TIME_PRESENT = 2;
+    public static final int TIME_PAST = 1;
+    public static final int TIME_FUTURE = 3;
+
+    public static final String VERB_TYPE = "verb";
+    public static final String NOUN_TYPE = "noun";
+    public static final String ADJECTIVE_TYPE = "adjective";
+    public static final String NOMBER_TYPE = "number";
 
 }

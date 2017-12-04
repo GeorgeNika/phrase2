@@ -1,18 +1,42 @@
 package il.george_nika.phrase2.controller;
 
+import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.service.data.WordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 
 import static il.george_nika.phrase2.controller.ControllerConstants.*;
 
 @Controller
 public class MainController {
 
+
+    private final WordService wordService;
+
+    @Autowired
+    public MainController(WordService wordService) {
+        this.wordService = wordService;
+    }
+
     @RequestMapping(value = "/")
     public String main() {
         return "main";
+    }
+
+    @RequestMapping(value = "/word/{type}/{wordId}")
+    public String showWord(@PathVariable String type, @PathVariable Integer wordId, Model model){
+        model.addAttribute("word_type", type);
+        model.addAttribute("word_id", wordId);
+        model.addAttribute("wordInfoList", wordService.getWordInfo(type, wordId));
+        return "word";
     }
 
     @RequestMapping(value = "/password")
@@ -47,7 +71,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/admin/prog/**")
-    public String admin2(){
+    public String adminProgRedirect(){
         return "redirect:/admin/prog";
     }
 

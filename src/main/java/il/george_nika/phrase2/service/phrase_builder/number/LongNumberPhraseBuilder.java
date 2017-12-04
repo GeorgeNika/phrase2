@@ -17,6 +17,6 @@ public class LongNumberPhraseBuilder extends AbstractNumberPhraseBuilder {
         for (int i = 0 ; i < 9 ; i++){
             tempCollection.add(numberService.getSingleNumber(randomService.getRandom(10)));
         }
-        return buildPhrase(tempCollection);
+        return buildPhrase(tempCollection, new ArrayList<>());
     }
 }

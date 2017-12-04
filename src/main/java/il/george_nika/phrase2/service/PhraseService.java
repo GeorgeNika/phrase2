@@ -7,6 +7,8 @@ import il.george_nika.phrase2.service.phrase_builder.VerbPhraseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static il.george_nika.phrase2.model.ModelConstants.NOUN_TYPE;
+
 /**
  * Created by George on 04.10.2017.
  */
@@ -24,7 +26,7 @@ public class PhraseService {
 
 
     public ViewPhrase getPhrase(String phraseType){
-        if (phraseType.equals("noun")) {
+        if (phraseType.equals(NOUN_TYPE)) {
             return nounPhraseService.getSimplePhrase();
         }
         if (phraseType.equals("number")) {
