@@ -25,6 +25,13 @@ import { AlertService }                       from "../useful/alert/alert.servic
                 <input [(ngModel)]="verb.infinitive.hebrew" class="col-3 text-right" placeholder="hebrew"/>
             </div>
             <br/>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-2">preposition - </div>
+                <input [(ngModel)]="verb.preposition.russian" class="col-3" placeholder="russian"/>
+                <input [(ngModel)]="verb.preposition.transcription" class="col-3" placeholder="transcription"/>
+                <input [(ngModel)]="verb.preposition.hebrew" class="col-3 text-right" placeholder="hebrew"/>
+            </div>
+            <br/>
             <br/>
             <table class="table table-hover">
                 <thead>

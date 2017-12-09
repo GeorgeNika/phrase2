@@ -2,38 +2,53 @@ package il.george_nika.phrase2.service.phrase_builder.number;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.view.ViewPhrase;
+import il.george_nika.phrase2.service.RandomService;
+import il.george_nika.phrase2.service.data.NumberService;
+import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class YearPhraseBuilder extends AbstractNumberPhraseBuilder {
+@Component
+public class YearPhraseBuilder extends AbstractPhraseBuilder implements NumberPhraseBuilder {
 
-    private static LanguageUnit YEAR =   new LanguageUnit("в году","בשנה","бе шана");
+    private final static LanguageUnit YEAR =   new LanguageUnit("в году","בשנה","бе шана");
+
+    private final RandomService randomService;
+    private final NumberService numberService;
+
+    @Autowired
+    public YearPhraseBuilder(RandomService randomService, NumberService numberService) {
+        this.randomService = randomService;
+        this.numberService = numberService;
+    }
 
     @Override
     public ViewPhrase getPhrase() {
         int russianYear = 0;
         int tempNumber;
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
 
-        tempCollection.add(YEAR);
+        resultCollection.add(YEAR);
 
         if (randomService.getRandom(2) == 0) {
             russianYear = russianYear + 2000;
-            tempCollection.add(numberService.getThousand(2));
+            resultCollection.add(numberService.getThousand(2));
             tempNumber = randomService.getRandom(26);
             russianYear = russianYear + tempNumber;
-            tempCollection.add(numberService.getDozens(tempNumber));
+            resultCollection.add(numberService.getDozens(tempNumber));
         } else {
             russianYear = russianYear + 1900;
-            tempCollection.add(numberService.getThousand(1));
-            tempCollection.add(numberService.getHundred(9));
+            resultCollection.add(numberService.getThousand(1));
+            resultCollection.add(numberService.getHundred(9));
             tempNumber = randomService.getRandom(100);
             russianYear = russianYear + tempNumber;
-            tempCollection.add(numberService.getDozens(tempNumber));
+            resultCollection.add(numberService.getDozens(tempNumber));
         }
 
-        ViewPhrase result = buildPhrase(tempCollection, new ArrayList<>());
+        ViewPhrase result = buildPhrase(resultCollection, new ArrayList<>());
         result.setRussian(YEAR.getRussian() + " " + russianYear);
         return result;
     }

@@ -71,7 +71,7 @@ public class AdjectiveService {
         return adjective.getId();
     }
 
-    public void saveAdjective(Adjective adjective){
+    private void saveAdjective(Adjective adjective){
         if (adjective.getAdjectiveDataCollection().size() > 0){
             adjective.setMainForm(getMainForm(adjective));
         }

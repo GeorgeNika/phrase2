@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 abstract public class AbstractVerbPhraseBuilder extends AbstractPhraseBuilder implements VerbPhraseBuilder {
 
-    @Autowired
-    PronounService pronounService;
-
-    @Autowired
-    protected VerbService verbService;
+    protected final PronounService pronounService;
+    protected final VerbService verbService;
 
     static LanguageUnit dot = new LanguageUnit(". ", ". ", ". ");
     static LanguageUnit comma = new LanguageUnit(", ", ", ", ", ");
@@ -26,4 +23,9 @@ abstract public class AbstractVerbPhraseBuilder extends AbstractPhraseBuilder im
     static LanguageUnit yesterday = new LanguageUnit("вчера ", "אתמול ", "этмоль ");
     static LanguageUnit tomorrow = new LanguageUnit("завтра ", "מחר ", "махар ");
 
+    @Autowired
+    public AbstractVerbPhraseBuilder(PronounService pronounService, VerbService verbService) {
+        this.pronounService = pronounService;
+        this.verbService = verbService;
+    }
 }

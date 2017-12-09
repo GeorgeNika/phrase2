@@ -2,21 +2,34 @@ package il.george_nika.phrase2.service.phrase_builder.number;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.view.ViewPhrase;
+import il.george_nika.phrase2.service.RandomService;
+import il.george_nika.phrase2.service.data.NumberService;
+import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by George on 05.10.2017.
- */
-public class LongNumberPhraseBuilder extends AbstractNumberPhraseBuilder {
+@Component
+public class LongNumberPhraseBuilder extends AbstractPhraseBuilder implements NumberPhraseBuilder {
+
+    private final RandomService randomService;
+    private final NumberService numberService;
+
+    @Autowired
+    public LongNumberPhraseBuilder(RandomService randomService, NumberService numberService) {
+        this.randomService = randomService;
+        this.numberService = numberService;
+    }
+
     @Override
     public ViewPhrase getPhrase() {
 
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
         for (int i = 0 ; i < 9 ; i++){
-            tempCollection.add(numberService.getSingleNumber(randomService.getRandom(10)));
+            resultCollection.add(numberService.getSingleNumber(randomService.getRandom(10)));
         }
-        return buildPhrase(tempCollection, new ArrayList<>());
+        return buildPhrase(resultCollection, new ArrayList<>());
     }
 }

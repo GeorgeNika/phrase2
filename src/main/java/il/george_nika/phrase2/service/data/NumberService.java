@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class NumberService {
 
     private final NumberRepository numberRepository;
+
     private static final LanguageUnit EMPTY_LANGUAGE_UNIT = new LanguageUnit("","" ,"");
 
     @Autowired

@@ -6,9 +6,6 @@ import il.george_nika.phrase2.model.view.WordIdentification;
 
 import java.util.List;
 
-/**
- * Created by George on 04.10.2017.
- */
 abstract public class AbstractPhraseBuilder {
 
     protected ViewPhrase buildPhrase(List<LanguageUnit> languageUnits, List<WordIdentification> wordsIdentification) {

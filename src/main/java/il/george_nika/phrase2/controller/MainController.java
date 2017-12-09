@@ -18,7 +18,6 @@ import static il.george_nika.phrase2.controller.ControllerConstants.*;
 @Controller
 public class MainController {
 
-
     private final WordService wordService;
 
     @Autowired

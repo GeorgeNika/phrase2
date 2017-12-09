@@ -5,17 +5,25 @@ import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
+import il.george_nika.phrase2.service.data.PronounService;
+import il.george_nika.phrase2.service.data.VerbService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.*;
 
+@Component
 public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
+    public AllTimeLongPhraseBuilder(PronounService pronounService, VerbService verbService) {
+        super(pronounService, verbService);
+    }
+
     @Override
     public ViewPhrase getPhrase(Verb verb) {
 
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
         List<WordIdentification> wordsIdentification = new ArrayList<>();
 
         Pronoun infinitivePronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST);
@@ -23,38 +31,38 @@ public class AllTimeLongPhraseBuilder extends AbstractVerbPhraseBuilder {
         wordsIdentification.add(new WordIdentification(VERB_TYPE, actionVerb.getId(), actionVerb.getInfinitive()));
         wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
 
-        tempCollection.add(infinitivePronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, infinitivePronoun, TIME_PRESENT));
-        tempCollection.add(verb.getInfinitive());
-        tempCollection.add(comma);
+        resultCollection.add(infinitivePronoun.getLanguageUnit());
+        resultCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, infinitivePronoun, TIME_PRESENT));
+        resultCollection.add(verb.getInfinitive());
+        resultCollection.add(comma);
 
-        tempCollection.addAll(getTimePart(verb, TIME_PRESENT, today));
-        tempCollection.addAll(getTimePart(verb, TIME_PAST, yesterday));
-        tempCollection.addAll(getTimePart(verb, TIME_FUTURE, tomorrow));
-        return buildPhrase(tempCollection, wordsIdentification);
+        resultCollection.addAll(getTimePart(verb, TIME_PRESENT, today));
+        resultCollection.addAll(getTimePart(verb, TIME_PAST, yesterday));
+        resultCollection.addAll(getTimePart(verb, TIME_FUTURE, tomorrow));
+        return buildPhrase(resultCollection, wordsIdentification);
     }
 
     private List<LanguageUnit> getTimePart(Verb verb, int time, LanguageUnit description){
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
 
         Pronoun pronoun = pronounService.getRandomPronounByVerb(verb, time);
 
-        tempCollection.add(description);
-        tempCollection.addAll(getVerbWithPronoun(verb, pronoun, time));
-        tempCollection.add(comma);
+        resultCollection.add(description);
+        resultCollection.addAll(getVerbWithPronoun(verb, pronoun, time));
+        resultCollection.add(comma);
 
-        return tempCollection;
+        return resultCollection;
     }
 
 
     private List<LanguageUnit> getVerbWithPronoun(Verb verb, Pronoun pronoun, int time){
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
 
         if (verbService.isUnitExist(verb, pronoun, time)){
-            tempCollection.add(pronoun.getLanguageUnit());
-            tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, time));
+            resultCollection.add(pronoun.getLanguageUnit());
+            resultCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, time));
         }
-        return tempCollection;
+        return resultCollection;
     }
 
 }

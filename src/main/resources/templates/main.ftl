@@ -15,9 +15,10 @@
                 <div class="row justify-content-between">
                     <select id="phrase-type" class="custom-select col-5 col-lg-4 responsive-text-3">
                         <option disabled>Choose type</option>
-                        <option selected value="verb">verb -></option>
+                        <option value="verb">verb -></option>
                         <option value="number">number -></option>
                         <option value="noun">noun -></option>
+                        <option selected value="sentence">sentence -></option>
                     </select>
                     <select id="direction" class="custom-select col-5 col-lg-4 responsive-text-3">
                         <option disabled>Choose direction</option>

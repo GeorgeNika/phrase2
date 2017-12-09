@@ -6,13 +6,21 @@ import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
+import il.george_nika.phrase2.service.data.PronounService;
+import il.george_nika.phrase2.service.data.VerbService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.VERB_TYPE;
 
+@Component
 public class PresentAlwaysPhraseBuilder extends AbstractVerbPhraseBuilder {
+
+    public PresentAlwaysPhraseBuilder(PronounService pronounService, VerbService verbService) {
+        super(pronounService, verbService);
+    }
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
@@ -22,12 +30,12 @@ public class PresentAlwaysPhraseBuilder extends AbstractVerbPhraseBuilder {
         List<WordIdentification> wordsIdentification = new ArrayList<>();
         wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
 
-        List<LanguageUnit> tempCollection = new ArrayList<>();
-        tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(always);
-        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_PRESENT));
-        tempCollection.add(dot);
+        List<LanguageUnit> resultCollection = new ArrayList<>();
+        resultCollection.add(pronoun.getLanguageUnit());
+        resultCollection.add(always);
+        resultCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_PRESENT));
+        resultCollection.add(dot);
 
-        return buildPhrase(tempCollection, wordsIdentification);
+        return buildPhrase(resultCollection, wordsIdentification);
     }
 }

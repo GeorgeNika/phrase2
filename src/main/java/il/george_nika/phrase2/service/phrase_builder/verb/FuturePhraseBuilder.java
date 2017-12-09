@@ -6,14 +6,21 @@ import il.george_nika.phrase2.model.pronoun.Pronoun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
+import il.george_nika.phrase2.service.data.PronounService;
+import il.george_nika.phrase2.service.data.VerbService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.VERB_TYPE;
 
-
+@Component
 public class FuturePhraseBuilder extends AbstractVerbPhraseBuilder {
+
+    public FuturePhraseBuilder(PronounService pronounService, VerbService verbService) {
+        super(pronounService, verbService);
+    }
 
     @Override
     public ViewPhrase getPhrase(Verb verb) {
@@ -21,12 +28,12 @@ public class FuturePhraseBuilder extends AbstractVerbPhraseBuilder {
 
         List<WordIdentification> wordsIdentification = new ArrayList<>();
         wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
-        List<LanguageUnit> tempCollection = new ArrayList<>();
-        tempCollection.add(whenQuestion);
-        tempCollection.add(pronoun.getLanguageUnit());
-        tempCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_FUTURE));
-        tempCollection.add(questionSign);
+        List<LanguageUnit> resultCollection = new ArrayList<>();
+        resultCollection.add(whenQuestion);
+        resultCollection.add(pronoun.getLanguageUnit());
+        resultCollection.add(verbService.getLanguageUnitByPronounByTime(verb, pronoun, ModelConstants.TIME_FUTURE));
+        resultCollection.add(questionSign);
 
-        return buildPhrase(tempCollection, wordsIdentification);
+        return buildPhrase(resultCollection, wordsIdentification);
     }
 }

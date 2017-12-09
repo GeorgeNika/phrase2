@@ -117,6 +117,7 @@ public class VerbService {
         }
 
         updateInfinitive(verb, verbForDetailView);
+        updatePreposition(verb, verbForDetailView);
         updateVerbDataCollection(verb, verbForDetailView);
 
         verbRepository.save(verb);
@@ -126,6 +127,9 @@ public class VerbService {
 
     private void updateInfinitive(Verb verb, VerbForDetailView verbForDetailView){
         verb.getInfinitive().updateLanguageUnit(verbForDetailView.getInfinitive());
+    }
+    private void updatePreposition(Verb verb, VerbForDetailView verbForDetailView){
+        verb.getPreposition().updateLanguageUnit(verbForDetailView.getPreposition());
     }
 
     private void updateVerbDataCollection(Verb verb, VerbForDetailView verbForDetailView){

@@ -2,28 +2,44 @@ package il.george_nika.phrase2.service.phrase_builder.number;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.view.ViewPhrase;
+import il.george_nika.phrase2.service.RandomService;
+import il.george_nika.phrase2.service.data.NumberService;
+import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShortNumberPhraseBuilder extends AbstractNumberPhraseBuilder {
+@Component
+public class ShortNumberPhraseBuilder extends AbstractPhraseBuilder implements NumberPhraseBuilder {
+
+    private final RandomService randomService;
+    private final NumberService numberService;
+
+    @Autowired
+    public ShortNumberPhraseBuilder(RandomService randomService, NumberService numberService) {
+        this.randomService = randomService;
+        this.numberService = numberService;
+    }
+
     @Override
     public ViewPhrase getPhrase() {
         int russianNumber = 0 ;
         int tempNumber;
         int quantityOfDigits = randomService.getRandom(4);
-        List<LanguageUnit> tempCollection = new ArrayList<>();
+        List<LanguageUnit> resultCollection = new ArrayList<>();
 
         if (quantityOfDigits >= 3 ){
             tempNumber = randomService.getRandom(10);
             russianNumber = russianNumber + tempNumber*1000;
-            tempCollection.add(numberService.getThousand(tempNumber));
+            resultCollection.add(numberService.getThousand(tempNumber));
         }
 
         if (quantityOfDigits >= 2){
             tempNumber = randomService.getRandom(10);
             russianNumber = russianNumber + tempNumber*100;
-            tempCollection.add(numberService.getHundred(tempNumber));
+            resultCollection.add(numberService.getHundred(tempNumber));
         }
 
         if (quantityOfDigits >= 1) {
@@ -32,9 +48,9 @@ public class ShortNumberPhraseBuilder extends AbstractNumberPhraseBuilder {
             tempNumber = randomService.getRandom(10);
         }
         russianNumber = russianNumber + tempNumber;
-        tempCollection.add(numberService.getDozens(tempNumber));
+        resultCollection.add(numberService.getDozens(tempNumber));
 
-        ViewPhrase result = buildPhrase(tempCollection, new ArrayList<>());
+        ViewPhrase result = buildPhrase(resultCollection, new ArrayList<>());
         result.setRussian(""+russianNumber);
         return result;
     }

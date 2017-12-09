@@ -24,4 +24,8 @@ public class Verb {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "verb", cascade = CascadeType.ALL)
     private List<VerbData> verbDataCollection;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="preposition_fk")
+    private LanguageUnit preposition;
+
 }

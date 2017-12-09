@@ -23,6 +23,7 @@ public class ModelConstants {
     public static final String VERB_TYPE = "verb";
     public static final String NOUN_TYPE = "noun";
     public static final String ADJECTIVE_TYPE = "adjective";
-    public static final String NOMBER_TYPE = "number";
+    public static final String NUMBER_TYPE = "number";
+    public static final String SENTENCE_TYPE = "sentence";
 
 }
