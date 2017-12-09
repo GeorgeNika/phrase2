@@ -15,15 +15,15 @@
                 <div class="row justify-content-between">
                     <select id="phrase-type" class="custom-select col-5 col-lg-4 responsive-text-3">
                         <option disabled>Choose type</option>
-                        <option value="verb">verb -></option>
+                        <option selected value="verb">verb -></option>
                         <option value="number">number -></option>
                         <option value="noun">noun -></option>
-                        <option selected value="sentence">sentence -></option>
+                        <option value="sentence">sentence -></option>
                     </select>
                     <select id="direction" class="custom-select col-5 col-lg-4 responsive-text-3">
                         <option disabled>Choose direction</option>
-                        <option selected value="russian">russian -></option>
-                        <option value="hebrew">hebrew -></option>
+                        <option value="russian">russian -></option>
+                        <option selected value="hebrew">hebrew -></option>
                         <option value="voice">voice -></option>
                     </select>
                     <button type="button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-secondary responsive-text-3" id="admin-button">

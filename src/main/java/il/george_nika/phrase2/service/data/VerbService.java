@@ -38,7 +38,17 @@ public class VerbService {
     }
 
     public Verb getVerbById(Integer id){
-        return verbRepository.getVerbById(id);
+        Verb result = verbRepository.getVerbById(id);
+
+        if (result.getInfinitive() == null) {
+            result.setInfinitive(new LanguageUnit());
+        }
+
+        if (result.getPreposition() == null) {
+            result.setPreposition(new LanguageUnit());
+        }
+
+        return result;
     }
 
     public List<Integer> getAllActionVerbIds(){

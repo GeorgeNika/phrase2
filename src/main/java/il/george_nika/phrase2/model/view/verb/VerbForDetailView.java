@@ -24,17 +24,9 @@ public class VerbForDetailView {
 
     public VerbForDetailView(Verb verb){
         this.id = verb.getId();
-        if (verb.getInfinitive() != null){
-            this.infinitive = verb.getInfinitive();
-        } else {
-            this.infinitive = new LanguageUnit();
-        }
+        this.infinitive = verb.getInfinitive();
 
-        if (verb.getPreposition() != null){
-            this.preposition = verb.getPreposition();
-        } else {
-            this.preposition = new LanguageUnit();
-        }
+        this.preposition = verb.getPreposition();
 
         this.verbDataCollection = verb.getVerbDataCollection().stream()
                 .map(verbData -> new VerbData(verbData, false))

@@ -67,9 +67,7 @@ public class SimpleSentencePhraseBuilder extends AbstractPhraseBuilder implement
         resultCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, pronoun, TIME_PRESENT));
         resultCollection.add(verb.getInfinitive());
 
-        if (verb.getPreposition() != null){
-            resultCollection.add(verb.getPreposition());
-        }
+        resultCollection.add(verb.getPreposition());
 
         int tempIndex = randomService.getRandom(noun.getNounDataCollection().size());
         NounData selectedNounData = noun.getNounDataCollection().get(tempIndex);
