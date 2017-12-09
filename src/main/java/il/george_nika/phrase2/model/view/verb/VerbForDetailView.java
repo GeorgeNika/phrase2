@@ -30,8 +30,12 @@ public class VerbForDetailView {
             this.infinitive = new LanguageUnit();
         }
 
+        if (verb.getPreposition() != null){
+            this.preposition = verb.getPreposition();
+        } else {
+            this.preposition = new LanguageUnit();
+        }
 
-        this.preposition = verb.getPreposition();
         this.verbDataCollection = verb.getVerbDataCollection().stream()
                 .map(verbData -> new VerbData(verbData, false))
                 .sorted(Comparator.comparingInt(verbData -> verbData.getTime()*1000 + verbData.getPerson()*100
