@@ -58,15 +58,15 @@ import { AlertService }                       from "../useful/alert/alert.servic
                             </selectPronounComponent>
                         </td>
                         <td class="col-3">
-                            <input [(ngModel)]="verbData.languageUnit.russian"  style="padding: 0" 
+                            <input [(ngModel)]="verbData.languageUnit.russian"  style="padding: 0; max-width: 100%" 
                                 placeholder="russian"/>
                         </td>
                         <td class="col-3">
-                            <input [(ngModel)]="verbData.languageUnit.transcription" style="padding: 0" 
+                            <input [(ngModel)]="verbData.languageUnit.transcription" style="padding: 0; max-width: 100%"
                                 placeholder="transcription"/>
                         </td>
                         <td class="col-3 text-right">
-                            <input [(ngModel)]="verbData.languageUnit.hebrew" style="padding: 0" 
+                            <input [(ngModel)]="verbData.languageUnit.hebrew" style="padding: 0; max-width: 100%" 
                                 class="text-right" placeholder="hebrew"/>
                         </td>
                     </tr>  

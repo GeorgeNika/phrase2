@@ -11,17 +11,15 @@ abstract public class AbstractVerbPhraseBuilder extends AbstractPhraseBuilder im
     protected final PronounService pronounService;
     protected final VerbService verbService;
 
-    static LanguageUnit dot = new LanguageUnit(". ", ". ", ". ");
-    static LanguageUnit comma = new LanguageUnit(", ", ", ", ", ");
-    static LanguageUnit questionSign = new LanguageUnit("? ", "? ", "? ");
-    static LanguageUnit whoQuestion = new LanguageUnit("Кто ", "מי ", "ми ");
-    static LanguageUnit whenQuestion = new LanguageUnit("Когда ", "מתי ", "матай ");
-    static LanguageUnit always = new LanguageUnit("всегда ", "תמיד ", "тамид ");
-    static LanguageUnit already = new LanguageUnit("уже ", "כבר ", "квар ");
-    static LanguageUnit notYet = new LanguageUnit("еще не ", "עוד לא ", "од лё ");
-    static LanguageUnit today = new LanguageUnit("сегодня ", "היום ", "хайом ");
-    static LanguageUnit yesterday = new LanguageUnit("вчера ", "אתמול ", "этмоль ");
-    static LanguageUnit tomorrow = new LanguageUnit("завтра ", "מחר ", "махар ");
+    protected static final LanguageUnit questionSign = new LanguageUnit("? ", "? ", "? ");
+    protected static final LanguageUnit whoQuestion = new LanguageUnit("Кто ", "מי ", "ми ");
+    protected static final LanguageUnit whenQuestion = new LanguageUnit("Когда ", "מתי ", "матай ");
+    protected static final LanguageUnit always = new LanguageUnit("всегда ", "תמיד ", "тамид ");
+    protected static final LanguageUnit already = new LanguageUnit("уже ", "כבר ", "квар ");
+    protected static final LanguageUnit notYet = new LanguageUnit("еще не ", "עוד לא ", "од лё ");
+    protected static final LanguageUnit today = new LanguageUnit("сегодня ", "היום ", "хайом ");
+    protected static final LanguageUnit yesterday = new LanguageUnit("вчера ", "אתמול ", "этмоль ");
+    protected static final LanguageUnit tomorrow = new LanguageUnit("завтра ", "מחר ", "махар ");
 
     @Autowired
     public AbstractVerbPhraseBuilder(PronounService pronounService, VerbService verbService) {

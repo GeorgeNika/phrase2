@@ -45,15 +45,15 @@ import { AlertService }                     from "../useful/alert/alert.service"
                             </selectQuantityComponent>
                         </td>
                         <td class="col-3">
-                            <input [(ngModel)]="nounData.languageUnit.russian" style="padding: 0" 
+                            <input [(ngModel)]="nounData.languageUnit.russian" style="padding: 0; max-width: 100%" 
                             placeholder="russian"/>
                         </td>
                         <td class="col-3">
-                            <input [(ngModel)]="nounData.languageUnit.transcription" style="padding: 0" 
+                            <input [(ngModel)]="nounData.languageUnit.transcription" style="padding: 0; max-width: 100%" 
                             placeholder="transcription"/>
                         </td>
                         <td class="col-2 text-right">
-                            <input [(ngModel)]="nounData.languageUnit.hebrew" style="padding: 0" 
+                            <input [(ngModel)]="nounData.languageUnit.hebrew" style="padding: 0; max-width: 100%"
                             class="text-right" placeholder="hebrew"/>
                         </td>
                         <td class="col-1">

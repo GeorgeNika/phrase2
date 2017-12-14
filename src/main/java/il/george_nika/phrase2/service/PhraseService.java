@@ -38,6 +38,9 @@ public class PhraseService {
         if (phraseType.equals(NUMBER_TYPE)) {
             return numberPhraseService.getPhrase();
         }
+        if (phraseType.equals(FRACTION_NUMBER_TYPE)) {
+            return numberPhraseService.getFractionPhrase();
+        }
         if (phraseType.equals(VERB_TYPE)) {
             return verbPhraseService.getPhrase();
         }

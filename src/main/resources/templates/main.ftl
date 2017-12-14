@@ -17,6 +17,7 @@
                         <option disabled>Choose type</option>
                         <option selected value="verb">verb -></option>
                         <option value="number">number -></option>
+                        <option value="fraction_number">fraction -></option>
                         <option value="noun">noun -></option>
                         <option value="sentence">sentence -></option>
                     </select>
@@ -39,7 +40,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-0 col-lg-1"></div>
-        <h1 id="question" class="col-12 col-lg-10 responsive-text-1"></h1>
+        <div id="question" class="col-12 col-lg-10 responsive-text-1"></div>
     </div>
     <br/>
     <div class="row">
@@ -54,7 +55,7 @@
         <button type="button" id="answer2-button" class="col-2 col-lg-1 btn btn-md btn-block btn-outline-primary responsive-text-3">
             answer 2
         </button>
-        <h2 id="answer2" class="col-10 col-lg-9 responsive-text-2"></h2>
+        <div id="answer2" class="col-10 col-lg-9 responsive-text-2"></div>
     </div>
     <div class="row">
         <div class="col-0 col-lg-1"></div>

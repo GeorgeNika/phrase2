@@ -8,6 +8,9 @@ import java.util.List;
 
 abstract public class AbstractPhraseBuilder {
 
+    protected static final LanguageUnit dot = new LanguageUnit(". ", ". ", ". ");
+    protected static final LanguageUnit comma = new LanguageUnit(", ", ", ", ", ");
+
     protected ViewPhrase buildPhrase(List<LanguageUnit> languageUnits, List<WordIdentification> wordsIdentification) {
         ViewPhrase result = new ViewPhrase();
         for (LanguageUnit loopLU : languageUnits) {

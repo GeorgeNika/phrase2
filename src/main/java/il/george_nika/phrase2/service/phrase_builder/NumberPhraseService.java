@@ -2,10 +2,7 @@ package il.george_nika.phrase2.service.phrase_builder;
 
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.service.RandomService;
-import il.george_nika.phrase2.service.phrase_builder.number.LongNumberPhraseBuilder;
-import il.george_nika.phrase2.service.phrase_builder.number.NumberPhraseBuilder;
-import il.george_nika.phrase2.service.phrase_builder.number.ShortNumberPhraseBuilder;
-import il.george_nika.phrase2.service.phrase_builder.number.YearPhraseBuilder;
+import il.george_nika.phrase2.service.phrase_builder.number.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +17,17 @@ public class NumberPhraseService {
     private final ShortNumberPhraseBuilder shortNumberPhraseBuilder;
     private final LongNumberPhraseBuilder longNumberPhraseBuilder;
     private final YearPhraseBuilder yearPhraseBuilder;
+    private final FractionalNumberPhraseBuilder fractionalNumberPhraseBuilder;
 
     @Autowired
     public NumberPhraseService(RandomService randomService, ShortNumberPhraseBuilder shortNumberPhraseBuilder,
-                               LongNumberPhraseBuilder longNumberPhraseBuilder, YearPhraseBuilder yearPhraseBuilder) {
+                               LongNumberPhraseBuilder longNumberPhraseBuilder, YearPhraseBuilder yearPhraseBuilder,
+                               FractionalNumberPhraseBuilder fractionalNumberPhraseBuilder) {
         this.randomService = randomService;
         this.shortNumberPhraseBuilder = shortNumberPhraseBuilder;
         this.longNumberPhraseBuilder = longNumberPhraseBuilder;
         this.yearPhraseBuilder = yearPhraseBuilder;
+        this.fractionalNumberPhraseBuilder=fractionalNumberPhraseBuilder;
     }
 
     public ViewPhrase getPhrase(){
@@ -39,6 +39,11 @@ public class NumberPhraseService {
         numberPhraseBuilders.add(yearPhraseBuilder);
 
         return numberPhraseBuilders.get(randomService.getRandom(numberPhraseBuilders.size())).getPhrase();
+    }
+
+    public ViewPhrase getFractionPhrase(){
+
+        return fractionalNumberPhraseBuilder.getPhrase();
     }
 
 
