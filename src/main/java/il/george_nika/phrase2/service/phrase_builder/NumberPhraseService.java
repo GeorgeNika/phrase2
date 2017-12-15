@@ -41,7 +41,7 @@ public class NumberPhraseService {
         return numberPhraseBuilders.get(randomService.getRandom(numberPhraseBuilders.size())).getPhrase();
     }
 
-    public ViewPhrase getFractionPhrase(){
+    public ViewPhrase getFractionalPhrase(){
 
         return fractionalNumberPhraseBuilder.getPhrase();
     }

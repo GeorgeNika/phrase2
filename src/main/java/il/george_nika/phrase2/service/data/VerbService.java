@@ -121,6 +121,7 @@ public class VerbService {
         if (verbForDetailView.getId()==null || verbForDetailView.getId()==0) {
             verb = new Verb();
             verb.setInfinitive(new LanguageUnit());
+            verb.setPreposition(new LanguageUnit());
             verb.setVerbDataCollection(new ArrayList<>());
         } else {
             verb = getVerbById(verbForDetailView.getId());

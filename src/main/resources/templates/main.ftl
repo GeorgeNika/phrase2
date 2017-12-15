@@ -17,7 +17,7 @@
                         <option disabled>Choose type</option>
                         <option selected value="verb">verb -></option>
                         <option value="number">number -></option>
-                        <option value="fraction_number">fraction -></option>
+                        <option value="fractional_number">fractional -></option>
                         <option value="noun">noun -></option>
                         <option value="sentence">sentence -></option>
                     </select>

@@ -24,7 +24,7 @@ public class ModelConstants {
     public static final String NOUN_TYPE = "noun";
     public static final String ADJECTIVE_TYPE = "adjective";
     public static final String NUMBER_TYPE = "number";
-    public static final String FRACTION_NUMBER_TYPE = "fraction_number";
+    public static final String FRACTIONAL_NUMBER_TYPE = "fractional_number";
     public static final String SENTENCE_TYPE = "sentence";
 
 }
