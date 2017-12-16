@@ -113,7 +113,7 @@ export class NounDetailComponent implements OnInit {
 
   saveNounAndClose(){
     this.service.saveNoun(this.noun).subscribe(
-        (data) => console.log(data),
+        (data) => console.log("save noun with id "+data),
         (error) => {this.alertService.error("Error during saving noun", true)}
         );
     this.gotoNouns();

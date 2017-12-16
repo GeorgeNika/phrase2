@@ -38,7 +38,6 @@ export class AdjectiveService {
   }
 
   saveAdjective(adjective: Adjective): Observable<number>{
-    console.log(adjective);
     return this.http.post(this.adjectiveUrl ,adjective
         ,{headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }

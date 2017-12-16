@@ -38,7 +38,6 @@ export class NounService {
   }
 
   saveNoun(noun: Noun): Observable<number>{
-    console.log(noun);
     return this.http.post(this.nounUrl ,noun
         ,{headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }

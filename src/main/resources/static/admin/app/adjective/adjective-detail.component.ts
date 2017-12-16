@@ -99,7 +99,7 @@ export class AdjectiveDetailComponent implements OnInit {
 
   saveAdjectiveAndClose(){
     this.service.saveAdjective(this.adjective).subscribe(
-        (data) => console.log(data),
+        (data) => console.log("save adjective with id "+data),
         (error) => {this.alertService.error("Error during saving adjective", true)}
         );
     this.gotoAdjectives();

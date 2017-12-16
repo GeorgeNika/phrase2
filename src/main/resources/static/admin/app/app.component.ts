@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
       <span>  </span>
       <a routerLink="/adjectives" class="btn btn-sm btn-secondary" >adjectives</a>
       <span>  </span>
+      <a routerLink="/adverbs" class="btn btn-sm btn-warning" >adverbs</a>
+      <span>  </span>
       <a href="/password/logout" class="btn btn-sm btn-danger">logout</a>
     </nav>
     <alert></alert>

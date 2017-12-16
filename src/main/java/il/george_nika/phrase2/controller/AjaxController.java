@@ -1,24 +1,26 @@
 package il.george_nika.phrase2.controller;
 
-import com.google.gson.Gson;
 import il.george_nika.phrase2.model.adjective.Adjective;
+import il.george_nika.phrase2.model.adverb.Adverb;
 import il.george_nika.phrase2.model.noun.Noun;
 import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.*;
 import il.george_nika.phrase2.model.view.adjective.AdjectiveForDetailView;
 import il.george_nika.phrase2.model.view.adjective.AdjectiveForListView;
+import il.george_nika.phrase2.model.view.adverb.AdverbForDetailView;
+import il.george_nika.phrase2.model.view.adverb.AdverbForListView;
 import il.george_nika.phrase2.model.view.noun.NounForDetailView;
 import il.george_nika.phrase2.model.view.noun.NounForListView;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.model.view.verb.VerbForListView;
 import il.george_nika.phrase2.service.PhraseService;
 import il.george_nika.phrase2.service.data.AdjectiveService;
+import il.george_nika.phrase2.service.data.AdverbService;
 import il.george_nika.phrase2.service.data.NounService;
 import il.george_nika.phrase2.service.data.VerbService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -36,14 +38,17 @@ public class AjaxController {
     private final NounService nounService;
     private final VerbService verbService;
     private final AdjectiveService adjectiveService;
+    private final AdverbService adverbService;
 
     @Autowired
     public AjaxController(PhraseService phraseService, NounService nounService,
-                          VerbService verbService, AdjectiveService adjectiveService) {
+                          VerbService verbService, AdjectiveService adjectiveService,
+                          AdverbService adverbService) {
         this.phraseService = phraseService;
         this.nounService = nounService;
         this.verbService = verbService;
         this.adjectiveService = adjectiveService;
+        this.adverbService = adverbService;
     }
 
     @RequestMapping(value = "/ajax/phrase")
@@ -91,12 +96,7 @@ public class AjaxController {
             verbInfoList.add(tempVerbInfo);
         }
 
-        ViewPageWithContent result = new ViewPageWithContent();
-        result.setCurrentPage(page);
-        result.setItemsOnPage(verbPage.getSize());
-        result.setTotalPages(verbPage.getTotalPages());
-        result.setJsonContent( new Gson().toJson(verbInfoList));
-        return result;
+        return new ViewPageWithContent(page, verbPage, verbInfoList);
     }
 
     @RequestMapping(value = "/ajax/verb/{id}", method = RequestMethod.GET)
@@ -135,12 +135,7 @@ public class AjaxController {
         List<NounForListView> nounInfoList = nounPage.getContent().stream()
                 .map(NounForListView::new).collect(Collectors.toList());
 
-        ViewPageWithContent result = new ViewPageWithContent();
-        result.setCurrentPage(page);
-        result.setItemsOnPage(nounPage.getSize());
-        result.setTotalPages(nounPage.getTotalPages());
-        result.setJsonContent( new Gson().toJson(nounInfoList));
-        return result;
+        return new ViewPageWithContent(page, nounPage, nounInfoList);
     }
 
     @RequestMapping(value = "/ajax/noun/{id}", method = RequestMethod.GET)
@@ -170,12 +165,7 @@ public class AjaxController {
         List<AdjectiveForListView> adjectiveInfoList = adjectivePage.getContent().stream()
                 .map(AdjectiveForListView::new).collect(Collectors.toList());
 
-        ViewPageWithContent result = new ViewPageWithContent();
-        result.setCurrentPage(page);
-        result.setItemsOnPage(adjectivePage.getSize());
-        result.setTotalPages(adjectivePage.getTotalPages());
-        result.setJsonContent( new Gson().toJson(adjectiveInfoList));
-        return result;
+        return new ViewPageWithContent(page, adjectivePage, adjectiveInfoList);
     }
 
     @RequestMapping(value = "/ajax/adjective/{id}", method = RequestMethod.GET)
@@ -191,5 +181,35 @@ public class AjaxController {
             throw new RuntimeException("Access denied");
         }
         return adjectiveService.saveAdjectiveByAdjectiveForDetailView(adjectiveForDetailView);
+    }
+
+    @RequestMapping(value = "/ajax/adverbs")
+    public ViewPageWithContent getAdverbsViewPageWithContent (
+            @RequestParam int page, @RequestParam int itemsOnPage, @RequestParam String filter){
+
+        if (page<1) {
+            page = 1;
+        }
+        Page<Adverb> adverbPage = adverbService.getAdverbsPage(page-1, itemsOnPage, filter);
+
+        List<AdverbForListView> adverbInfoList = adverbPage.getContent().stream()
+                .map(AdverbForListView::new).collect(Collectors.toList());
+
+        return new ViewPageWithContent(page, adverbPage, adverbInfoList);
+    }
+
+    @RequestMapping(value = "/ajax/adverb/{id}", method = RequestMethod.GET)
+    public AdverbForDetailView getAdverbForDetailView (@PathVariable Integer id){
+
+        return new AdverbForDetailView(adverbService.getAdverbById(id));
+    }
+
+    @RequestMapping(value = "/ajax/adverb", method = {RequestMethod.POST, RequestMethod.PUT} )
+    public Integer  updateAdverb (@RequestBody AdverbForDetailView adverbForDetailView, HttpSession session){
+
+        if (!ControllerUtil.isAdminLogin(session, true)){
+            throw new RuntimeException("Access denied");
+        }
+        return adverbService.saveAdverbByAdverbForDetailView(adverbForDetailView);
     }
 }

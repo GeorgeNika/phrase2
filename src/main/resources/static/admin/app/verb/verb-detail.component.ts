@@ -75,6 +75,7 @@ import { AlertService }                       from "../useful/alert/alert.servic
             <br/>
             <div class="row justify-content-between">
                 <button (click)="addVerbData()" class="col-3 btn btn-form btn-primary">Add verb data</button>
+                <button (click)="addFullSetVerbData()" class="col-1 btn btn-form btn-primary">+full set</button>
                 <button (click)="saveVerbAndClose()" class="col-3 btn btn-form btn-success">Save and Close</button>
                 <button (click)="gotoVerbs()" class="col-3 btn btn-form btn-danger">CLOSE</button>
             </div>
@@ -114,7 +115,7 @@ export class VerbDetailComponent implements OnInit {
 
   saveVerbAndClose(){
     this.service.saveVerb(this.verb).subscribe(
-        (data) => console.log(data),
+        (data) => console.log("save verb with id "+data),
         (error) => {this.alertService.error("Error during saving verb", true)}
         );
     this.gotoVerbs();
@@ -142,5 +143,50 @@ export class VerbDetailComponent implements OnInit {
       verbData.gender = pronoun.gender;
       verbData.quantity = pronoun.quantity;
     }
+  }
+
+  addFullSetVerbData(){
+    let fullset=[
+        {gender: 1, quantity: 1, time: 1, person : 1},
+        {gender: 2, quantity: 1, time: 1, person : 1},
+        {gender: 1, quantity: 2, time: 1, person : 1},
+        {gender: 1, quantity: 1, time: 1, person : 2},
+        {gender: 2, quantity: 1, time: 1, person : 2},
+        {gender: 1, quantity: 1, time: 1, person : 3},
+        {gender: 2, quantity: 1, time: 1, person : 3},
+        {gender: 1, quantity: 2, time: 1, person : 3},
+        {gender: 1, quantity: 2, time: 2, person : 1},
+        {gender: 1, quantity: 1, time: 2, person : 2},
+        {gender: 2, quantity: 1, time: 2, person : 2},
+        {gender: 1, quantity: 1, time: 3, person : 1},
+        {gender: 1, quantity: 2, time: 3, person : 1},
+        {gender: 1, quantity: 1, time: 3, person : 2},
+        {gender: 2, quantity: 1, time: 3, person : 2},
+        {gender: 1, quantity: 1, time: 3, person : 3},
+        {gender: 1, quantity: 2, time: 3, person : 3}
+        ];
+    for(let i=0; i<fullset.length; i++){
+      let newItem = fullset[i];
+      if (!this.itemExist(newItem)){
+        let verbData = new VerbData();
+        verbData.gender = newItem.gender;
+        verbData.quantity = newItem.quantity;
+        verbData.time = newItem.time;
+        verbData.person = newItem.person;
+        this.verb.verbDataCollection.push(verbData);
+      }
+    }
+  }
+
+  itemExist(newItem){
+    for(let i=0; i<this.verb.verbDataCollection.length; i++){
+      let existItem = this.verb.verbDataCollection[i];
+      if (existItem.gender != newItem.gender ){ continue;}
+      if (existItem.quantity != newItem.quantity ){ continue;}
+      if (existItem.time != newItem.time ){ continue;}
+      if (existItem.person != newItem.person ){ continue;}
+      return true;
+    }
+    return false;
   }
 }

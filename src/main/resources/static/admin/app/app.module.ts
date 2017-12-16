@@ -12,6 +12,7 @@ import { AppRoutingModule }         from './app-routing.module';
 import { VerbModule }               from './verb/verb.module';
 import { NounModule }               from './noun/noun.module';
 import { AdjectiveModule }          from './adjective/adjective.module';
+import { AdverbModule }             from './adverb/adverb.module';
 import { AlertComponent }           from './useful/alert/alert.component';
 import { AlertService }             from './useful/alert/alert.service';
 
@@ -30,6 +31,7 @@ import { PaginationModule }         from "./useful/pagination/pagination.module"
         VerbModule,
         NounModule,
         AdjectiveModule,
+        AdverbModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         SelectTimeModule,
