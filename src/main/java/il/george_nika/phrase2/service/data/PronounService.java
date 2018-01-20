@@ -16,12 +16,10 @@ import java.util.stream.Collectors;
 @Service
 public class PronounService {
 
-    private final RandomService randomService;
     private final PronounRepository pronounRepository;
 
     @Autowired
-    public PronounService(RandomService randomService, PronounRepository pronounRepository){
-        this.randomService = randomService;
+    public PronounService(PronounRepository pronounRepository){
         this.pronounRepository = pronounRepository;
     }
 
@@ -35,7 +33,7 @@ public class PronounService {
         if (tempPronouns.size()<1){
             throw new RuntimeException("Can't get pronoun for verb id="+verb.getId()+" time:"+time);
         }
-        return tempPronouns.get(randomService.getRandom(tempPronouns.size()));
+        return tempPronouns.get(RandomService.getRandom(tempPronouns.size()));
     }
 
     public Pronoun getPronoun(int gender, int quantity, int person){

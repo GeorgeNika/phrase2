@@ -26,16 +26,14 @@ import static il.george_nika.phrase2.model.ModelConstants.NOUN_TYPE;
 @Component
 public class NounWithAdjectivePhraseBuilder extends AbstractPhraseBuilder {
 
-    private final RandomService randomService;
     private final NounService nounService;
     private final AdjectiveService adjectiveService;
 
     private final AdjectivePhraseService adjectivePhraseService;
 
     @Autowired
-    public NounWithAdjectivePhraseBuilder(RandomService randomService, NounService nounService,
-                                          AdjectiveService adjectiveService, AdjectivePhraseService adjectivePhraseService) {
-        this.randomService = randomService;
+    public NounWithAdjectivePhraseBuilder(NounService nounService, AdjectiveService adjectiveService,
+                                          AdjectivePhraseService adjectivePhraseService) {
         this.nounService = nounService;
         this.adjectiveService = adjectiveService;
         this.adjectivePhraseService = adjectivePhraseService;
@@ -50,7 +48,7 @@ public class NounWithAdjectivePhraseBuilder extends AbstractPhraseBuilder {
         wordsIdentification.add(new WordIdentification(NOUN_TYPE, noun.getId(), noun.getMainForm()));
         wordsIdentification.add(new WordIdentification(ADJECTIVE_TYPE, adjective.getId(), adjective.getMainForm()));
 
-        int tempIndex = randomService.getRandom(noun.getNounDataCollection().size());
+        int tempIndex = RandomService.getRandom(noun.getNounDataCollection().size());
         NounData selectedNounData = noun.getNounDataCollection().get(tempIndex);
         resultCollection.add(selectedNounData.getLanguageUnit());
 

@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class NumberPhraseService {
 
-    private final RandomService randomService;
 
     private final ShortNumberPhraseBuilder shortNumberPhraseBuilder;
     private final LongNumberPhraseBuilder longNumberPhraseBuilder;
@@ -20,10 +19,9 @@ public class NumberPhraseService {
     private final FractionalNumberPhraseBuilder fractionalNumberPhraseBuilder;
 
     @Autowired
-    public NumberPhraseService(RandomService randomService, ShortNumberPhraseBuilder shortNumberPhraseBuilder,
+    public NumberPhraseService(ShortNumberPhraseBuilder shortNumberPhraseBuilder,
                                LongNumberPhraseBuilder longNumberPhraseBuilder, YearPhraseBuilder yearPhraseBuilder,
                                FractionalNumberPhraseBuilder fractionalNumberPhraseBuilder) {
-        this.randomService = randomService;
         this.shortNumberPhraseBuilder = shortNumberPhraseBuilder;
         this.longNumberPhraseBuilder = longNumberPhraseBuilder;
         this.yearPhraseBuilder = yearPhraseBuilder;
@@ -38,7 +36,7 @@ public class NumberPhraseService {
         numberPhraseBuilders.add(longNumberPhraseBuilder);
         numberPhraseBuilders.add(yearPhraseBuilder);
 
-        return numberPhraseBuilders.get(randomService.getRandom(numberPhraseBuilders.size())).getPhrase();
+        return numberPhraseBuilders.get(RandomService.getRandom(numberPhraseBuilders.size())).getPhrase();
     }
 
     public ViewPhrase getFractionalPhrase(){

@@ -17,7 +17,6 @@ import static il.george_nika.phrase2.model.ModelConstants.*;
 public class VerbPhraseService {
 
     private final VerbService verbService;
-    private final RandomService randomService;
 
     private final AllTimeLongPhraseBuilder allTimeLongPhraseBuilder;
     private final PastAlreadyPhraseBuilder pastAlreadyPhraseBuilder;
@@ -59,12 +58,12 @@ public class VerbPhraseService {
             }
         }
 
-        return verbPhraseBuilders.get(randomService.getRandom(verbPhraseBuilders.size())).getPhrase(verb);
+        return verbPhraseBuilders.get(RandomService.getRandom(verbPhraseBuilders.size())).getPhrase(verb);
     }
 
     @Autowired
     public VerbPhraseService(AllTimeLongPhraseBuilder allTimeLongPhraseBuilder, VerbService verbService,
-                             RandomService randomService, PastAlreadyPhraseBuilder pastAlreadyPhraseBuilder,
+                             PastAlreadyPhraseBuilder pastAlreadyPhraseBuilder,
                              PresentWhoQuestionPhraseBuilder presentWhoQuestionPhraseBuilder,
                              PastWhoQuestionPhraseBuilder pastWhoQuestionPhraseBuilder,
                              FutureWhoQuestionPhraseBuilder futureWhoQuestionPhraseBuilder,
@@ -74,7 +73,6 @@ public class VerbPhraseService {
                              FuturePhraseBuilder futurePhraseBuilder) {
         this.allTimeLongPhraseBuilder = allTimeLongPhraseBuilder;
         this.verbService = verbService;
-        this.randomService = randomService;
         this.pastAlreadyPhraseBuilder = pastAlreadyPhraseBuilder;
         this.presentWhoQuestionPhraseBuilder = presentWhoQuestionPhraseBuilder;
         this.pastWhoQuestionPhraseBuilder = pastWhoQuestionPhraseBuilder;

@@ -14,12 +14,10 @@ import java.util.List;
 @Component
 public class ShortNumberPhraseBuilder extends AbstractPhraseBuilder implements NumberPhraseBuilder {
 
-    private final RandomService randomService;
     private final NumberService numberService;
 
     @Autowired
-    public ShortNumberPhraseBuilder(RandomService randomService, NumberService numberService) {
-        this.randomService = randomService;
+    public ShortNumberPhraseBuilder( NumberService numberService) {
         this.numberService = numberService;
     }
 
@@ -27,25 +25,25 @@ public class ShortNumberPhraseBuilder extends AbstractPhraseBuilder implements N
     public ViewPhrase getPhrase() {
         int russianNumber = 0 ;
         int tempNumber;
-        int quantityOfDigits = randomService.getRandom(4);
+        int quantityOfDigits = RandomService.getRandom(4);
         List<LanguageUnit> resultCollection = new ArrayList<>();
 
         if (quantityOfDigits >= 3 ){
-            tempNumber = randomService.getRandom(10);
+            tempNumber = RandomService.getRandom(10);
             russianNumber = russianNumber + tempNumber*1000;
             resultCollection.add(numberService.getThousand(tempNumber));
         }
 
         if (quantityOfDigits >= 2){
-            tempNumber = randomService.getRandom(10);
+            tempNumber = RandomService.getRandom(10);
             russianNumber = russianNumber + tempNumber*100;
             resultCollection.add(numberService.getHundred(tempNumber));
         }
 
         if (quantityOfDigits >= 1) {
-            tempNumber = randomService.getRandom(100);
+            tempNumber = RandomService.getRandom(100);
         } else {
-            tempNumber = randomService.getRandom(10);
+            tempNumber = RandomService.getRandom(10);
         }
         russianNumber = russianNumber + tempNumber;
         resultCollection.add(numberService.getDozens(tempNumber));

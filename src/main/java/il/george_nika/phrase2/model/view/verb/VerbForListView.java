@@ -10,8 +10,7 @@ public class VerbForListView extends AbstractEntityForListView {
     private boolean actionVerb;
 
     public VerbForListView(Verb verb) {
-        super(verb.getId(), verb.getInfinitive().getHebrew(),
-                verb.getInfinitive().getRussian(), verb.getVerbDataCollection().size());
+        super(verb.getId(), verb.getInfinitive(), verb.getVerbDataCollection().size());
         this.actionVerb = false;
     }
 }

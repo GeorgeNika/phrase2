@@ -20,6 +20,7 @@
                         <option value="fractional_number">fractional -></option>
                         <option value="noun">noun -></option>
                         <option value="sentence">sentence -></option>
+                        <option value="adverb">adverb -></option>
                     </select>
                     <select id="direction" class="custom-select col-5 col-lg-4 responsive-text-3">
                         <option disabled>Choose direction</option>

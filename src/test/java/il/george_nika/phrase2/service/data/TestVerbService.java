@@ -104,7 +104,7 @@ public class TestVerbService {
         List<Verb> verbsFromDataBase = setDataBase();
         Verb futureVerb = verbService.getVerbById(verbsFromDataBase.get(2).getId());
 
-        PronounService pronounService = new PronounService(new RandomService(), new PronounRepository());
+        PronounService pronounService = new PronounService(new PronounRepository());
         Pronoun pronoun;
 
         pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);
@@ -207,7 +207,7 @@ public class TestVerbService {
         List<Verb> verbsFromDataBase = setDataBase();
         Verb futureVerb = verbService.getVerbById(verbsFromDataBase.get(2).getId());
 
-        PronounService pronounService = new PronounService(new RandomService(), new PronounRepository());
+        PronounService pronounService = new PronounService(new PronounRepository());
         Pronoun pronoun;
 
         pronoun = pronounService.getPronoun(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_SECOND);

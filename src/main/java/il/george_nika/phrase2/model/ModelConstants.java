@@ -26,5 +26,6 @@ public class ModelConstants {
     public static final String NUMBER_TYPE = "number";
     public static final String FRACTIONAL_NUMBER_TYPE = "fractional_number";
     public static final String SENTENCE_TYPE = "sentence";
+    public static final String ADVERB_TYPE = "adverb";
 
 }

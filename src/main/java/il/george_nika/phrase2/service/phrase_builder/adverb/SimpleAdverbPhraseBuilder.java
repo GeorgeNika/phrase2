@@ -1,7 +1,8 @@
-package il.george_nika.phrase2.service.phrase_builder.sentence;
+package il.george_nika.phrase2.service.phrase_builder.adverb;
 
 import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.adjective.Adjective;
+import il.george_nika.phrase2.model.adverb.Adverb;
 import il.george_nika.phrase2.model.noun.Noun;
 import il.george_nika.phrase2.model.noun.NounData;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
@@ -9,12 +10,10 @@ import il.george_nika.phrase2.model.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
 import il.george_nika.phrase2.service.RandomService;
-import il.george_nika.phrase2.service.data.AdjectiveService;
-import il.george_nika.phrase2.service.data.NounService;
-import il.george_nika.phrase2.service.data.PronounService;
-import il.george_nika.phrase2.service.data.VerbService;
+import il.george_nika.phrase2.service.data.*;
 import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;
 import il.george_nika.phrase2.service.phrase_builder.AdjectivePhraseService;
+import il.george_nika.phrase2.service.phrase_builder.sentence.SentencePhraseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,27 +23,23 @@ import java.util.List;
 import static il.george_nika.phrase2.model.ModelConstants.*;
 
 @Component
-public class SimpleSentencePhraseBuilder extends AbstractPhraseBuilder implements SentencePhraseBuilder {
+public class SimpleAdverbPhraseBuilder extends AbstractPhraseBuilder {
 
     private final VerbService verbService;
     private final PronounService pronounService;
-    private final NounService nounService;
-    private final AdjectiveService adjectiveService;
+    private final AdverbService adverbService;
 
-    private final AdjectivePhraseService adjectivePhraseService;
+    protected static final LanguageUnit questionSign = new LanguageUnit("? ", "? ", "? ");
+    protected static final LanguageUnit howQuestion = new LanguageUnit("Как ", "איך ", "эйх ");
 
     @Autowired
-    public SimpleSentencePhraseBuilder(PronounService pronounService, VerbService verbService,
-                                       NounService nounService, AdjectiveService adjectiveService,
-                                       AdjectivePhraseService adjectivePhraseService) {
+    public SimpleAdverbPhraseBuilder(PronounService pronounService, VerbService verbService,
+                                     AdverbService adverbService) {
         this.verbService = verbService;
         this.pronounService = pronounService;
-        this.nounService = nounService;
-        this.adjectiveService = adjectiveService;
-        this.adjectivePhraseService = adjectivePhraseService;
+        this.adverbService = adverbService;
     }
 
-    @Override
     public ViewPhrase getPhrase() {
 
         List<LanguageUnit> resultCollection = new ArrayList<>();
@@ -53,25 +48,21 @@ public class SimpleSentencePhraseBuilder extends AbstractPhraseBuilder implement
         Verb actionVerb = verbService.getRandomActionVerb();
         Verb verb = verbService.getRandomVerb();
         Pronoun pronoun = pronounService.getRandomPronounByVerb(actionVerb, TIME_PRESENT);
-        Noun noun = nounService.getRandomNoun();
-        Adjective adjective = adjectiveService.getRandomAdjective();
+        Adverb adverb = adverbService.getRandomAdverb();
 
         wordsIdentification.add(new WordIdentification(VERB_TYPE, actionVerb.getId(), actionVerb.getInfinitive()));
         wordsIdentification.add(new WordIdentification(VERB_TYPE, verb.getId(), verb.getInfinitive()));
-        wordsIdentification.add(new WordIdentification(NOUN_TYPE, noun.getId(), noun.getMainForm()));
-        wordsIdentification.add(new WordIdentification(ADJECTIVE_TYPE, adjective.getId(), adjective.getMainForm()));
+        wordsIdentification.add(new WordIdentification(ADVERB_TYPE, adverb.getId(), adverb.getMainForm()));
 
+        resultCollection.add(howQuestion);
         resultCollection.add(pronoun.getLanguageUnit());
         resultCollection.add(verbService.getLanguageUnitByPronounByTime(actionVerb, pronoun, TIME_PRESENT));
         resultCollection.add(verb.getInfinitive());
 
-        resultCollection.add(verb.getPreposition());
+        resultCollection.add(questionSign);
 
-        int tempIndex = RandomService.getRandom(noun.getNounDataCollection().size());
-        NounData selectedNounData = noun.getNounDataCollection().get(tempIndex);
-        resultCollection.add(selectedNounData.getLanguageUnit());
-
-        resultCollection.add(adjectivePhraseService.getMixedAdjective(adjective, selectedNounData));
+        resultCollection.add(adverb.getMainForm());
+        resultCollection.add(dot);
 
         return buildPhrase(resultCollection, wordsIdentification);
     }

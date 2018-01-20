@@ -16,12 +16,10 @@ public class YearPhraseBuilder extends AbstractPhraseBuilder implements NumberPh
 
     private final static LanguageUnit YEAR =   new LanguageUnit("в году","בשנה","бе шана");
 
-    private final RandomService randomService;
     private final NumberService numberService;
 
     @Autowired
-    public YearPhraseBuilder(RandomService randomService, NumberService numberService) {
-        this.randomService = randomService;
+    public YearPhraseBuilder(NumberService numberService) {
         this.numberService = numberService;
     }
 
@@ -33,17 +31,17 @@ public class YearPhraseBuilder extends AbstractPhraseBuilder implements NumberPh
 
         resultCollection.add(YEAR);
 
-        if (randomService.getRandom(2) == 0) {
+        if (RandomService.getRandom(2) == 0) {
             russianYear = russianYear + 2000;
             resultCollection.add(numberService.getThousand(2));
-            tempNumber = randomService.getRandom(26);
+            tempNumber = RandomService.getRandom(26);
             russianYear = russianYear + tempNumber;
             resultCollection.add(numberService.getDozens(tempNumber));
         } else {
             russianYear = russianYear + 1900;
             resultCollection.add(numberService.getThousand(1));
             resultCollection.add(numberService.getHundred(9));
-            tempNumber = randomService.getRandom(100);
+            tempNumber = RandomService.getRandom(100);
             russianYear = russianYear + tempNumber;
             resultCollection.add(numberService.getDozens(tempNumber));
         }

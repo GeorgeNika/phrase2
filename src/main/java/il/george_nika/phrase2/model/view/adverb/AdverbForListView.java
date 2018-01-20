@@ -6,7 +6,6 @@ import il.george_nika.phrase2.model.view.AbstractEntityForListView;
 public class AdverbForListView extends AbstractEntityForListView {
 
     public AdverbForListView(Adverb adverb) {
-        super(adverb.getId(), adverb.getMainForm().getHebrew(),
-                adverb.getMainForm().getRussian(), 0);
+        super(adverb.getId(), adverb.getMainForm(), 0);
     }
 }

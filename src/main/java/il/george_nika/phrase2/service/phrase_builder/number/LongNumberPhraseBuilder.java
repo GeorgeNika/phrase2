@@ -14,12 +14,10 @@ import java.util.List;
 @Component
 public class LongNumberPhraseBuilder extends AbstractPhraseBuilder implements NumberPhraseBuilder {
 
-    private final RandomService randomService;
     private final NumberService numberService;
 
     @Autowired
-    public LongNumberPhraseBuilder(RandomService randomService, NumberService numberService) {
-        this.randomService = randomService;
+    public LongNumberPhraseBuilder(NumberService numberService) {
         this.numberService = numberService;
     }
 
@@ -28,7 +26,7 @@ public class LongNumberPhraseBuilder extends AbstractPhraseBuilder implements Nu
 
         List<LanguageUnit> resultCollection = new ArrayList<>();
         for (int i = 0 ; i < 9 ; i++){
-            resultCollection.add(numberService.getSingleNumber(randomService.getRandom(10)));
+            resultCollection.add(numberService.getSingleNumber(RandomService.getRandom(10)));
         }
         return buildPhrase(resultCollection, new ArrayList<>());
     }

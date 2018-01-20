@@ -6,7 +6,6 @@ import il.george_nika.phrase2.model.view.AbstractEntityForListView;
 public class NounForListView extends AbstractEntityForListView {
 
     public NounForListView(Noun noun) {
-        super(noun.getId(), noun.getMainForm().getHebrew(),
-                noun.getMainForm().getRussian(), noun.getNounDataCollection().size());
+        super(noun.getId(), noun.getMainForm(), noun.getNounDataCollection().size());
     }
 }

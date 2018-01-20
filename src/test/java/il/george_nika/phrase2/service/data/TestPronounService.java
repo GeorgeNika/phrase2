@@ -16,7 +16,7 @@ import static il.george_nika.phrase2.service.data.TestUtil.getVerbData;
 
 public class TestPronounService {
 
-    private PronounService pronounService = new PronounService(new RandomService(), new PronounRepository());
+    private PronounService pronounService = new PronounService(new PronounRepository());
 
     @Test
     public void getRandomPronounByVerbTest() {

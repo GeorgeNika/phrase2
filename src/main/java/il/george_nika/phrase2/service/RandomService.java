@@ -7,16 +7,16 @@ import java.util.Random;
 @Service
 public class RandomService {
 
-    private Random random  = new Random();
+    private static Random random  = new Random();
 
-    public int getRandom(int bound) {
+    public static int getRandom(int bound) {
         if (bound ==0){
             return 0;
         }
         return random.nextInt(bound);
     }
 
-    public int getRandomWithPriorityOnLast(int bound, int percentPriority){
+    public static int getRandomWithPriorityOnLast(int bound, int percentPriority){
         if (getRandom(2) == 0){
             return getRandom(bound);
         } else {
