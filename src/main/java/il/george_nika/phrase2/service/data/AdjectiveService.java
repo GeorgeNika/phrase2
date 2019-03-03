@@ -108,8 +108,8 @@ public class AdjectiveService {
     }
 
     private void deleteAdjectiveData(AdjectiveData adjectiveData){
-        languageUnitRepository.delete(adjectiveData.getLanguageUnit().getId());
-        adjectiveDataRepository.delete(adjectiveData.getId());
+        languageUnitRepository.delete(adjectiveData.getLanguageUnit());
+        adjectiveDataRepository.delete(adjectiveData);
     }
 
     public Adjective getRandomAdjective(){

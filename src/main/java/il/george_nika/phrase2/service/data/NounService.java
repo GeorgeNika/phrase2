@@ -111,8 +111,8 @@ public class NounService {
     }
 
     private void deleteNounData(NounData nounData){
-        languageUnitRepository.delete(nounData.getLanguageUnit().getId());
-        nounDataRepository.delete(nounData.getId());
+        languageUnitRepository.delete(nounData.getLanguageUnit());
+        nounDataRepository.delete(nounData);
     }
 
     public Noun getRandomNoun(){

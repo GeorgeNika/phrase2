@@ -170,13 +170,13 @@ public class VerbService {
         for (VerbData loopVerbData : verb.getVerbDataCollection()){
             deleteVerbData(loopVerbData);
         }
-        languageUnitRepository.delete(verb.getInfinitive().getId());
-        verbRepository.delete(verb.getId());
+        languageUnitRepository.delete(verb.getInfinitive());
+        verbRepository.delete(verb);
     }
 
     private void deleteVerbData(VerbData verbData){
-        languageUnitRepository.delete(verbData.getLanguageUnit().getId());
-        verbDataRepository.delete(verbData.getId());
+        languageUnitRepository.delete(verbData.getLanguageUnit());
+        verbDataRepository.delete(verbData);
     }
 
     public boolean changeActionVerb(Integer id){
