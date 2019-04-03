@@ -256,6 +256,7 @@ public class TestVerbService {
         newVerbDataCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND, TIME_PRESENT));
         newVerbForDetailView.setVerbDataCollection(newVerbDataCollection);
         newVerbForDetailView.setInfinitive(new LanguageUnit("новый", "חדש", "new"));
+        newVerbForDetailView.setPreposition(new LanguageUnit("", "", ""));
         Assert.assertEquals(verbService.getVerbsPage(0,2,"").getTotalElements(),3);
         verbService.saveVerbByVerbForDetailView(newVerbForDetailView);
         Assert.assertEquals(verbService.getVerbsPage(0,2,"").getTotalElements(),4);
@@ -303,6 +304,7 @@ public class TestVerbService {
         pastVerbDataCollection.add(getVerbData(GENDER_MASCULINE, QUANTITY_SINGULAR, PERSON_FIRST, TIME_PAST));
         Verb pastVerb = new Verb();
         pastVerb.setInfinitive(new LanguageUnit("past_russian", "past_hebrew", "past_transcr"));
+        pastVerb.setPreposition(new LanguageUnit("", "", ""));
         pastVerb.setVerbDataCollection(pastVerbDataCollection);
         resultList.add(verbRepository.save(pastVerb));
 
@@ -311,6 +313,7 @@ public class TestVerbService {
         presentVerbDataCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_SECOND, TIME_PRESENT));
         Verb presentVerb = new Verb();
         presentVerb.setInfinitive(new LanguageUnit("present_russian", "present_hebrew", "present_transcr"));
+        presentVerb.setPreposition(new LanguageUnit("", "", ""));
         presentVerb.setVerbDataCollection(presentVerbDataCollection);
         resultList.add(verbRepository.save(presentVerb));
 
@@ -320,6 +323,7 @@ public class TestVerbService {
         futureVerbDataCollection.add(getVerbData(GENDER_FEMININE, QUANTITY_SINGULAR, PERSON_FIRST, TIME_FUTURE));
         Verb futureVerb = new Verb();
         futureVerb.setInfinitive(new LanguageUnit("future_russian", "future_hebrew", "future_transcr"));
+        futureVerb.setPreposition(new LanguageUnit("", "", ""));
         futureVerb.setVerbDataCollection(futureVerbDataCollection);
         resultList.add(verbRepository.save(futureVerb));
 
