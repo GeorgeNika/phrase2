@@ -1,5 +1,6 @@
 package il.george_nika.phrase2.controller;
 
+import il.george_nika.phrase2.model.LanguageUnit;
 import il.george_nika.phrase2.model.adjective.Adjective;
 import il.george_nika.phrase2.model.adverb.Adverb;
 import il.george_nika.phrase2.model.noun.Noun;
@@ -14,10 +15,7 @@ import il.george_nika.phrase2.model.view.noun.NounForListView;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.model.view.verb.VerbForListView;
 import il.george_nika.phrase2.service.PhraseService;
-import il.george_nika.phrase2.service.data.AdjectiveService;
-import il.george_nika.phrase2.service.data.AdverbService;
-import il.george_nika.phrase2.service.data.NounService;
-import il.george_nika.phrase2.service.data.VerbService;
+import il.george_nika.phrase2.service.data.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,16 +37,18 @@ public class AjaxController {
     private final VerbService verbService;
     private final AdjectiveService adjectiveService;
     private final AdverbService adverbService;
+    private final WordService wordService;
 
     @Autowired
     public AjaxController(PhraseService phraseService, NounService nounService,
                           VerbService verbService, AdjectiveService adjectiveService,
-                          AdverbService adverbService) {
+                          AdverbService adverbService, WordService wordService) {
         this.phraseService = phraseService;
         this.nounService = nounService;
         this.verbService = verbService;
         this.adjectiveService = adjectiveService;
         this.adverbService = adverbService;
+        this.wordService = wordService;
     }
 
     @RequestMapping(value = "/ajax/phrase")
@@ -212,4 +212,12 @@ public class AjaxController {
         }
         return adverbService.saveAdverbByAdverbForDetailView(adverbForDetailView);
     }
+
+    @RequestMapping(value = "/ajax/word/{wordType}/{wordId}", method = RequestMethod.GET)
+    public List<LanguageUnit> getWordInfoView (@PathVariable String wordType, @PathVariable Integer wordId){
+
+        return wordService.getWordInfo(wordType, wordId);
+    }
+
+
 }

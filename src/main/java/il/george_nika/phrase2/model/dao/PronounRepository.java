@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static il.george_nika.phrase2.model.ModelConstants.*;
-import static il.george_nika.phrase2.model.ModelConstants.PERSON_THIRD;
-import static il.george_nika.phrase2.model.ModelConstants.QUANTITY_PLURAL;
 
 @Repository
 public class PronounRepository {
