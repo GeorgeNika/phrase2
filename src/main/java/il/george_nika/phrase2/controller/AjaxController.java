@@ -14,6 +14,7 @@ import il.george_nika.phrase2.model.view.noun.NounForDetailView;
 import il.george_nika.phrase2.model.view.noun.NounForListView;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import il.george_nika.phrase2.model.view.verb.VerbForListView;
+import il.george_nika.phrase2.service.AdminService;
 import il.george_nika.phrase2.service.PhraseService;
 import il.george_nika.phrase2.service.data.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -38,17 +39,19 @@ public class AjaxController {
     private final AdjectiveService adjectiveService;
     private final AdverbService adverbService;
     private final WordService wordService;
+    private final AdminService adminService;
 
     @Autowired
     public AjaxController(PhraseService phraseService, NounService nounService,
                           VerbService verbService, AdjectiveService adjectiveService,
-                          AdverbService adverbService, WordService wordService) {
+                          AdverbService adverbService, WordService wordService, AdminService adminService) {
         this.phraseService = phraseService;
         this.nounService = nounService;
         this.verbService = verbService;
         this.adjectiveService = adjectiveService;
         this.adverbService = adverbService;
         this.wordService = wordService;
+        this.adminService = adminService;
     }
 
     @RequestMapping(value = "/ajax/phrase")
@@ -67,9 +70,7 @@ public class AjaxController {
     @RequestMapping(value = "/ajax/password")
     public Integer checkPassword (@RequestParam String password, HttpSession session){
 
-        String  hashPassword = "$2a$10$eV.B2TBN2m3WMcTFmcswZOo1JsO/ZlQuGSZOf38IjuwAxU6b7d4P6";
-
-        if (BCrypt.checkpw(password, hashPassword)){
+        if (adminService.isAdmin("", password)){
             session.setAttribute(SESSION_CONNECTION_TYPE, CONNECTION_TYPE_ADMIN);
             return 1;
         }else{

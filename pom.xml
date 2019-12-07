@@ -76,6 +76,13 @@
             <version>2.2.2</version>
         </dependency>
 
+        <!--  JWT: Json Web Token -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <!--  Springfox implementation of the Swagger 2 specification: for rest api ui -->
         <dependency>
             <groupId>io.springfox</groupId>
