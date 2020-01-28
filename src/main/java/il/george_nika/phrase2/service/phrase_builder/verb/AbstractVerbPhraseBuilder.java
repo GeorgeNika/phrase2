@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.service.phrase_builder.verb;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.service.data.PronounService;
 import il.george_nika.phrase2.service.data.VerbService;
 import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;

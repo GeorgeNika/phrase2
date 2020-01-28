@@ -1,7 +1,6 @@
-package il.george_nika.phrase2.model.adjective;
+package il.george_nika.phrase2.model.data.adjective;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import lombok.Data;
 
 import javax.persistence.*;

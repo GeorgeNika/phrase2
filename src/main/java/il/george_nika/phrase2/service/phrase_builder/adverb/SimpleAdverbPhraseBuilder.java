@@ -1,19 +1,13 @@
 package il.george_nika.phrase2.service.phrase_builder.adverb;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.adjective.Adjective;
-import il.george_nika.phrase2.model.adverb.Adverb;
-import il.george_nika.phrase2.model.noun.Noun;
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.adverb.Adverb;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
-import il.george_nika.phrase2.service.RandomService;
 import il.george_nika.phrase2.service.data.*;
 import il.george_nika.phrase2.service.phrase_builder.AbstractPhraseBuilder;
-import il.george_nika.phrase2.service.phrase_builder.AdjectivePhraseService;
-import il.george_nika.phrase2.service.phrase_builder.sentence.SentencePhraseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

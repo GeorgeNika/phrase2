@@ -1,7 +1,7 @@
 package il.george_nika.phrase2.service.data;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.verb.VerbData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.verb.VerbData;
 
 /**
  * Created by George on 03.11.2017.

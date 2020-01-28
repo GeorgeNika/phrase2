@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.view;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import lombok.Data;
 
 import java.util.List;

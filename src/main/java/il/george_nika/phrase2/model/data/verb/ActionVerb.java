@@ -1,4 +1,4 @@
-package il.george_nika.phrase2.model.verb;
+package il.george_nika.phrase2.model.data.verb;
 
 import lombok.Data;
 

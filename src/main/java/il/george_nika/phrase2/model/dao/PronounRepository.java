@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
 import org.springframework.stereotype.Repository;
 

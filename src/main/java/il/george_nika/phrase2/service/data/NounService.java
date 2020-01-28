@@ -1,13 +1,12 @@
 package il.george_nika.phrase2.service.data;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.dao.LanguageUnitRepository;
 import il.george_nika.phrase2.model.dao.NounDataRepository;
 import il.george_nika.phrase2.model.dao.NounRepository;
-import il.george_nika.phrase2.model.noun.Noun;
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.noun.Noun;
+import il.george_nika.phrase2.model.data.noun.NounData;
 import il.george_nika.phrase2.model.view.noun.NounForDetailView;
-import il.george_nika.phrase2.service.RandomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

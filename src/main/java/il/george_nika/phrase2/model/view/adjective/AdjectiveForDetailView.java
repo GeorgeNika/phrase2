@@ -1,8 +1,8 @@
 package il.george_nika.phrase2.model.view.adjective;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.adjective.Adjective;
-import il.george_nika.phrase2.model.adjective.AdjectiveData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.adjective.Adjective;
+import il.george_nika.phrase2.model.data.adjective.AdjectiveData;
 import lombok.Data;
 
 import java.util.Comparator;

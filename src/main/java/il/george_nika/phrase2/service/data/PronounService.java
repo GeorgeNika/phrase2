@@ -1,16 +1,14 @@
 package il.george_nika.phrase2.service.data;
 
 import il.george_nika.phrase2.model.dao.PronounRepository;
-import il.george_nika.phrase2.model.noun.Noun;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.service.RandomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service

@@ -1,9 +1,9 @@
 package il.george_nika.phrase2.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -51,5 +51,23 @@ public class TokenService {
 
 
         return jwtBuilder.compact();
+    }
+
+    private Claims getClaims(String token){
+
+        Claims claims = Jwts.parser()
+                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+                .parseClaimsJws(token).getBody();
+        return claims;
+    }
+
+    public String getNameFromToken(String token){
+        Claims claims = getClaims(token);
+        return claims.get(NAME_IN_TOKEN, String.class);
+    }
+
+    public Boolean isAdminFromToken(String token) {
+        Claims claims = getClaims(token);
+        return (Boolean) claims.get(IS_ADMIN_IN_TOKEN);
     }
 }

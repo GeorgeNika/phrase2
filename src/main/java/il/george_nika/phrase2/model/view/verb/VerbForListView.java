@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.view.verb;
 
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.model.view.AbstractEntityForListView;
 import lombok.Data;
 

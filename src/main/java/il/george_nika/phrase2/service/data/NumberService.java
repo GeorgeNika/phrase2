@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.service.data;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.dao.NumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

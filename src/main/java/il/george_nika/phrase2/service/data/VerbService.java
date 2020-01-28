@@ -1,16 +1,15 @@
 package il.george_nika.phrase2.service.data;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.dao.ActionVerbRepository;
 import il.george_nika.phrase2.model.dao.LanguageUnitRepository;
 import il.george_nika.phrase2.model.dao.VerbDataRepository;
 import il.george_nika.phrase2.model.dao.VerbRepository;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
-import il.george_nika.phrase2.model.verb.ActionVerb;
-import il.george_nika.phrase2.model.verb.Verb;
-import il.george_nika.phrase2.model.verb.VerbData;
+import il.george_nika.phrase2.model.data.verb.ActionVerb;
+import il.george_nika.phrase2.model.data.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.VerbData;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
-import il.george_nika.phrase2.service.RandomService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

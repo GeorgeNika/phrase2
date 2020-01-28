@@ -1,8 +1,8 @@
 package il.george_nika.phrase2.service.phrase_builder;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.adjective.Adjective;
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.adjective.Adjective;
+import il.george_nika.phrase2.model.data.noun.NounData;
 import il.george_nika.phrase2.service.data.AdjectiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

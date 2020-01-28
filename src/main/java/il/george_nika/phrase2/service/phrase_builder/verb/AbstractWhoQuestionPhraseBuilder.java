@@ -1,8 +1,8 @@
 package il.george_nika.phrase2.service.phrase_builder.verb;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.pronoun.Pronoun;
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.model.view.WordIdentification;
 import il.george_nika.phrase2.service.data.PronounService;

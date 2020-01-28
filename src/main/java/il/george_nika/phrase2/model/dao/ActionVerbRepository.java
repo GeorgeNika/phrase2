@@ -1,7 +1,7 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.verb.ActionVerb;
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.ActionVerb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

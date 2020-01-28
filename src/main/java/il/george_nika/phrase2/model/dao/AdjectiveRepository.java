@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.adjective.Adjective;
+import il.george_nika.phrase2.model.data.adjective.Adjective;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

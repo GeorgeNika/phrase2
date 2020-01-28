@@ -1,10 +1,9 @@
 package il.george_nika.phrase2.service.data;
 
-import il.george_nika.phrase2.model.LanguageUnit;
+import il.george_nika.phrase2.model.data.LanguageUnit;
 import il.george_nika.phrase2.model.view.adjective.AdjectiveForDetailView;
 import il.george_nika.phrase2.model.view.adverb.AdverbForDetailView;
 import il.george_nika.phrase2.model.view.noun.NounForDetailView;
-import il.george_nika.phrase2.model.view.noun.NounForListView;
 import il.george_nika.phrase2.model.view.verb.VerbForDetailView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

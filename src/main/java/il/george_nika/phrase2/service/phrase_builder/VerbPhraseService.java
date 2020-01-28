@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.service.phrase_builder;
 
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.model.view.ViewPhrase;
 import il.george_nika.phrase2.service.RandomService;
 import il.george_nika.phrase2.service.data.VerbService;

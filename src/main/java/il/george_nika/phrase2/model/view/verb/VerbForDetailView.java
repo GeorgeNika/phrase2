@@ -1,12 +1,10 @@
 package il.george_nika.phrase2.model.view.verb;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.verb.Verb;
-import il.george_nika.phrase2.model.verb.VerbData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.verb.Verb;
+import il.george_nika.phrase2.model.data.verb.VerbData;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

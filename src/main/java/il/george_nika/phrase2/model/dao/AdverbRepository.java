@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.adverb.Adverb;
+import il.george_nika.phrase2.model.data.adverb.Adverb;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

@@ -1,11 +1,10 @@
 package il.george_nika.phrase2.model.view.noun;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.noun.Noun;
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.noun.Noun;
+import il.george_nika.phrase2.model.data.noun.NounData;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

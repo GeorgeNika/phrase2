@@ -1,10 +1,10 @@
 package il.george_nika.phrase2.controller;
 
-import il.george_nika.phrase2.model.LanguageUnit;
-import il.george_nika.phrase2.model.adjective.Adjective;
-import il.george_nika.phrase2.model.adverb.Adverb;
-import il.george_nika.phrase2.model.noun.Noun;
-import il.george_nika.phrase2.model.verb.Verb;
+import il.george_nika.phrase2.model.data.LanguageUnit;
+import il.george_nika.phrase2.model.data.adjective.Adjective;
+import il.george_nika.phrase2.model.data.adverb.Adverb;
+import il.george_nika.phrase2.model.data.noun.Noun;
+import il.george_nika.phrase2.model.data.verb.Verb;
 import il.george_nika.phrase2.model.view.*;
 import il.george_nika.phrase2.model.view.adjective.AdjectiveForDetailView;
 import il.george_nika.phrase2.model.view.adjective.AdjectiveForListView;
@@ -17,7 +17,6 @@ import il.george_nika.phrase2.model.view.verb.VerbForListView;
 import il.george_nika.phrase2.service.AdminService;
 import il.george_nika.phrase2.service.PhraseService;
 import il.george_nika.phrase2.service.data.*;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

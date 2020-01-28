@@ -1,6 +1,6 @@
 package il.george_nika.phrase2.model.dao;
 
-import il.george_nika.phrase2.model.noun.NounData;
+import il.george_nika.phrase2.model.data.noun.NounData;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
